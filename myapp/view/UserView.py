@@ -19,8 +19,7 @@ class UserView(APIView):
     def get(self, request, format=None):
         user = User.objects.all()
         serializer = UserSerializer(user, many=True)
-        return Response(serializer.data)
-        # return Response({"User": serializer.data})
+        return Response({"User": serializer.data})
 
     def post(self, request, format=None):
         request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").date()

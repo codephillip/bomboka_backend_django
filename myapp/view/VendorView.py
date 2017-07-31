@@ -7,12 +7,11 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myapp.models import Vendor, User
-from myapp.serializers import VendorGetSerializer, VendorPostSerializer
+from myapp.models import Vendor, User, Shop
+from myapp.serializers import VendorGetSerializer, VendorPostSerializer, ShopGetSerializer
 
 
 class VendorView(APIView):
-
     def get(self, request, format=None):
         vendor = Vendor.objects.all()
         serializer = VendorGetSerializer(vendor, many=True)
@@ -31,3 +30,13 @@ class VendorView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GetVendorShopsView(APIView):
+    def get(self, request, vendor_id):
+        print("shopDetails")
+        print(vendor_id)
+        shops = Shop.objects.filter(vendor_id=vendor_id)
+        # shop = Shop.objects.all()
+        serializer = ShopGetSerializer(shops, many=True)
+        return Response({"Shops": serializer.data})
