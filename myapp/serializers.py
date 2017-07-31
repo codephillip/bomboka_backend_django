@@ -73,4 +73,4 @@ class ProductPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = (
-            'id', 'name', 'is_blocked', 'vendor', 'createdAt', 'modifiedAt')
+            'id', 'name', 'image', 'price', 'createdAt', 'modifiedAt', 'shop', 'subCategory')
