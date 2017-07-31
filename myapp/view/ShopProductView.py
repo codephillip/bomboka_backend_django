@@ -11,15 +11,14 @@ from myapp.models import Vendor, User, Shop, Product
 from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetSerializer
 
 
-class ShopView(APIView):
-    # get all shops
-    def get(self, request, format=None):
-        print("shopview")
-        shop = Shop.objects.all()
-        serializer = ShopGetSerializer(shop, many=True)
-        return Response({"Shops": serializer.data})
+class ShopProductView(APIView):
+    # get shop products
+    def get(self, request, shop_id):
+        print("shopproducts##")
+        products = Product.objects.filter(shop_id=shop_id)
+        serializer = ProductGetSerializer(products, many=True)
+        return Response({"Products": serializer.data})
 
-    # create shop
     def post(self, request, format=None):
         request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").date()
         request.data['modifiedAt'] = datetime.strptime('24052010', "%d%m%Y").date()
@@ -32,21 +31,3 @@ class ShopView(APIView):
             serializer.save()
             return Response({"Shops": serializer.data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class ShopDetailsView(APIView):
-    # get single shop
-    def get(self, request, shop_id):
-        print(shop_id)
-        shop = Shop.objects.filter(id=shop_id)
-        # shop = Shop.objects.all()
-        serializer = ShopGetSerializer(shop, many=True)
-        return Response({"Shops": serializer.data})
-
-
-class ProductView(APIView):
-    # get all products
-    def get(self, request):
-        products = Product.objects.all()
-        serializer = ProductGetSerializer(products, many=True)
-        return Response({"Products": serializer.data})

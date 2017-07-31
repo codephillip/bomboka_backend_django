@@ -70,6 +70,8 @@ class Product(models.Model):
     image = models.CharField(max_length=250)
     price = models.FloatField()
     description = models.TextField()
+    createdAt = models.DateField(auto_created=True)
+    modifiedAt = models.DateField(auto_created=True)
     shop = models.ForeignKey(Shop)
     subCategory = models.ForeignKey(SubCategory)
 

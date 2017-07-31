@@ -1,4 +1,3 @@
-import datetime
 from rest_framework import serializers
 
 from myapp.models import *
@@ -40,5 +39,38 @@ class ShopGetSerializer(serializers.ModelSerializer):
 class ShopPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shop
+        fields = (
+            'id', 'name', 'is_blocked', 'vendor', 'createdAt', 'modifiedAt')
+
+
+class CategoryGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = (
+            'id', 'name', 'image')
+
+
+class SubCategoryGetSerializer(serializers.ModelSerializer):
+    category = CategoryGetSerializer()
+
+    class Meta:
+        model = SubCategory
+        fields = (
+            'id', 'name', 'image', 'category')
+
+
+class ProductGetSerializer(serializers.ModelSerializer):
+    shop = ShopGetSerializer()
+    subCategory = SubCategoryGetSerializer()
+
+    class Meta:
+        model = Product
+        fields = (
+            'id', 'name', 'image', 'price', 'createdAt', 'modifiedAt', 'shop', 'subCategory')
+
+
+class ProductPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
         fields = (
             'id', 'name', 'is_blocked', 'vendor', 'createdAt', 'modifiedAt')
