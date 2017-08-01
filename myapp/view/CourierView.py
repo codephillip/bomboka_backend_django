@@ -5,9 +5,9 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myapp.models import Vendor, User, Shop, Product, SubCategory, Order, Courier
+from myapp.models import Vendor, User, Shop, Product, SubCategory, Order, Courier, VendorCourier
 from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetSerializer, ProductPostSerializer, \
-    OrderGetSerializer, OrderPostSerializer, CourierGetSerializer, CourierPostSerializer
+    OrderGetSerializer, OrderPostSerializer, CourierGetSerializer, CourierPostSerializer, VendorCouriersSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
     RetrieveUpdateDestroyAPIView
 
@@ -33,10 +33,10 @@ class CourierView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# class UserOrders(APIView):
-#     # get user orders
-#     def get(self, request, user_id):
-#         print("orderview")
-#         orders = Order.objects.filter(user_id=user_id)
-#         serializer = OrderGetSerializer(orders, many=True)
-#         return Response({"Orders": serializer.data})
+class VendorCouriers(APIView):
+    # get vendor couriers
+    def get(self, request, vendor_id):
+        print("vendor_courier")
+        vendor_couriers = VendorCourier.objects.filter(vendor_id=vendor_id)
+        serializer = VendorCouriersSerializer(vendor_couriers, many=True)
+        return Response({"VendorCouriers": serializer.data})

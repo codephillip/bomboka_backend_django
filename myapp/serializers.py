@@ -108,6 +108,15 @@ class CourierPostSerializer(serializers.ModelSerializer):
             'id', 'is_verified', 'is_blocked', 'createdAt', 'modifiedAt', 'user')
 
 
+class VendorCouriersSerializer(serializers.ModelSerializer):
+    vendor = VendorGetSerializer()
+    courier = CourierGetSerializer()
+
+    class Meta:
+        model = Courier
+        fields = ('id', 'vendor', 'courier')
+
+
 class OrderGetSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     address = AddressSerializer()
