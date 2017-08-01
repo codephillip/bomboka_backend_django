@@ -7,6 +7,8 @@ from rest_framework.views import APIView
 
 from myapp.models import Vendor, User, Shop, Product, SubCategory
 from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetSerializer, ProductPostSerializer
+from rest_framework.generics import ListCreateAPIView, RetrieveAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
+    RetrieveUpdateDestroyAPIView
 
 
 class ShopView(APIView):
@@ -39,7 +41,18 @@ class ShopDetailsView(APIView):
         shop = Shop.objects.filter(id=shop_id)
         serializer = ShopGetSerializer(shop, many=True)
         return Response({"Shops": serializer.data})
-    
+
+
+class ShopEditView(RetrieveUpdateAPIView):
+    # edit shop
+    def put(self, request, *args, **kwargs):
+        print("put##")
+        print(kwargs['shop_id'])
+        shop = Shop.objects.filter(id=kwargs['shop_id'])
+        shop.update(name='New Shop', modifiedAt=datetime.strptime('24052010', "%d%m%Y").date())
+        serializer = ShopGetSerializer(shop, many=True)
+        return Response({"Shops": serializer.data})
+
 
 class ProductView(APIView):
     # get all products
