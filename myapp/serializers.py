@@ -74,3 +74,30 @@ class ProductPostSerializer(serializers.ModelSerializer):
         model = Product
         fields = (
             'id', 'name', 'image', 'price', 'createdAt', 'modifiedAt', 'shop', 'subCategory')
+
+
+class AddressSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model = Address
+        fields = (
+            'id', 'name', 'latitude', 'longitude', 'createdAt', 'modifiedAt', 'user')
+
+
+class OrderGetSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    address = AddressSerializer()
+    product = ProductGetSerializer()
+
+    class Meta:
+        model = Order
+        fields = (
+            'id', 'name', 'image', 'price', 'createdAt', 'modifiedAt', 'shop', 'subCategory')
+
+
+class OrderPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = (
+            'id', 'name', 'image', 'price', 'createdAt', 'modifiedAt', 'shop', 'subCategory')
