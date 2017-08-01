@@ -3,6 +3,7 @@ from datetime import date, datetime
 from django.shortcuts import render
 from django.views import View
 from rest_framework import status
+from rest_framework.generics import RetrieveUpdateAPIView
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -40,3 +41,19 @@ class GetVendorShopsView(APIView):
         # shop = Shop.objects.all()
         serializer = ShopGetSerializer(shops, many=True)
         return Response({"Shops": serializer.data})
+
+
+class VendorEditView(RetrieveUpdateAPIView):
+    # edit vendor
+    def put(self, request, *args, **kwargs):
+        # post all the field when editing
+        print("put##")
+        vendor = Vendor.objects.filter(id=kwargs['vendor_id'])
+        is_blocked = request.data['is_blocked']
+        is_verified = request.data['is_verified']
+        if vendor and is_blocked and is_verified:
+            vendor.update(is_blocked=(is_blocked == "true"), is_verified=(is_verified == "true"),
+                          modifiedAt=datetime.strptime('24052010', "%d%m%Y").now())
+            serializer = VendorGetSerializer(vendor, many=True)
+            return Response({"Vendors": serializer.data})
+        return Response("Failed to edit vendor", status=status.HTTP_400_BAD_REQUEST)
