@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 
 from rest_framework import status
 
@@ -21,8 +21,8 @@ class ShopView(APIView):
 
     # create shop
     def post(self, request, format=None):
-        request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").date()
-        request.data['modifiedAt'] = datetime.strptime('24052010', "%d%m%Y").date()
+        request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").now()
+        request.data['modifiedAt'] = datetime.strptime('24052010', "%d%m%Y").now()
         serializer = ShopPostSerializer(data=request.data)
 
         print("db#")
@@ -49,7 +49,7 @@ class ShopEditView(RetrieveUpdateAPIView):
         print("put##")
         print(kwargs['shop_id'])
         shop = Shop.objects.filter(id=kwargs['shop_id'])
-        shop.update(name='New Shop', modifiedAt=datetime.strptime('24052010', "%d%m%Y").date())
+        shop.update(name=request.data['name'], modifiedAt=datetime.strptime('24052010', "%d%m%Y").now())
         serializer = ShopGetSerializer(shop, many=True)
         return Response({"Shops": serializer.data})
 
@@ -73,8 +73,8 @@ class ShopProductView(APIView):
     # add product to shop
     def post(self, request, shop_id):
         print("post product##")
-        request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").date()
-        request.data['modifiedAt'] = datetime.strptime('24052010', "%d%m%Y").date()
+        request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").now()
+        request.data['modifiedAt'] = datetime.strptime('24052010', "%d%m%Y").now()
         request.data['shop'] = shop_id
         serializer = ProductPostSerializer(data=request.data)
 
