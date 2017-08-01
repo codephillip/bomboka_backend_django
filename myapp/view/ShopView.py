@@ -39,23 +39,7 @@ class ShopDetailsView(APIView):
         shop = Shop.objects.filter(id=shop_id)
         serializer = ShopGetSerializer(shop, many=True)
         return Response({"Shops": serializer.data})
-
-    # add product to shop
-    def post(self, request, shop_id):
-        print("post product##")
-        request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").date()
-        request.data['modifiedAt'] = datetime.strptime('24052010', "%d%m%Y").date()
-        serializer = ProductPostSerializer(data=request.data)
-
-        print("db#")
-        print(Shop.objects.get(id=shop_id))
-        serializer.shop = Shop.objects.get(id=shop_id)
-        serializer.subCategory = SubCategory.objects.get(id=request.data['subCategory'])
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"Shops": serializer.data}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+    
 
 class ProductView(APIView):
     # get all products
