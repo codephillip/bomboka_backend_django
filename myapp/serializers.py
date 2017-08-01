@@ -93,11 +93,13 @@ class OrderGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = (
-            'id', 'name', 'image', 'price', 'createdAt', 'modifiedAt', 'shop', 'subCategory')
+            'id', 'is_received', 'is_accepted', 'is_cancelled', 'is_completed', 'createdAt', 'modifiedAt', 'address',
+            'product', 'user')
 
 
 class OrderPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = (
-            'id', 'name', 'image', 'price', 'createdAt', 'modifiedAt', 'shop', 'subCategory')
+            'id', 'is_received', 'is_accepted', 'is_cancelled', 'is_completed', 'createdAt', 'modifiedAt', 'address',
+            'product', 'user')

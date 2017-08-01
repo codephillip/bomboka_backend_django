@@ -111,10 +111,11 @@ class Address(models.Model):
 
 
 class Order(models.Model):
-    createdAt = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User)
     address = models.ForeignKey(Address)
     product = models.ForeignKey(Product)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    modifiedAt = models.DateTimeField(auto_now_add=True)
     is_received = models.BooleanField(default=False)
     is_accepted = models.BooleanField(default=False)
     is_cancelled = models.BooleanField(default=False)
@@ -122,7 +123,7 @@ class Order(models.Model):
     is_completed = models.BooleanField(default=False)
 
     def __str__(self):
-        return str(self.name)
+        return self.product.name
 
 
 class Courier(models.Model):

@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.contrib import admin
 
-from myapp import views
+from myapp.view.OrderView import OrderView
 from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProductView, ShopEditView
 from myapp.view.UserView import UserView, AddressView, UserAddressView
 from myapp.view.VendorView import VendorView, GetVendorShopsView
@@ -18,5 +18,6 @@ urlpatterns = [
     url(r'api/v1/shops/(?P<shop_id>[-\w]+)/products$', ShopProductView.as_view(), name='shop_product'),
     url(r'api/v1/products$', ProductView.as_view(), name='products'),
     url(r'api/v1/addresses$', AddressView.as_view(), name='address'),
+    url(r'api/v1/orders$', OrderView.as_view(), name='orders'),
 
 ]
