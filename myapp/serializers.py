@@ -92,16 +92,33 @@ class AddressPostSerializer(serializers.ModelSerializer):
             'id', 'name', 'latitude', 'longitude', 'createdAt', 'modifiedAt', 'user')
 
 
+class CourierGetSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model = Courier
+        fields = (
+            'id', 'is_verified', 'is_blocked', 'createdAt', 'modifiedAt', 'user')
+
+
+class CourierPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Courier
+        fields = (
+            'id', 'is_verified', 'is_blocked', 'createdAt', 'modifiedAt', 'user')
+
+
 class OrderGetSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     address = AddressSerializer()
     product = ProductGetSerializer()
+    courier = CourierGetSerializer()
 
     class Meta:
         model = Order
         fields = (
             'id', 'is_received', 'is_accepted', 'is_cancelled', 'is_completed', 'createdAt', 'modifiedAt', 'address',
-            'product', 'user')
+            'product', 'user', 'courier')
 
 
 class OrderPostSerializer(serializers.ModelSerializer):
@@ -109,4 +126,4 @@ class OrderPostSerializer(serializers.ModelSerializer):
         model = Order
         fields = (
             'id', 'is_received', 'is_accepted', 'is_cancelled', 'is_completed', 'createdAt', 'modifiedAt', 'address',
-            'product', 'user')
+            'product', 'user', 'courier')

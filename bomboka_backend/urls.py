@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from django.contrib import admin
 
+from myapp.view.CourierView import CourierView
 from myapp.view.OrderView import OrderView, UserOrders
 from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProductView, ShopEditView
 from myapp.view.UserView import UserView, AddressView, UserAddressView
@@ -20,5 +21,6 @@ urlpatterns = [
     url(r'api/v1/products$', ProductView.as_view(), name='products'),
     url(r'api/v1/addresses$', AddressView.as_view(), name='address'),
     url(r'api/v1/orders$', OrderView.as_view(), name='orders'),
+    url(r'api/v1/couriers$', CourierView.as_view(), name='couriers'),
 
 ]

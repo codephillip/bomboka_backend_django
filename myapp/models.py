@@ -110,10 +110,22 @@ class Address(models.Model):
         return str(self.name)
 
 
+class Courier(models.Model):
+    is_verified = models.BooleanField(default=False)
+    is_blocked = models.BooleanField(default=False)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    modifiedAt = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User)
+
+    def __str__(self):
+        return self.user.name
+
+
 class Order(models.Model):
     user = models.ForeignKey(User)
     address = models.ForeignKey(Address)
     product = models.ForeignKey(Product)
+    courier = models.ForeignKey(Courier)
     createdAt = models.DateTimeField(auto_now_add=True)
     modifiedAt = models.DateTimeField(auto_now_add=True)
     is_received = models.BooleanField(default=False)
@@ -124,17 +136,6 @@ class Order(models.Model):
 
     def __str__(self):
         return self.product.name
-
-
-class Courier(models.Model):
-    is_verified = models.BooleanField(default=False)
-    is_blocked = models.BooleanField(default=False)
-    createdAt = models.DateTimeField(auto_now_add=True)
-    modifiedAt = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User)
-
-    def __str__(self):
-        return self.name
 
 
 class VendorCourier(models.Model):
