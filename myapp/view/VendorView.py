@@ -19,8 +19,8 @@ class VendorView(APIView):
         # return Response({"Vendor": serializer.data})
 
     def post(self, request, format=None):
-        request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").date()
-        request.data['modifiedAt'] = datetime.strptime('24052010', "%d%m%Y").date()
+        request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").now()
+        request.data['modifiedAt'] = datetime.strptime('24052010', "%d%m%Y").now()
 
         serializer = VendorPostSerializer(data=request.data)
         print("db#")

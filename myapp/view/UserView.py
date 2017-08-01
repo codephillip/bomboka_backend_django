@@ -1,5 +1,6 @@
 from datetime import date, datetime
 
+from django.forms import model_to_dict
 from django.shortcuts import render
 from django.views import View
 from rest_framework import status
@@ -18,8 +19,8 @@ class UserView(APIView):
         return Response({"User": serializer.data})
 
     def post(self, request, format=None):
-        request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").date()
-        request.data['modifiedAt'] = datetime.strptime('24052010', "%d%m%Y").date()
+        request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").now()
+        request.data['modifiedAt'] = datetime.strptime('24052010', "%d%m%Y").now()
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -28,9 +29,21 @@ class UserView(APIView):
 
 
 class UserAddressView(APIView):
-    # get all addresses
+    # get user addresses
     def get(self, request, user_id):
         address = Address.objects.filter(user=User.objects.get(id=user_id))
+        serializer = AddressSerializer(address, many=True)
+        return Response({"Address": serializer.data})
+
+    # add user delivery address
+    def post(self, request, user_id):
+        request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").now()
+        request.data['modifiedAt'] = datetime.strptime('24052010', "%d%m%Y").now()
+        user = User.objects.get(id=user_id)
+        Address.objects.create(user=user, latitude=request.data['latitude'], name=request.data['name'],
+                               longitude=request.data['longitude'], createdAt=request.data['createdAt'],
+                               modifiedAt=request.data['modifiedAt'])
+        address = Address.objects.filter(user_id=user_id)
         serializer = AddressSerializer(address, many=True)
         return Response({"Address": serializer.data})
 
@@ -43,8 +56,8 @@ class AddressView(APIView):
         return Response({"Address": serializer.data})
 
     def post(self, request, format=None):
-        request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").date()
-        request.data['modifiedAt'] = datetime.strptime('24052010', "%d%m%Y").date()
+        request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").now()
+        request.data['modifiedAt'] = datetime.strptime('24052010', "%d%m%Y").now()
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
