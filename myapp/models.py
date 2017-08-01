@@ -38,7 +38,7 @@ class Vendor(models.Model):
     is_blocked = models.BooleanField(default=False)
     createdAt = models.DateTimeField(auto_now_add=True)
     modifiedAt = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, unique=True)
 
     def __str__(self):
         return str(self.id)
@@ -115,7 +115,7 @@ class Courier(models.Model):
     is_blocked = models.BooleanField(default=False)
     createdAt = models.DateTimeField(auto_now_add=True)
     modifiedAt = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, unique=True)
 
     def __str__(self):
         return self.user.name
@@ -152,7 +152,7 @@ class Driver(models.Model):
     is_blocked = models.BooleanField(default=False)
     createdAt = models.DateTimeField(auto_now_add=True)
     modifiedAt = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, unique=True)
     courier = models.ForeignKey(Courier)
 
     def __str__(self):
