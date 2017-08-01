@@ -85,6 +85,13 @@ class AddressSerializer(serializers.ModelSerializer):
             'id', 'name', 'latitude', 'longitude', 'createdAt', 'modifiedAt', 'user')
 
 
+class AddressPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Address
+        fields = (
+            'id', 'name', 'latitude', 'longitude', 'createdAt', 'modifiedAt', 'user')
+
+
 class OrderGetSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     address = AddressSerializer()

@@ -31,3 +31,12 @@ class OrderView(APIView):
             serializer.save()
             return Response({"Orders": serializer.data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserOrders(APIView):
+    # get user orders
+    def get(self, request, user_id):
+        print("orderview")
+        orders = Order.objects.filter(user_id=user_id)
+        serializer = OrderGetSerializer(orders, many=True)
+        return Response({"Orders": serializer.data})

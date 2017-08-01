@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from myapp.models import User, Address
-from myapp.serializers import UserSerializer, AddressSerializer
+from myapp.serializers import UserSerializer, AddressSerializer, AddressPostSerializer
 
 
 # todo create user using authentication
@@ -37,13 +37,13 @@ class UserAddressView(APIView):
     def post(self, request, user_id):
         request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").now()
         request.data['modifiedAt'] = datetime.strptime('24052010', "%d%m%Y").now()
-        user = User.objects.get(id=user_id)
-        Address.objects.create(user=user, latitude=request.data['latitude'], name=request.data['name'],
-                               longitude=request.data['longitude'], createdAt=request.data['createdAt'],
-                               modifiedAt=request.data['modifiedAt'])
-        address = Address.objects.filter(user_id=user_id)
-        serializer = AddressSerializer(address, many=True)
-        return Response({"Address": serializer.data})
+        request.data['user'] = user_id
+        serializer = AddressPostSerializer(data=request.data)
+        print("db#")
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"Orders": serializer.data}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class AddressView(APIView):
