@@ -46,10 +46,14 @@ class ShopDetailsView(APIView):
 class ShopEditView(RetrieveUpdateAPIView):
     # edit shop
     def put(self, request, *args, **kwargs):
+        # post all the field when editing
         print("put##")
         print(kwargs['shop_id'])
         shop = Shop.objects.filter(id=kwargs['shop_id'])
-        shop.update(name=request.data['name'], modifiedAt=datetime.strptime('24052010', "%d%m%Y").now())
+        name = request.data['name']
+        is_blocked = request.data['is_blocked']
+        if name and is_blocked:
+            shop.update(name=name, is_blocked=(is_blocked == "true"), modifiedAt=datetime.strptime('24052010', "%d%m%Y").now())
         serializer = ShopGetSerializer(shop, many=True)
         return Response({"Shops": serializer.data})
 
