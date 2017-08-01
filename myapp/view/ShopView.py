@@ -53,7 +53,8 @@ class ShopEditView(RetrieveUpdateAPIView):
         name = request.data['name']
         is_blocked = request.data['is_blocked']
         if name and is_blocked:
-            shop.update(name=name, is_blocked=(is_blocked == "true"), modifiedAt=datetime.strptime('24052010', "%d%m%Y").now())
+            shop.update(name=name, is_blocked=(is_blocked == "true"),
+                        modifiedAt=datetime.strptime('24052010', "%d%m%Y").now())
         serializer = ShopGetSerializer(shop, many=True)
         return Response({"Shops": serializer.data})
 
@@ -88,3 +89,22 @@ class ShopProductView(APIView):
             serializer.save()
             return Response({"Shops": serializer.data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ProductEditView(RetrieveUpdateAPIView):
+    # edit product
+    def put(self, request, *args, **kwargs):
+        # post all the field when editing
+        print("put##")
+        product = Product.objects.filter(id=kwargs['product_id'])
+        name = request.data['name']
+        image = request.data['image']
+        price = request.data['price']
+        description = request.data['description']
+
+        if product and name and image and price and description:
+            product.update(name=name, image=image, price=price, description=description,
+                           modifiedAt=datetime.strptime('24052010', "%d%m%Y").now())
+            serializer = ProductGetSerializer(product, many=True)
+            return Response({"Products": serializer.data})
+        return Response("Failed to edit product", status=status.HTTP_400_BAD_REQUEST)
