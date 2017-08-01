@@ -108,13 +108,19 @@ class CourierPostSerializer(serializers.ModelSerializer):
             'id', 'is_verified', 'is_blocked', 'createdAt', 'modifiedAt', 'user')
 
 
-class VendorCouriersSerializer(serializers.ModelSerializer):
+class VendorCouriersGetSerializer(serializers.ModelSerializer):
     vendor = VendorGetSerializer()
     courier = CourierGetSerializer()
 
     class Meta:
-        model = Courier
-        fields = ('id', 'vendor', 'courier')
+        model = VendorCourier
+        fields = ('id', 'createdAt', 'vendor', 'courier')
+
+
+class VendorCouriersPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VendorCourier
+        fields = ('id', 'createdAt', 'vendor', 'courier')
 
 
 class OrderGetSerializer(serializers.ModelSerializer):
