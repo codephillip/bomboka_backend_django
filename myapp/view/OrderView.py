@@ -40,3 +40,34 @@ class UserOrders(APIView):
         orders = Order.objects.filter(user_id=user_id)
         serializer = OrderGetSerializer(orders, many=True)
         return Response({"Orders": serializer.data})
+
+
+class OrdersListView(ListCreateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderGetSerializer
+
+
+# using pk
+class OrderDetailsView(RetrieveAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderGetSerializer
+
+
+# using custom value other than <pk> in url
+# class OrderDetailsView(RetrieveAPIView):
+#     queryset = Order.objects.all()
+#     serializer_class = OrderGetSerializer
+#     # field to query in table
+#     lookup_field = 'pk'
+#     # the value pass in url
+#     lookup_url_kwarg = 'order_id'
+
+
+class OrderUpdateView(RetrieveUpdateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderPostSerializer
+
+
+class OrderDestroyView(RetrieveDestroyAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderPostSerializer
