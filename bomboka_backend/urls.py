@@ -2,8 +2,7 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from myapp.view.CourierView import CourierView, VendorCouriers
-from myapp.view.OrderView import OrderView, UserOrders, OrdersListView, OrderDetailsView, OrderUpdateView, \
-    OrderDestroyView
+from myapp.view.OrderView import OrderDetailsView, OrdersListView, UserOrders
 from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProductView, ShopEditView, ProductEditView
 from myapp.view.UserView import UserView, AddressView, UserAddressView
 from myapp.view.VendorView import VendorView, GetVendorShopsView, VendorEditView
@@ -12,7 +11,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'api/v1/users$', UserView.as_view(), name='users'),
     url(r'api/v1/users/(?P<user_id>[-\w]+)/addresses$', UserAddressView.as_view(), name='user_addresses'),
-    url(r'api/v1/users/(?P<user_id>[-\w]+)/orders', UserOrders.as_view(), name='user_orders'),
+    url(r'api/v1/users/(?P<pk>[-\w]+)/orders', UserOrders.as_view(), name='user_orders'),
     url(r'api/v1/vendors$', VendorView.as_view(), name='vendors'),
     url(r'api/v1/vendors/(?P<vendor_id>[-\w]+)/shops$', GetVendorShopsView.as_view(), name='vendors_shops'),
     url(r'api/v1/vendors/(?P<vendor_id>[-\w]+)/couriers$', VendorCouriers.as_view(), name='vendors_couriers'),
@@ -26,10 +25,6 @@ urlpatterns = [
     url(r'api/v1/addresses$', AddressView.as_view(), name='address'),
     url(r'api/v1/orders$', OrdersListView.as_view(), name='orders'),
     url(r'api/v1/orders/(?P<pk>[-\w]+)$', OrderDetailsView.as_view(), name='order-details'),
-    url(r'api/v1/orders$', OrderUpdateView.as_view(), name='order-update'),
-    url(r'api/v1/orders/(?P<pk>[-\w]+)/edit$', OrderUpdateView.as_view(), name='order-update'),
-    url(r'api/v1/orders/(?P<pk>[-\w]+)/delete$', OrderDestroyView.as_view(), name='order-delete'),
-    # url(r'api/v1/orders$', OrderView.as_view(), name='orders'),
     url(r'api/v1/couriers$', CourierView.as_view(), name='couriers'),
 
 ]
