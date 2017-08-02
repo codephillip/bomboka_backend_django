@@ -113,14 +113,27 @@ class ProductEditView(RetrieveUpdateAPIView):
 
 class ShopRatingsView(ListCreateAPIView):
     # Get all shop ratings / Create shop rating
-    # queryset = Rating.objects.all()
-
     def get_queryset(self):
-        orders = Rating.objects.filter(shop=self.kwargs['pk'])
-        return orders
+        ratings = Rating.objects.filter(shop=self.kwargs['pk'])
+        return ratings
 
     def get_serializer_class(self):
         if self.request.method == 'POST':
+            return RatingPostSerializer
+        else:
+            return RatingGetSerializer
+
+
+class ShopRatingDetailsView(RetrieveUpdateDestroyAPIView):
+    # pk2->rating.id passed to the queryset
+    lookup_url_kwarg = 'pk2'
+
+    def get_queryset(self):
+        ratings = Rating.objects.filter(shop=self.kwargs['pk'])
+        return ratings
+
+    def get_serializer_class(self):
+        if self.request.method == 'PUT':
             return RatingPostSerializer
         else:
             return RatingGetSerializer
