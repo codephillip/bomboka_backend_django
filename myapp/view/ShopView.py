@@ -5,8 +5,9 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myapp.models import Vendor, User, Shop, Product, SubCategory
-from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetSerializer, ProductPostSerializer
+from myapp.models import Vendor, User, Shop, Product, SubCategory, Rating
+from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetSerializer, ProductPostSerializer, \
+    RatingGetSerializer, RatingPostSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
     RetrieveUpdateDestroyAPIView
 
@@ -108,3 +109,18 @@ class ProductEditView(RetrieveUpdateAPIView):
             serializer = ProductGetSerializer(product, many=True)
             return Response({"Products": serializer.data})
         return Response("Failed to edit product", status=status.HTTP_400_BAD_REQUEST)
+
+
+class ShopRatingsView(ListCreateAPIView):
+    # Get all shop ratings / Create shop rating
+    # queryset = Rating.objects.all()
+
+    def get_queryset(self):
+        orders = Rating.objects.filter(shop=self.kwargs['pk'])
+        return orders
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return RatingPostSerializer
+        else:
+            return RatingGetSerializer

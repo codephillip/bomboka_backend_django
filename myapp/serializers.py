@@ -142,3 +142,18 @@ class OrderPostSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'is_received', 'is_accepted', 'is_cancelled', 'is_completed', 'createdAt', 'modifiedAt', 'address',
             'product', 'user', 'courier')
+
+
+class RatingGetSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    shop = ShopGetSerializer()
+
+    class Meta:
+        model = Rating
+        fields = ('id', 'count', 'createdAt', 'user', 'shop')
+
+
+class RatingPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rating
+        fields = ('id', 'count', 'createdAt', 'user', 'shop')
