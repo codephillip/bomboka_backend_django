@@ -65,6 +65,15 @@ class Rating(models.Model):
         return str(self.count)
 
 
+class Follow(models.Model):
+    createdAt = models.DateTimeField(auto_now_add=True)
+    shop = models.ForeignKey(Shop)
+    user = models.ForeignKey(User)
+
+    def __str__(self):
+        return self.user.name
+
+
 class Product(models.Model):
     name = models.CharField(max_length=250)
     image = models.CharField(max_length=250)
