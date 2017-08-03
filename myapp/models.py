@@ -130,6 +130,17 @@ class Courier(models.Model):
         return self.user.name
 
 
+class Coverage(models.Model):
+    area = models.CharField(max_length=200)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    price = models.IntegerField()
+    courier = models.ForeignKey(Courier)
+
+    def __str__(self):
+        return self.area
+
+
 class Order(models.Model):
     user = models.ForeignKey(User)
     address = models.ForeignKey(Address)
