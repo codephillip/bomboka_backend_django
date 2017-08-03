@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
 
 from myapp.models import *
 
@@ -172,3 +173,35 @@ class ReviewPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = ('id', 'comment', 'createdAt', 'user', 'product')
+
+    def validate(self, data):
+        print("validate")
+        print(self.serializer_url_field)
+        user = data['user']
+        # user = self._kwargs['user']
+        product = data['product']
+        review = Review.objects.filter(user=user, product=product)
+        if review.exists():
+            raise ValidationError("This user has already reviewed the product.")
+        return data
+
+
+class FollowGetSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    shop = ShopGetSerializer()
+
+    class Meta:
+        model = Follow
+        fields = ('id', 'createdAt', 'shop', 'user')
+
+
+class FollowPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Follow
+        fields = ('id', 'createdAt', 'shop', 'user')
+
+    def validate(self, data):
+        follow = Follow.objects.filter(user=data['user'], shop=data['shop'])
+        if follow.exists():
+            raise ValidationError("This user has already followed the shop.")
+        return data

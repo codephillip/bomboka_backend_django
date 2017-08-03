@@ -4,7 +4,8 @@ from django.contrib import admin
 from myapp.view.CourierView import CourierView, VendorCouriers
 from myapp.view.OrderView import OrderDetailsView, OrdersListView, UserOrders
 from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProductView, ShopEditView, ProductEditView, \
-    ShopRatingsView, ShopRatingDetailsView, ProductReviewsView, ProductReviewDetailsView
+    ShopRatingsView, ShopRatingDetailsView, ProductReviewsView, ProductReviewDetailsView, ShopFollowersView, \
+    ShopFollowerDetailsView
 from myapp.view.UserView import UserView, AddressView, UserAddressView
 from myapp.view.VendorView import VendorView, GetVendorShopsView, VendorEditView
 
@@ -20,6 +21,9 @@ urlpatterns = [
     url(r'api/v1/shops/(?P<shop_id>[-\w]+)$', ShopDetailsView.as_view(), name='shop-details'),
     url(r'api/v1/shops/(?P<pk>[-\w]+)/ratings$', ShopRatingsView.as_view(), name='shop-ratings'),
     url(r'api/v1/shops/(?P<pk>[-\w]+)/ratings/(?P<pk2>[-\w]+)$', ShopRatingDetailsView.as_view(), name='shop-rating'),
+    url(r'api/v1/shops/(?P<pk>[-\w]+)/followers$', ShopFollowersView.as_view(), name='shop-followers'),
+    url(r'api/v1/shops/(?P<pk>[-\w]+)/followers/(?P<pk2>[-\w]+)$', ShopFollowerDetailsView.as_view(),
+        name='shop-follower'),
     url(r'api/v1/products/(?P<pk>[-\w]+)/reviews$', ProductReviewsView.as_view(), name='product-reviews'),
     url(r'api/v1/products/(?P<pk>[-\w]+)/reviews/(?P<pk2>[-\w]+)$', ProductReviewDetailsView.as_view(),
         name='product-review'),

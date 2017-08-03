@@ -5,9 +5,10 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myapp.models import Vendor, User, Shop, Product, SubCategory, Rating, Review
+from myapp.models import Vendor, User, Shop, Product, SubCategory, Rating, Review, Follow
 from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetSerializer, ProductPostSerializer, \
-    RatingGetSerializer, RatingPostSerializer, ReviewPostSerializer, ReviewGetSerializer
+    RatingGetSerializer, RatingPostSerializer, ReviewPostSerializer, ReviewGetSerializer, FollowPostSerializer, \
+    FollowGetSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
     RetrieveUpdateDestroyAPIView
 
@@ -167,3 +168,34 @@ class ProductReviewDetailsView(RetrieveUpdateDestroyAPIView):
             return ReviewPostSerializer
         else:
             return ReviewGetSerializer
+
+
+class ShopFollowersView(ListCreateAPIView):
+    # Get all user_followed_shops / Follow shop
+    print("follow get###")
+
+    def get_queryset(self):
+        follows = Follow.objects.filter(shop=self.kwargs['pk'])
+        print(follows)
+        return follows
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            # grab the url data then insert into the request dictionary
+            self.request.data['shop'] = self.kwargs['pk']
+            return FollowPostSerializer
+        else:
+            return FollowGetSerializer
+
+
+class ShopFollowerDetailsView(RetrieveDestroyAPIView):
+    # Get one followed shop, Edit follow, Unfollow shop
+    # pk2->stop.id passed to the queryset
+    lookup_url_kwarg = 'pk2'
+
+    def get_queryset(self):
+        follows = Follow.objects.filter(shop=self.kwargs['pk'])
+        return follows
+
+    def get_serializer_class(self):
+        return FollowGetSerializer
