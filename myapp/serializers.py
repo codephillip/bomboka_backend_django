@@ -157,3 +157,18 @@ class RatingPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rating
         fields = ('id', 'count', 'createdAt', 'user', 'shop')
+
+
+class ReviewGetSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    product = ProductGetSerializer()
+
+    class Meta:
+        model = Review
+        fields = ('id', 'comment', 'createdAt', 'user', 'product')
+
+
+class ReviewPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = ('id', 'comment', 'createdAt', 'user', 'product')

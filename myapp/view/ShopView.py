@@ -5,9 +5,9 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myapp.models import Vendor, User, Shop, Product, SubCategory, Rating
+from myapp.models import Vendor, User, Shop, Product, SubCategory, Rating, Review
 from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetSerializer, ProductPostSerializer, \
-    RatingGetSerializer, RatingPostSerializer
+    RatingGetSerializer, RatingPostSerializer, ReviewPostSerializer, ReviewGetSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
     RetrieveUpdateDestroyAPIView
 
@@ -125,6 +125,7 @@ class ShopRatingsView(ListCreateAPIView):
 
 
 class ShopRatingDetailsView(RetrieveUpdateDestroyAPIView):
+    # Get one shop_rating, Edit shop_rating, Delete shop_rating
     # pk2->rating.id passed to the queryset
     lookup_url_kwarg = 'pk2'
 
@@ -137,3 +138,32 @@ class ShopRatingDetailsView(RetrieveUpdateDestroyAPIView):
             return RatingPostSerializer
         else:
             return RatingGetSerializer
+
+
+class ProductReviewsView(ListCreateAPIView):
+    # Get all product reviews / Create product review
+    def get_queryset(self):
+        reviews = Review.objects.filter(product=self.kwargs['pk'])
+        return reviews
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return ReviewPostSerializer
+        else:
+            return ReviewGetSerializer
+
+
+class ProductReviewDetailsView(RetrieveUpdateDestroyAPIView):
+    # Get one product_review, Edit product_review, Delete product_review
+    # pk2->review.id passed to the queryset
+    lookup_url_kwarg = 'pk2'
+
+    def get_queryset(self):
+        reviews = Review.objects.filter(product=self.kwargs['pk'])
+        return reviews
+
+    def get_serializer_class(self):
+        if self.request.method == 'PUT':
+            return ReviewPostSerializer
+        else:
+            return ReviewGetSerializer

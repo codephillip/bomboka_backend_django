@@ -4,7 +4,7 @@ from django.contrib import admin
 from myapp.view.CourierView import CourierView, VendorCouriers
 from myapp.view.OrderView import OrderDetailsView, OrdersListView, UserOrders
 from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProductView, ShopEditView, ProductEditView, \
-    ShopRatingsView, ShopRatingDetailsView
+    ShopRatingsView, ShopRatingDetailsView, ProductReviewsView, ProductReviewDetailsView
 from myapp.view.UserView import UserView, AddressView, UserAddressView
 from myapp.view.VendorView import VendorView, GetVendorShopsView, VendorEditView
 
@@ -17,9 +17,12 @@ urlpatterns = [
     url(r'api/v1/vendors/(?P<vendor_id>[-\w]+)/shops$', GetVendorShopsView.as_view(), name='vendors_shops'),
     url(r'api/v1/vendors/(?P<vendor_id>[-\w]+)/couriers$', VendorCouriers.as_view(), name='vendors_couriers'),
     url(r'api/v1/vendor_edit/(?P<vendor_id>[-\w]+)$', VendorEditView.as_view(), name='edit_vendor'),
-    url(r'api/v1/shops/(?P<shop_id>[-\w]+)$', ShopDetailsView.as_view(), name='shop_details'),
-    url(r'api/v1/shops/(?P<pk>[-\w]+)/ratings$', ShopRatingsView.as_view(), name='shop_details'),
-    url(r'api/v1/shops/(?P<pk>[-\w]+)/ratings/(?P<pk2>[-\w]+)$', ShopRatingDetailsView.as_view(), name='shop_details'),
+    url(r'api/v1/shops/(?P<shop_id>[-\w]+)$', ShopDetailsView.as_view(), name='shop-details'),
+    url(r'api/v1/shops/(?P<pk>[-\w]+)/ratings$', ShopRatingsView.as_view(), name='shop-ratings'),
+    url(r'api/v1/shops/(?P<pk>[-\w]+)/ratings/(?P<pk2>[-\w]+)$', ShopRatingDetailsView.as_view(), name='shop-rating'),
+    url(r'api/v1/products/(?P<pk>[-\w]+)/reviews$', ProductReviewsView.as_view(), name='product-reviews'),
+    url(r'api/v1/products/(?P<pk>[-\w]+)/reviews/(?P<pk2>[-\w]+)$', ProductReviewDetailsView.as_view(),
+        name='product-review'),
     url(r'api/v1/shop_edit/(?P<shop_id>[-\w]+)$', ShopEditView.as_view(), name='edit_shop'),
     url(r'api/v1/shops$', ShopView.as_view(), name='shops'),
     url(r'api/v1/shops/(?P<shop_id>[-\w]+)/products$', ShopProductView.as_view(), name='shop_product'),
