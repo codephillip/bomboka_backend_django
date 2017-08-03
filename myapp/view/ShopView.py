@@ -120,6 +120,7 @@ class ShopRatingsView(ListCreateAPIView):
 
     def get_serializer_class(self):
         if self.request.method == 'POST':
+            self.request.data['shop'] = self.kwargs['pk']
             return RatingPostSerializer
         else:
             return RatingGetSerializer
@@ -149,6 +150,7 @@ class ProductReviewsView(ListCreateAPIView):
 
     def get_serializer_class(self):
         if self.request.method == 'POST':
+            self.request.data['product'] = self.kwargs['pk']
             return ReviewPostSerializer
         else:
             return ReviewGetSerializer
