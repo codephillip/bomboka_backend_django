@@ -6,7 +6,7 @@ from myapp.view.OrderView import OrderDetailsView, OrdersListView, UserOrders
 from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProductView, ShopEditView, ProductEditView, \
     ShopRatingsView, ShopRatingDetailsView, ProductReviewsView, ProductReviewDetailsView, ShopFollowersView, \
     ShopFollowerDetailsView
-from myapp.view.UserView import UserView, AddressView, UserAddressView
+from myapp.view.UserView import UserView, AddressView, UserAddressView, FollowedShopsView
 from myapp.view.VendorView import VendorView, GetVendorShopsView, VendorEditView
 
 urlpatterns = [
@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'api/v1/users$', UserView.as_view(), name='users'),
     url(r'api/v1/users/(?P<user_id>[-\w]+)/addresses$', UserAddressView.as_view(), name='user_addresses'),
     url(r'api/v1/users/(?P<pk>[-\w]+)/orders', UserOrders.as_view(), name='user_orders'),
+    url(r'api/v1/users/(?P<pk>[-\w]+)/followedShops', FollowedShopsView.as_view(), name='user-followed-shops'),
     url(r'api/v1/vendors$', VendorView.as_view(), name='vendors'),
     url(r'api/v1/vendors/(?P<vendor_id>[-\w]+)/shops$', GetVendorShopsView.as_view(), name='vendors_shops'),
     url(r'api/v1/vendors/(?P<vendor_id>[-\w]+)/couriers$', VendorCouriers.as_view(), name='vendors_couriers'),

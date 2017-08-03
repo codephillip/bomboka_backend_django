@@ -1,12 +1,14 @@
 from datetime import datetime
 
 from rest_framework import status
+from rest_framework.exceptions import ValidationError
+from rest_framework.generics import ListCreateAPIView
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myapp.models import User, Address
-from myapp.serializers import UserSerializer, AddressSerializer, AddressPostSerializer
+from myapp.models import User, Address, Follow
+from myapp.serializers import UserSerializer, AddressSerializer, AddressPostSerializer, FollowGetSerializer
 
 
 # todo create user using authentication
@@ -52,3 +54,19 @@ class AddressView(APIView):
         address = Address.objects.all()
         serializer = AddressSerializer(address, many=True)
         return Response({"Address": serializer.data})
+
+
+class FollowedShopsView(ListCreateAPIView):
+    # Get all shops followed by user
+    serializer_class = FollowGetSerializer
+
+    def get_queryset(self):
+        print("followed shops")
+        print(self.kwargs['pk'])
+        user = User.objects.get(id=self.kwargs['pk'])
+        print(user)
+        follows = Follow.objects.filter(user=user)
+        if follows:
+            return follows
+        raise ValidationError("User has no followed shops")
+
