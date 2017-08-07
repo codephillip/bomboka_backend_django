@@ -2,13 +2,14 @@ from datetime import datetime
 
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, ListAPIView
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myapp.models import User, Address, Follow
-from myapp.serializers import UserSerializer, AddressSerializer, AddressPostSerializer, FollowGetSerializer
+from myapp.models import User, Address, Follow, Order
+from myapp.serializers import UserSerializer, AddressSerializer, AddressPostSerializer, FollowGetSerializer, \
+    OrderGetSerializer
 
 
 # todo create user using authentication
@@ -70,3 +71,9 @@ class FollowedShopsView(ListCreateAPIView):
             return follows
         raise ValidationError("User has no followed shops")
 
+
+class UserOrdersDetailsView(ListAPIView):
+    serializer_class = OrderGetSerializer
+
+    def get_queryset(self):
+        return Order.objects.filter(user=self.kwargs['pk'])

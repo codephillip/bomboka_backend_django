@@ -1,15 +1,13 @@
-from datetime import date, datetime
+from datetime import datetime
 
-from django.shortcuts import render
-from django.views import View
 from rest_framework import status
-from rest_framework.generics import RetrieveUpdateAPIView
+from rest_framework.generics import RetrieveUpdateAPIView, ListAPIView
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myapp.models import Vendor, User, Shop
-from myapp.serializers import VendorGetSerializer, VendorPostSerializer, ShopGetSerializer
+from myapp.models import Vendor, User, Shop, Order
+from myapp.serializers import VendorGetSerializer, VendorPostSerializer, ShopGetSerializer, OrderGetSerializer
 
 
 class VendorView(APIView):
@@ -57,3 +55,10 @@ class VendorEditView(RetrieveUpdateAPIView):
             serializer = VendorGetSerializer(vendor, many=True)
             return Response({"Vendors": serializer.data})
         return Response("Failed to edit vendor", status=status.HTTP_400_BAD_REQUEST)
+
+
+class VendorOrdersDetailsView(ListAPIView):
+    serializer_class = OrderGetSerializer
+
+    def get_queryset(self):
+        return Order.objects.filter(product__shop__vendor=self.kwargs['pk'])

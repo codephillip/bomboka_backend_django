@@ -1,18 +1,16 @@
-from datetime import date, datetime, timezone
+from datetime import datetime
 
 from rest_framework import status
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myapp.models import Vendor, User, Shop, Product, SubCategory, Order, Courier, VendorCourier, Coverage, Driver, \
-    CourierDriver
-from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetSerializer, ProductPostSerializer, \
-    OrderGetSerializer, OrderPostSerializer, CourierGetSerializer, CourierPostSerializer, VendorCouriersGetSerializer, \
+from myapp.models import Order, Courier, VendorCourier, Coverage, CourierDriver
+from myapp.serializers import CourierGetSerializer, CourierPostSerializer, VendorCouriersGetSerializer, \
     VendorCouriersPostSerializer, CoveragePostSerializer, CoverageGetSerializer, CourierDriversGetSerializer, \
-    CourierDriversPostSerializer
-from rest_framework.generics import ListCreateAPIView, RetrieveAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
-    RetrieveUpdateDestroyAPIView, ListAPIView, UpdateAPIView
+    CourierDriversPostSerializer, OrderGetSerializer
+from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, \
+    RetrieveUpdateDestroyAPIView, ListAPIView
 
 
 class CourierView(APIView):
@@ -114,3 +112,10 @@ class CourierDriversDetailsView(RetrieveDestroyAPIView):
 
     def get_queryset(self):
         return CourierDriver.objects.filter(courier=self.kwargs['pk'])
+
+
+class CourierOrdersDetailsView(ListAPIView):
+    serializer_class = OrderGetSerializer
+
+    def get_queryset(self):
+        return Order.objects.filter(courier=self.kwargs['pk'])

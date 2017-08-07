@@ -1,16 +1,16 @@
-from datetime import date, datetime, timezone
+from datetime import datetime
 
 from rest_framework import status
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myapp.models import Vendor, User, Shop, Product, SubCategory, Rating, Review, Follow
+from myapp.models import Vendor, Shop, Product, SubCategory, Rating, Review, Follow, Order
 from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetSerializer, ProductPostSerializer, \
     RatingGetSerializer, RatingPostSerializer, ReviewPostSerializer, ReviewGetSerializer, FollowPostSerializer, \
-    FollowGetSerializer
-from rest_framework.generics import ListCreateAPIView, RetrieveAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
-    RetrieveUpdateDestroyAPIView
+    FollowGetSerializer, OrderGetSerializer
+from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
+    RetrieveUpdateDestroyAPIView, ListAPIView
 
 
 class ShopView(APIView):
@@ -201,3 +201,10 @@ class ShopFollowerDetailsView(RetrieveDestroyAPIView):
 
     def get_serializer_class(self):
         return FollowGetSerializer
+
+
+class ShopOrdersDetailsView(ListAPIView):
+    serializer_class = OrderGetSerializer
+
+    def get_queryset(self):
+        return Order.objects.filter(product__shop=self.kwargs['pk'])
