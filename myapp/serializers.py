@@ -160,6 +160,20 @@ class RatingPostSerializer(serializers.ModelSerializer):
         fields = ('id', 'count', 'createdAt', 'user', 'shop')
 
 
+class CoverageGetSerializer(serializers.ModelSerializer):
+    courier = CourierGetSerializer()
+
+    class Meta:
+        model = Coverage
+        fields = ('id', 'area', 'latitude', 'longitude', 'price', 'courier')
+
+
+class CoveragePostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Coverage
+        fields = ('id', 'area', 'latitude', 'longitude', 'price', 'courier')
+
+
 class ReviewGetSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     product = ProductGetSerializer()

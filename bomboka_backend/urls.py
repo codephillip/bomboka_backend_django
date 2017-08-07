@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.contrib import admin
 
-from myapp.view.CourierView import CourierView, VendorCouriers
+from myapp.view.CourierView import CourierView, VendorCouriers, AllCoveragesListView
 from myapp.view.OrderView import OrderDetailsView, OrdersListView, UserOrders
 from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProductView, ShopEditView, ProductEditView, \
     ShopRatingsView, ShopRatingDetailsView, ProductReviewsView, ProductReviewDetailsView, ShopFollowersView, \
@@ -37,4 +37,5 @@ urlpatterns = [
     url(r'api/v1/orders$', OrdersListView.as_view(), name='orders'),
     url(r'api/v1/orders/(?P<pk>[-\w]+)$', OrderDetailsView.as_view(), name='order-details'),
     url(r'api/v1/couriers$', CourierView.as_view(), name='couriers'),
+    url(r'api/v1/coverages$', AllCoveragesListView.as_view(), name='courier-coverages'),
 ]

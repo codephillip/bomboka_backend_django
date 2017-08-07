@@ -5,12 +5,12 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myapp.models import Vendor, User, Shop, Product, SubCategory, Order, Courier, VendorCourier
+from myapp.models import Vendor, User, Shop, Product, SubCategory, Order, Courier, VendorCourier, Coverage
 from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetSerializer, ProductPostSerializer, \
     OrderGetSerializer, OrderPostSerializer, CourierGetSerializer, CourierPostSerializer, VendorCouriersGetSerializer, \
-    VendorCouriersPostSerializer
+    VendorCouriersPostSerializer, CoveragePostSerializer, CoverageGetSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
-    RetrieveUpdateDestroyAPIView
+    RetrieveUpdateDestroyAPIView, ListAPIView
 
 
 class CourierView(APIView):
@@ -49,3 +49,9 @@ class VendorCouriers(APIView):
             serializer.save()
             return Response({"VendorCouriers": serializer.data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class AllCoveragesListView(ListAPIView):
+    # Get all courier coverages / Create courier coverage
+    queryset = Coverage.objects.all()
+    serializer_class = CoverageGetSerializer
