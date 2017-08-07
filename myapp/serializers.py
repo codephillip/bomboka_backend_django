@@ -174,6 +174,47 @@ class CoveragePostSerializer(serializers.ModelSerializer):
         fields = ('id', 'area', 'latitude', 'longitude', 'price', 'courier')
 
 
+class CourierDriversGetSerializer(serializers.ModelSerializer):
+    courier = CourierGetSerializer()
+
+    class Meta:
+        model = CourierDriver
+        fields = ('id', 'is_verified', 'is_blocked', 'createdAt', 'modifiedAt', 'courier', 'user')
+
+
+class CourierDriversPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CourierDriver
+        fields = ('id', 'area', 'latitude', 'longitude', 'price', 'courier')
+
+
+class DriverGetSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model = Driver
+        fields = (
+            'id', 'is_verified', 'is_blocked', 'createdAt', 'modifiedAt', 'user')
+
+
+class DriverPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Driver
+        fields = (
+            'id', 'is_verified', 'is_blocked', 'createdAt', 'modifiedAt', 'user')
+
+    def validate(self, data):
+        print("validate")
+        print(self.serializer_url_field)
+        user = data['user']
+        # user = self._kwargs['user']
+        product = data['product']
+        review = Review.objects.filter(user=user, product=product)
+        if review.exists():
+            raise ValidationError("This user has already reviewed the product.")
+        return data
+
+
 class ReviewGetSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     product = ProductGetSerializer()

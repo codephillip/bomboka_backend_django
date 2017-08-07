@@ -173,7 +173,15 @@ class Driver(models.Model):
     createdAt = models.DateTimeField(auto_now_add=True)
     modifiedAt = models.DateTimeField(auto_now_add=True)
     user = models.OneToOneField(User)
-    courier = models.ForeignKey(Courier)
 
     def __str__(self):
-        return self.name
+        return self.user.name
+
+
+class CourierDriver(models.Model):
+    createdAt = models.DateTimeField(auto_now_add=True)
+    courier = models.ForeignKey(Courier)
+    driver = models.ForeignKey(Driver)
+
+    def __str__(self):
+        return self.courier.user.name

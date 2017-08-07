@@ -3,6 +3,7 @@ from django.contrib import admin
 
 from myapp.view.CourierView import CourierView, VendorCouriers, AllCoveragesListView, CourierCoveragesListView, \
     CourierCoveragesUpdateView
+from myapp.view.DriverView import DriversListView, DriverDetailsView, DriverEditView
 from myapp.view.OrderView import OrderDetailsView, OrdersListView, UserOrders
 from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProductView, ShopEditView, ProductEditView, \
     ShopRatingsView, ShopRatingDetailsView, ProductReviewsView, ProductReviewDetailsView, ShopFollowersView, \
@@ -37,6 +38,9 @@ urlpatterns = [
     url(r'api/v1/addresses$', AddressView.as_view(), name='address'),
     url(r'api/v1/orders$', OrdersListView.as_view(), name='orders'),
     url(r'api/v1/orders/(?P<pk>[-\w]+)$', OrderDetailsView.as_view(), name='order-details'),
+    url(r'api/v1/drivers$', DriversListView.as_view(), name='drivers'),
+    url(r'api/v1/drivers/(?P<pk>[-\w]+)$', DriverDetailsView.as_view(), name='driver-details'),
+    url(r'api/v1/drivers_edit/(?P<pk>[-\w]+)$', DriverEditView.as_view(), name='edit-driver'),
     url(r'api/v1/couriers$', CourierView.as_view(), name='couriers'),
     url(r'api/v1/coverages$', AllCoveragesListView.as_view(), name='courier-coverages'),
     url(r'api/v1/couriers/(?P<pk>[-\w]+)/coverages$', CourierCoveragesListView.as_view(), name='courier-coverages'),
