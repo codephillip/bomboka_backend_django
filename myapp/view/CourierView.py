@@ -10,7 +10,7 @@ from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetS
     OrderGetSerializer, OrderPostSerializer, CourierGetSerializer, CourierPostSerializer, VendorCouriersGetSerializer, \
     VendorCouriersPostSerializer, CoveragePostSerializer, CoverageGetSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
-    RetrieveUpdateDestroyAPIView, ListAPIView
+    RetrieveUpdateDestroyAPIView, ListAPIView, UpdateAPIView
 
 
 class CourierView(APIView):
@@ -52,6 +52,35 @@ class VendorCouriers(APIView):
 
 
 class AllCoveragesListView(ListAPIView):
-    # Get all courier coverages / Create courier coverage
+    # Get all coverages from all couriers
     queryset = Coverage.objects.all()
     serializer_class = CoverageGetSerializer
+
+
+class CourierCoveragesListView(ListCreateAPIView):
+    # Get all courier coverages / Create courier coverage
+    def get_queryset(self):
+        print("courier id " + self.kwargs['pk'])
+        return Coverage.objects.filter(courier=self.kwargs['pk'])
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            self.request.POST._mutable = True
+            self.request.data['courier'] = self.kwargs['pk']
+            return CoveragePostSerializer
+        else:
+            return CoverageGetSerializer
+
+
+class CourierCoveragesUpdateView(RetrieveUpdateDestroyAPIView):
+    # Get one courier_coverage, Edit courier_coverage, Delete courier_coverage
+    # pk2->coverages.id passed to the queryset
+    lookup_url_kwarg = 'pk2'
+
+    def get_serializer_class(self):
+        self.request.POST._mutable = True
+        self.request.data['courier'] = self.kwargs['pk']
+        return CoveragePostSerializer
+
+    def get_queryset(self):
+        return Coverage.objects.filter(courier=self.kwargs['pk'])
