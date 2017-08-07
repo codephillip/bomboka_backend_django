@@ -2,7 +2,7 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from myapp.view.CourierView import CourierView, VendorCouriers, AllCoveragesListView, CourierCoveragesListView, \
-    CourierCoveragesUpdateView
+    CourierCoveragesUpdateView, CourierDriversListView, CourierDriversDetailsView
 from myapp.view.DriverView import DriversListView, DriverDetailsView, DriverEditView
 from myapp.view.OrderView import OrderDetailsView, OrdersListView, UserOrders
 from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProductView, ShopEditView, ProductEditView, \
@@ -46,4 +46,8 @@ urlpatterns = [
     url(r'api/v1/couriers/(?P<pk>[-\w]+)/coverages$', CourierCoveragesListView.as_view(), name='courier-coverages'),
     url(r'api/v1/couriers/(?P<pk>[-\w]+)/coverages/(?P<pk2>[-\w]+)$', CourierCoveragesUpdateView.as_view(),
         name='courier-coverage'),
+    url(r'api/v1/couriers/(?P<pk>[-\w]+)/drivers$', CourierDriversListView.as_view(),
+        name='courier-drivers'),
+    url(r'api/v1/couriers/(?P<pk>[-\w]+)/drivers/(?P<pk2>[-\w]+)$', CourierDriversDetailsView.as_view(),
+        name='courier-driver')
 ]

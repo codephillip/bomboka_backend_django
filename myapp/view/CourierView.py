@@ -5,10 +5,12 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myapp.models import Vendor, User, Shop, Product, SubCategory, Order, Courier, VendorCourier, Coverage, Driver
+from myapp.models import Vendor, User, Shop, Product, SubCategory, Order, Courier, VendorCourier, Coverage, Driver, \
+    CourierDriver
 from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetSerializer, ProductPostSerializer, \
     OrderGetSerializer, OrderPostSerializer, CourierGetSerializer, CourierPostSerializer, VendorCouriersGetSerializer, \
-    VendorCouriersPostSerializer, CoveragePostSerializer, CoverageGetSerializer
+    VendorCouriersPostSerializer, CoveragePostSerializer, CoverageGetSerializer, CourierDriversGetSerializer, \
+    CourierDriversPostSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
     RetrieveUpdateDestroyAPIView, ListAPIView, UpdateAPIView
 
@@ -86,36 +88,29 @@ class CourierCoveragesUpdateView(RetrieveUpdateDestroyAPIView):
         return Coverage.objects.filter(courier=self.kwargs['pk'])
 
 
-# class AllDriversListView(ListAPIView):
-#     # Get all coverages from all couriers
-#     queryset = Driver.objects.all()
-#     serializer_class = DriverGetSerializer
-#
-#
-# class CourierDriversListView(ListCreateAPIView):
-#     # Get all courier coverages / Create courier coverage
-#     def get_queryset(self):
-#         print("courier id " + self.kwargs['pk'])
-#         return Driver.objects.filter(courier=self.kwargs['pk'])
-#
-#     def get_serializer_class(self):
-#         if self.request.method == 'POST':
-#             self.request.POST._mutable = True
-#             self.request.data['courier'] = self.kwargs['pk']
-#             return DriverPostSerializer
-#         else:
-#             return DriverGetSerializer
-#
-#
-# class CourierDriversUpdateView(RetrieveUpdateDestroyAPIView):
-#     # Get one courier_coverage, Edit courier_coverage, Delete courier_coverage
-#     # pk2->coverages.id passed to the queryset
-#     lookup_url_kwarg = 'pk2'
-#
-#     def get_serializer_class(self):
-#         self.request.POST._mutable = True
-#         self.request.data['courier'] = self.kwargs['pk']
-#         return DriverPostSerializer
-#
-#     def get_queryset(self):
-#         return Driver.objects.filter(courier=self.kwargs['pk'])
+class CourierDriversListView(ListCreateAPIView):
+    # Get all courier drivers / Create courier driver partnership
+    # Courier can also be the driver
+    def get_queryset(self):
+        print("courier id " + self.kwargs['pk'])
+        return CourierDriver.objects.filter(courier=self.kwargs['pk'])
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            self.request.POST._mutable = True
+            self.request.data['courier'] = self.kwargs['pk']
+            return CourierDriversPostSerializer
+        else:
+            return CourierDriversGetSerializer
+
+
+class CourierDriversDetailsView(RetrieveDestroyAPIView):
+    # Get one courier_driver, Delete courier_driver
+    # pk2->driver.id passed to the queryset
+    lookup_url_kwarg = 'pk2'
+
+    def get_serializer_class(self):
+        return CourierDriversPostSerializer
+
+    def get_queryset(self):
+        return CourierDriver.objects.filter(courier=self.kwargs['pk'])
