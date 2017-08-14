@@ -62,11 +62,7 @@ class FollowedShopsView(ListCreateAPIView):
     serializer_class = FollowGetSerializer
 
     def get_queryset(self):
-        print("followed shops")
-        print(self.kwargs['pk'])
-        user = User.objects.get(id=self.kwargs['pk'])
-        print(user)
-        follows = Follow.objects.filter(user=user)
+        follows = Follow.objects.filter(user_id=self.kwargs['pk'])
         if follows:
             return follows
         raise ValidationError("User has no followed shops")
