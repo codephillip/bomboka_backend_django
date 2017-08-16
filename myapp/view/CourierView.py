@@ -5,10 +5,11 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myapp.models import Order, Courier, VendorCourier, Coverage, CourierDriver, Vehicle
+from myapp.models import Order, Courier, VendorCourier, Coverage, CourierDriver, Vehicle, CourierVehicle
 from myapp.serializers import CourierGetSerializer, CourierPostSerializer, VendorCouriersGetSerializer, \
     VendorCouriersPostSerializer, CoveragePostSerializer, CoverageGetSerializer, CourierDriversGetSerializer, \
-    CourierDriversPostSerializer, OrderGetSerializer, VehicleSerializer
+    CourierDriversPostSerializer, OrderGetSerializer, VehicleSerializer, CourierVehicleGetSerializer, \
+    CourierVehiclePostSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, \
     RetrieveUpdateDestroyAPIView, ListAPIView
 
@@ -130,3 +131,29 @@ class VehicleDetailsView(RetrieveUpdateDestroyAPIView):
     queryset = Vehicle.objects.all()
     serializer_class = VehicleSerializer
 
+
+class CourierVehicleListView(ListCreateAPIView):
+    # Get all courier vehicle / Create courier vehicle
+    def get_queryset(self):
+        print("courier id " + self.kwargs['pk'])
+        return CourierVehicle.objects.filter(courier=self.kwargs['pk'])
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            self.request.POST._mutable = True
+            self.request.data['courier'] = self.kwargs['pk']
+            return CourierVehiclePostSerializer
+        else:
+            return CourierVehicleGetSerializer
+
+
+class CourierVehicleDetailsView(RetrieveDestroyAPIView):
+    # Get one courier_vehicle, Delete courier_vehicle
+    # pk2->vehicle.id passed to the queryset
+    lookup_url_kwarg = 'pk2'
+
+    def get_serializer_class(self):
+        return CourierVehiclePostSerializer
+
+    def get_queryset(self):
+        return CourierVehicle.objects.filter(courier=self.kwargs['pk'])

@@ -222,7 +222,6 @@ class VehicleSerializer(serializers.ModelSerializer):
 
 
 class CourierVehicleGetSerializer(serializers.ModelSerializer):
-    courier = CourierGetSerializer()
     vehicle = VehicleSerializer()
 
     class Meta:

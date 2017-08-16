@@ -199,7 +199,7 @@ class Vehicle(models.Model):
 
 class CourierVehicle(models.Model):
     courier = models.ForeignKey(Courier)
-    vehicle = models.ForeignKey(Vehicle)
+    vehicle = models.OneToOneField(Vehicle)
 
     def __str__(self):
         return self.courier.user.name
