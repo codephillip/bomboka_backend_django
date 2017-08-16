@@ -145,19 +145,19 @@ class OrderPostSerializer(serializers.ModelSerializer):
             'product', 'user', 'courier')
 
 
-class RatingGetSerializer(serializers.ModelSerializer):
+class ShopReviewGetSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     shop = ShopGetSerializer()
 
     class Meta:
-        model = Rating
-        fields = ('id', 'count', 'createdAt', 'user', 'shop')
+        model = ShopReview
+        fields = ('id', 'count', 'comment', 'createdAt', 'user', 'shop')
 
 
-class RatingPostSerializer(serializers.ModelSerializer):
+class ShopReviewPostSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Rating
-        fields = ('id', 'count', 'createdAt', 'user', 'shop')
+        model = ShopReview
+        fields = ('id', 'count', 'comment', 'createdAt', 'user', 'shop')
 
 
 class CoverageGetSerializer(serializers.ModelSerializer):
@@ -215,19 +215,19 @@ class CourierDriversPostSerializer(serializers.ModelSerializer):
         return data
 
 
-class ReviewGetSerializer(serializers.ModelSerializer):
+class ProductReviewGetSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     product = ProductGetSerializer()
 
     class Meta:
-        model = Review
-        fields = ('id', 'comment', 'createdAt', 'user', 'product')
+        model = ProductReview
+        fields = ('id', 'count', 'comment', 'createdAt', 'user', 'product')
 
 
-class ReviewPostSerializer(serializers.ModelSerializer):
+class ProductReviewPostSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Review
-        fields = ('id', 'comment', 'createdAt', 'user', 'product')
+        model = ProductReview
+        fields = ('id', 'count', 'comment', 'createdAt', 'user', 'product')
 
     def validate(self, data):
         print("validate")
@@ -235,7 +235,7 @@ class ReviewPostSerializer(serializers.ModelSerializer):
         user = data['user']
         # user = self._kwargs['user']
         product = data['product']
-        review = Review.objects.filter(user=user, product=product)
+        review = ProductReview.objects.filter(user=user, product=product)
         if review.exists():
             raise ValidationError("This user has already reviewed the product.")
         return data

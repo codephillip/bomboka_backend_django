@@ -55,14 +55,15 @@ class Shop(models.Model):
         return self.name
 
 
-class Rating(models.Model):
+class ShopReview(models.Model):
+    comment = models.TextField()
     count = models.FloatField(default=0)
     createdAt = models.DateTimeField(auto_now_add=True)
     shop = models.ForeignKey(Shop)
     user = models.ForeignKey(User)
 
     def __str__(self):
-        return str(self.count)
+        return str(self.shop.name)
 
 
 class Follow(models.Model):
@@ -88,8 +89,9 @@ class Product(models.Model):
         return self.name
 
 
-class Review(models.Model):
+class ProductReview(models.Model):
     comment = models.TextField()
+    count = models.FloatField(default=0)
     createdAt = models.DateTimeField(auto_now_add=True)
     product = models.ForeignKey(Product)
     user = models.ForeignKey(User)

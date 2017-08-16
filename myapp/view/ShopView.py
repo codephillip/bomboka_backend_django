@@ -5,9 +5,9 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myapp.models import Vendor, Shop, Product, SubCategory, Rating, Review, Follow, Order
+from myapp.models import Vendor, Shop, Product, SubCategory, ShopReview, ProductReview, Follow, Order
 from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetSerializer, ProductPostSerializer, \
-    RatingGetSerializer, RatingPostSerializer, ReviewPostSerializer, ReviewGetSerializer, FollowPostSerializer, \
+    ShopReviewGetSerializer, ShopReviewPostSerializer, ProductReviewPostSerializer, ProductReviewGetSerializer, FollowPostSerializer, \
     FollowGetSerializer, OrderGetSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
     RetrieveUpdateDestroyAPIView, ListAPIView
@@ -112,48 +112,50 @@ class ProductEditView(RetrieveUpdateAPIView):
         return Response("Failed to edit product", status=status.HTTP_400_BAD_REQUEST)
 
 
-class ShopRatingsView(ListCreateAPIView):
+class ShopReviewView(ListCreateAPIView):
     # Get all shop ratings / Create shop rating
     def get_queryset(self):
-        ratings = Rating.objects.filter(shop=self.kwargs['pk'])
+        ratings = ShopReview.objects.filter(shop=self.kwargs['pk'])
         return ratings
 
     def get_serializer_class(self):
         if self.request.method == 'POST':
+            self.request.POST._mutable = True
             self.request.data['shop'] = self.kwargs['pk']
-            return RatingPostSerializer
+            return ShopReviewPostSerializer
         else:
-            return RatingGetSerializer
+            return ShopReviewGetSerializer
 
 
-class ShopRatingDetailsView(RetrieveUpdateDestroyAPIView):
+class ShopReviewDetailsView(RetrieveUpdateDestroyAPIView):
     # Get one shop_rating, Edit shop_rating, Delete shop_rating
     # pk2->rating.id passed to the queryset
     lookup_url_kwarg = 'pk2'
 
     def get_queryset(self):
-        ratings = Rating.objects.filter(shop=self.kwargs['pk'])
+        ratings = ShopReview.objects.filter(shop=self.kwargs['pk'])
         return ratings
 
     def get_serializer_class(self):
         if self.request.method == 'PUT':
-            return RatingPostSerializer
+            return ShopReviewPostSerializer
         else:
-            return RatingGetSerializer
+            return ShopReviewGetSerializer
 
 
 class ProductReviewsView(ListCreateAPIView):
     # Get all product reviews / Create product review
     def get_queryset(self):
-        reviews = Review.objects.filter(product=self.kwargs['pk'])
+        reviews = ProductReview.objects.filter(product=self.kwargs['pk'])
         return reviews
 
     def get_serializer_class(self):
         if self.request.method == 'POST':
+            self.request.POST._mutable = True
             self.request.data['product'] = self.kwargs['pk']
-            return ReviewPostSerializer
+            return ProductReviewPostSerializer
         else:
-            return ReviewGetSerializer
+            return ProductReviewGetSerializer
 
 
 class ProductReviewDetailsView(RetrieveUpdateDestroyAPIView):
@@ -162,14 +164,14 @@ class ProductReviewDetailsView(RetrieveUpdateDestroyAPIView):
     lookup_url_kwarg = 'pk2'
 
     def get_queryset(self):
-        reviews = Review.objects.filter(product=self.kwargs['pk'])
+        reviews = ProductReview.objects.filter(product=self.kwargs['pk'])
         return reviews
 
     def get_serializer_class(self):
         if self.request.method == 'PUT':
-            return ReviewPostSerializer
+            return ProductReviewPostSerializer
         else:
-            return ReviewGetSerializer
+            return ProductReviewGetSerializer
 
 
 class ShopFollowersView(ListCreateAPIView):
