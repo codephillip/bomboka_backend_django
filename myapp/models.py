@@ -187,3 +187,14 @@ class CourierDriver(models.Model):
 
     def __str__(self):
         return self.courier.user.name
+
+
+class Attribute(models.Model):
+    name = models.CharField(max_length=250)
+    element = models.CharField(max_length=250, null=True, blank=True)
+    parameter = models.CharField(max_length=250, null=True, blank=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    product = models.ForeignKey(Product)
+
+    def __str__(self):
+        return self.product.name

@@ -241,6 +241,19 @@ class ProductReviewPostSerializer(serializers.ModelSerializer):
         return data
 
 
+class AttributeGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Attribute
+        fields = ('id', 'name', 'element', 'parameter', 'createdAt', 'product')
+
+
+class AttributePostSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Attribute
+        fields = '__all__'
+
+
 class FollowGetSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     shop = ShopGetSerializer()

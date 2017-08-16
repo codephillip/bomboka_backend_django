@@ -5,10 +5,11 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myapp.models import Vendor, Shop, Product, SubCategory, ShopReview, ProductReview, Follow, Order
+from myapp.models import Vendor, Shop, Product, SubCategory, ShopReview, ProductReview, Follow, Order, Attribute
 from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetSerializer, ProductPostSerializer, \
-    ShopReviewGetSerializer, ShopReviewPostSerializer, ProductReviewPostSerializer, ProductReviewGetSerializer, FollowPostSerializer, \
-    FollowGetSerializer, OrderGetSerializer
+    ShopReviewGetSerializer, ShopReviewPostSerializer, ProductReviewPostSerializer, ProductReviewGetSerializer, \
+    FollowPostSerializer, \
+    FollowGetSerializer, OrderGetSerializer, AttributePostSerializer, AttributeGetSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
     RetrieveUpdateDestroyAPIView, ListAPIView
 
@@ -172,6 +173,38 @@ class ProductReviewDetailsView(RetrieveUpdateDestroyAPIView):
             return ProductReviewPostSerializer
         else:
             return ProductReviewGetSerializer
+
+
+class AttributeView(ListCreateAPIView):
+    def get_queryset(self):
+        attribute = Attribute.objects.filter(product=self.kwargs['pk'])
+        return attribute
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            self.request.POST._mutable = True
+            self.request.data['product'] = self.kwargs['pk']
+            return AttributePostSerializer
+        else:
+            return AttributeGetSerializer
+
+
+class AttributeDetailsView(RetrieveUpdateDestroyAPIView):
+    # Get one product_attribute, Edit product_attribute, Delete product_attribute
+    # pk2->attribute.id passed to the queryset
+    lookup_url_kwarg = 'pk2'
+
+    def get_queryset(self):
+        attribute = Attribute.objects.filter(product=self.kwargs['pk'])
+        return attribute
+
+    def get_serializer_class(self):
+        if self.request.method == 'PUT':
+            self.request.POST._mutable = True
+            self.request.data['product'] = self.kwargs['pk']
+            return AttributePostSerializer
+        else:
+            return AttributeGetSerializer
 
 
 class ShopFollowersView(ListCreateAPIView):
