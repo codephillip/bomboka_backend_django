@@ -189,6 +189,22 @@ class CourierDriver(models.Model):
         return self.courier.user.name
 
 
+class Vehicle(models.Model):
+    name = models.CharField(max_length=250)
+    # todo upload image
+
+    def __str__(self):
+        return self.name
+
+
+class CourierVehicle(models.Model):
+    courier = models.ForeignKey(Courier)
+    vehicle = models.ForeignKey(Vehicle)
+
+    def __str__(self):
+        return self.courier.user.name
+
+
 class Attribute(models.Model):
     name = models.CharField(max_length=250)
     element = models.CharField(max_length=250, null=True, blank=True)

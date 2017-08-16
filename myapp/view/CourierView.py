@@ -5,10 +5,10 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myapp.models import Order, Courier, VendorCourier, Coverage, CourierDriver
+from myapp.models import Order, Courier, VendorCourier, Coverage, CourierDriver, Vehicle
 from myapp.serializers import CourierGetSerializer, CourierPostSerializer, VendorCouriersGetSerializer, \
     VendorCouriersPostSerializer, CoveragePostSerializer, CoverageGetSerializer, CourierDriversGetSerializer, \
-    CourierDriversPostSerializer, OrderGetSerializer
+    CourierDriversPostSerializer, OrderGetSerializer, VehicleSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, \
     RetrieveUpdateDestroyAPIView, ListAPIView
 
@@ -119,3 +119,14 @@ class CourierOrdersDetailsView(ListAPIView):
 
     def get_queryset(self):
         return Order.objects.filter(courier=self.kwargs['pk'])
+
+
+class VehicleView(ListCreateAPIView):
+    queryset = Vehicle.objects.all()
+    serializer_class = VehicleSerializer
+
+
+class VehicleDetailsView(RetrieveUpdateDestroyAPIView):
+    queryset = Vehicle.objects.all()
+    serializer_class = VehicleSerializer
+

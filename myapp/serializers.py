@@ -215,6 +215,27 @@ class CourierDriversPostSerializer(serializers.ModelSerializer):
         return data
 
 
+class VehicleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Vehicle
+        fields = '__all__'
+
+
+class CourierVehicleGetSerializer(serializers.ModelSerializer):
+    courier = CourierGetSerializer()
+    vehicle = VehicleSerializer()
+
+    class Meta:
+        model = CourierVehicle
+        fields = ('id', 'courier', 'vehicle')
+
+
+class CourierVehiclePostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CourierVehicle
+        fields = '__all__'
+
+
 class ProductReviewGetSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     product = ProductGetSerializer()
