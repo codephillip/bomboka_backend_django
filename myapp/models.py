@@ -225,3 +225,11 @@ class Discount(models.Model):
     createdAt = models.DateTimeField(auto_now_add=True)
     startDate = models.DateTimeField(auto_now_add=True)
     endDate = models.DateTimeField()
+
+
+class Brand(models.Model):
+    # todo upload image
+    name = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.name

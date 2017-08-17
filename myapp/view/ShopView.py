@@ -6,12 +6,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from myapp.models import Vendor, Shop, Product, SubCategory, ShopReview, ProductReview, Follow, Order, Attribute, \
-    Discount
+    Discount, Brand
 from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetSerializer, ProductPostSerializer, \
     ShopReviewGetSerializer, ShopReviewPostSerializer, ProductReviewPostSerializer, ProductReviewGetSerializer, \
     FollowPostSerializer, \
     FollowGetSerializer, OrderGetSerializer, AttributePostSerializer, AttributeGetSerializer, DiscountGetSerializer, \
-    DiscountPostSerializer
+    DiscountPostSerializer, BrandSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
     RetrieveUpdateDestroyAPIView, ListAPIView
 
@@ -265,3 +265,13 @@ class DiscountDetailsView(RetrieveUpdateDestroyAPIView):
             return DiscountPostSerializer
         else:
             return DiscountGetSerializer
+
+
+class BrandView(ListCreateAPIView):
+    queryset = Brand.objects.all()
+    serializer_class = BrandSerializer
+
+
+class BrandDetailsView(RetrieveUpdateDestroyAPIView):
+    queryset = Brand.objects.all()
+    serializer_class = BrandSerializer
