@@ -312,3 +312,17 @@ class BrandSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brand
         fields = '__all__'
+
+
+class ProductBrandPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductBrand
+        fields = '__all__'
+
+
+class ProductBrandGetSerializer(serializers.ModelSerializer):
+    brand = BrandSerializer()
+
+    class Meta:
+        model = ProductBrand
+        fields = ('id', 'product', 'brand')

@@ -6,12 +6,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from myapp.models import Vendor, Shop, Product, SubCategory, ShopReview, ProductReview, Follow, Order, Attribute, \
-    Discount, Brand
+    Discount, Brand, ProductBrand
 from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetSerializer, ProductPostSerializer, \
     ShopReviewGetSerializer, ShopReviewPostSerializer, ProductReviewPostSerializer, ProductReviewGetSerializer, \
     FollowPostSerializer, \
     FollowGetSerializer, OrderGetSerializer, AttributePostSerializer, AttributeGetSerializer, DiscountGetSerializer, \
-    DiscountPostSerializer, BrandSerializer
+    DiscountPostSerializer, BrandSerializer, ProductBrandPostSerializer, ProductBrandGetSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
     RetrieveUpdateDestroyAPIView, ListAPIView
 
@@ -275,3 +275,15 @@ class BrandView(ListCreateAPIView):
 class BrandDetailsView(RetrieveUpdateDestroyAPIView):
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer
+
+
+class ProductBrandView(ListCreateAPIView):
+    def get_queryset(self):
+        return ProductBrand.objects.filter(product_id=self.kwargs['pk'])
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return ProductBrandPostSerializer
+        else:
+            return ProductBrandGetSerializer
+
