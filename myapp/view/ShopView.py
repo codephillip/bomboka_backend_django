@@ -13,7 +13,7 @@ from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetS
     FollowGetSerializer, OrderGetSerializer, AttributePostSerializer, AttributeGetSerializer, DiscountGetSerializer, \
     DiscountPostSerializer, BrandSerializer, ProductBrandPostSerializer, ProductBrandGetSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
-    RetrieveUpdateDestroyAPIView, ListAPIView
+    RetrieveUpdateDestroyAPIView, ListAPIView, DestroyAPIView
 
 
 class ShopView(APIView):
@@ -287,3 +287,14 @@ class ProductBrandView(ListCreateAPIView):
         else:
             return ProductBrandGetSerializer
 
+
+class ProductBrandDetailsView(RetrieveUpdateDestroyAPIView):
+    # Get one product_brand, Delete product_brand
+    # pk2->brand.id passed to the queryset
+    lookup_url_kwarg = 'pk2'
+
+    def get_serializer_class(self):
+        return ProductBrandPostSerializer
+
+    def get_queryset(self):
+        return ProductBrand.objects.filter(product_id=self.kwargs['pk'])

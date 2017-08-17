@@ -10,7 +10,7 @@ from myapp.view.OrderView import OrderDetailsView, OrdersListView, UserOrders
 from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProductView, ShopEditView, ProductEditView, \
     ShopReviewView, ShopReviewDetailsView, ProductReviewsView, ProductReviewDetailsView, ShopFollowersView, \
     ShopFollowerDetailsView, ShopOrdersDetailsView, AttributeView, AttributeDetailsView, DiscountView, \
-    DiscountDetailsView, BrandView, BrandDetailsView, ProductBrandView
+    DiscountDetailsView, BrandView, BrandDetailsView, ProductBrandView, ProductBrandDetailsView
 from myapp.view.UserView import UserView, AddressView, UserAddressView, FollowedShopsView, UserOrdersDetailsView, \
     DisplayShopDiscounts
 from myapp.view.VendorView import VendorView, GetVendorShopsView, VendorEditView, VendorOrdersDetailsView
@@ -51,6 +51,7 @@ urlpatterns = [
     url(r'api/v1/products$', ProductView.as_view(), name='products'),
     url(r'api/v1/product_edit/(?P<product_id>[-\w]+)$', ProductEditView.as_view(), name='edit_product'),
     url(r'api/v1/products/(?P<pk>[-\w]+)/brands$', ProductBrandView.as_view(), name='product-brand'),
+    url(r'api/v1/products/(?P<pk>[-\w]+)/brands/(?P<pk2>[-\w]+)$', ProductBrandDetailsView.as_view(), name='product-brand'),
 
     url(r'api/v1/brands$', BrandView.as_view(), name='brands'),
     url(r'api/v1/brands/(?P<pk>[-\w]+)$', BrandDetailsView.as_view(), name='brand-details'),
