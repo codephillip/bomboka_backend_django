@@ -7,9 +7,9 @@ from rest_framework.generics import ListCreateAPIView, ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myapp.models import User, Address, Follow, Order
+from myapp.models import User, Address, Follow, Order, Discount
 from myapp.serializers import UserSerializer, AddressSerializer, AddressPostSerializer, FollowGetSerializer, \
-    OrderGetSerializer
+    OrderGetSerializer, DiscountGetSerializer
 
 
 # todo create user using authentication
@@ -73,3 +73,14 @@ class UserOrdersDetailsView(ListAPIView):
 
     def get_queryset(self):
         return Order.objects.filter(user=self.kwargs['pk'])
+
+
+class DisplayShopDiscounts(ListAPIView):
+    serializer_class = DiscountGetSerializer
+
+    def get_queryset(self):
+        follows = Follow.objects.filter(user_id=self.kwargs['pk'])
+        shop_id_list = []
+        [shop_id_list.append(x.shop_id) for x in follows]
+        print(shop_id_list)
+        return Discount.objects.filter(product__shop_id__in=shop_id_list)

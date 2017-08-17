@@ -10,7 +10,8 @@ from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProd
     ShopReviewView, ShopReviewDetailsView, ProductReviewsView, ProductReviewDetailsView, ShopFollowersView, \
     ShopFollowerDetailsView, ShopOrdersDetailsView, AttributeView, AttributeDetailsView, DiscountView, \
     DiscountDetailsView
-from myapp.view.UserView import UserView, AddressView, UserAddressView, FollowedShopsView, UserOrdersDetailsView
+from myapp.view.UserView import UserView, AddressView, UserAddressView, FollowedShopsView, UserOrdersDetailsView, \
+    DisplayShopDiscounts
 from myapp.view.VendorView import VendorView, GetVendorShopsView, VendorEditView, VendorOrdersDetailsView
 
 urlpatterns = [
@@ -21,6 +22,8 @@ urlpatterns = [
     url(r'api/v1/users/(?P<pk>[-\w]+)/followedShops', FollowedShopsView.as_view(), name='user-followed-shops'),
     url(r'api/v1/users/(?P<pk>[-\w]+)/orders$', UserOrdersDetailsView.as_view(),
         name='user-orders'),
+    url(r'api/v1/users/(?P<pk>[-\w]+)/discounts$', DisplayShopDiscounts.as_view(),
+        name='user-discounts'),
 
     url(r'api/v1/addresses$', AddressView.as_view(), name='address'),
 
