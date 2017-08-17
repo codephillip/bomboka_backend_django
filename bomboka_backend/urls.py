@@ -8,7 +8,8 @@ from myapp.view.DriverView import DriversListView, DriverDetailsView, DriverEdit
 from myapp.view.OrderView import OrderDetailsView, OrdersListView, UserOrders
 from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProductView, ShopEditView, ProductEditView, \
     ShopReviewView, ShopReviewDetailsView, ProductReviewsView, ProductReviewDetailsView, ShopFollowersView, \
-    ShopFollowerDetailsView, ShopOrdersDetailsView, AttributeView, AttributeDetailsView
+    ShopFollowerDetailsView, ShopOrdersDetailsView, AttributeView, AttributeDetailsView, DiscountView, \
+    DiscountDetailsView
 from myapp.view.UserView import UserView, AddressView, UserAddressView, FollowedShopsView, UserOrdersDetailsView
 from myapp.view.VendorView import VendorView, GetVendorShopsView, VendorEditView, VendorOrdersDetailsView
 
@@ -45,6 +46,9 @@ urlpatterns = [
     url(r'api/v1/products/(?P<pk>[-\w]+)/reviews$', ProductReviewsView.as_view(), name='product-reviews'),
     url(r'api/v1/products$', ProductView.as_view(), name='products'),
     url(r'api/v1/product_edit/(?P<product_id>[-\w]+)$', ProductEditView.as_view(), name='edit_product'),
+
+    url(r'api/v1/discounts$', DiscountView.as_view(), name='discounts'),
+    url(r'api/v1/discounts/(?P<pk>[-\w]+)$', DiscountDetailsView.as_view(), name='discount-details'),
 
     url(r'api/v1/shops$', ShopView.as_view(), name='shops'),
     url(r'api/v1/shop_edit/(?P<shop_id>[-\w]+)$', ShopEditView.as_view(), name='edit_shop'),

@@ -5,11 +5,13 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myapp.models import Vendor, Shop, Product, SubCategory, ShopReview, ProductReview, Follow, Order, Attribute
+from myapp.models import Vendor, Shop, Product, SubCategory, ShopReview, ProductReview, Follow, Order, Attribute, \
+    Discount
 from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetSerializer, ProductPostSerializer, \
     ShopReviewGetSerializer, ShopReviewPostSerializer, ProductReviewPostSerializer, ProductReviewGetSerializer, \
     FollowPostSerializer, \
-    FollowGetSerializer, OrderGetSerializer, AttributePostSerializer, AttributeGetSerializer
+    FollowGetSerializer, OrderGetSerializer, AttributePostSerializer, AttributeGetSerializer, DiscountGetSerializer, \
+    DiscountPostSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
     RetrieveUpdateDestroyAPIView, ListAPIView
 
@@ -243,3 +245,23 @@ class ShopOrdersDetailsView(ListAPIView):
 
     def get_queryset(self):
         return Order.objects.filter(product__shop=self.kwargs['pk'])
+
+
+class DiscountView(ListCreateAPIView):
+    queryset = Discount.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return DiscountPostSerializer
+        else:
+            return DiscountGetSerializer
+
+
+class DiscountDetailsView(RetrieveUpdateDestroyAPIView):
+    queryset = Discount.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'PUT':
+            return DiscountPostSerializer
+        else:
+            return DiscountGetSerializer

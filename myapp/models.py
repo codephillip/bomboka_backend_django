@@ -78,6 +78,7 @@ class Follow(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=250)
     image = models.CharField(max_length=250)
+    brand = models.CharField(max_length=250)
     price = models.FloatField()
     description = models.TextField()
     createdAt = models.DateTimeField(auto_now_add=True)
@@ -191,6 +192,7 @@ class CourierDriver(models.Model):
 
 class Vehicle(models.Model):
     name = models.CharField(max_length=250)
+
     # todo upload image
 
     def __str__(self):
@@ -214,3 +216,12 @@ class Attribute(models.Model):
 
     def __str__(self):
         return self.product.name
+
+
+class Discount(models.Model):
+    product = models.OneToOneField(Product)
+    percentage = models.IntegerField(default=0)
+    activated = models.BooleanField(default=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    startDate = models.DateTimeField(auto_now_add=True)
+    endDate = models.DateTimeField()

@@ -268,7 +268,6 @@ class AttributeGetSerializer(serializers.ModelSerializer):
 
 
 class AttributePostSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Attribute
         fields = '__all__'
@@ -293,3 +292,17 @@ class FollowPostSerializer(serializers.ModelSerializer):
         if follow.exists():
             raise ValidationError("This user has already followed the shop.")
         return data
+
+
+class DiscountGetSerializer(serializers.ModelSerializer):
+    product = ProductGetSerializer()
+
+    class Meta:
+        model = Discount
+        fields = ('id', 'product', 'percentage', 'activated', 'createdAt', 'startDate', 'endDate')
+
+
+class DiscountPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Discount
+        fields = '__all__'
