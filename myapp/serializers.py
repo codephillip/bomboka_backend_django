@@ -340,13 +340,16 @@ class FeedbackCategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class FeedbackGetSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Feedback
-        fields = '__all__'
-
-
 class FeedbackPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feedback
         fields = '__all__'
+
+
+class FeedbackGetSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    category = FeedbackCategorySerializer()
+
+    class Meta:
+        model = Feedback
+        fields = ('id', 'content', 'category', 'user')

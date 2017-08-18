@@ -13,7 +13,7 @@ from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProd
     DiscountDetailsView, BrandView, BrandDetailsView, ProductBrandView, ProductBrandDetailsView, SubscriptionView, \
     SubscriptionDetailsView
 from myapp.view.UserView import UserView, AddressView, UserAddressView, FollowedShopsView, UserOrdersDetailsView, \
-    DisplayShopDiscounts, FeedbackCategoryView, FeedbackCategoryDetailsView
+    DisplayShopDiscounts, FeedbackCategoryView, FeedbackCategoryDetailsView, FeedbackDetailsView, FeedbackView
 from myapp.view.VendorView import VendorView, GetVendorShopsView, VendorEditView, VendorOrdersDetailsView
 
 urlpatterns = [
@@ -30,6 +30,9 @@ urlpatterns = [
     url(r'api/v1/feedbackcategorys$', FeedbackCategoryView.as_view(), name='feedback-categorys'),
     url(r'api/v1/feedbackcategorys/(?P<pk>[-\w]+)$', FeedbackCategoryDetailsView.as_view(),
         name='feedback-category-details'),
+    url(r'api/v1/feedbacks$', FeedbackView.as_view(), name='feedbacks'),
+    url(r'api/v1/feedbacks/(?P<pk>[-\w]+)$', FeedbackDetailsView.as_view(),
+        name='feedback-details'),
 
     url(r'api/v1/addresses$', AddressView.as_view(), name='address'),
 

@@ -2,14 +2,14 @@ from datetime import datetime
 
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
-from rest_framework.generics import ListCreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView, RetrieveDestroyAPIView
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myapp.models import User, Address, Follow, Order, Discount, FeedbackCategory
+from myapp.models import User, Address, Follow, Order, Discount, FeedbackCategory, Feedback
 from myapp.serializers import UserSerializer, AddressSerializer, AddressPostSerializer, FollowGetSerializer, \
-    OrderGetSerializer, DiscountGetSerializer, FeedbackCategorySerializer
+    OrderGetSerializer, DiscountGetSerializer, FeedbackCategorySerializer, FeedbackPostSerializer, FeedbackGetSerializer
 
 
 # todo create user using authentication
@@ -94,3 +94,18 @@ class FeedbackCategoryView(ListCreateAPIView):
 class FeedbackCategoryDetailsView(RetrieveUpdateDestroyAPIView):
     queryset = FeedbackCategory.objects.all()
     serializer_class = FeedbackCategorySerializer
+
+
+class FeedbackView(ListCreateAPIView):
+    queryset = Feedback.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return FeedbackPostSerializer
+        else:
+            return FeedbackGetSerializer
+
+
+class FeedbackDetailsView(RetrieveDestroyAPIView):
+    queryset = Feedback.objects.all()
+    serializer_class = FeedbackGetSerializer
