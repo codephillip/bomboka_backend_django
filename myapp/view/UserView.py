@@ -2,14 +2,14 @@ from datetime import datetime
 
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
-from rest_framework.generics import ListCreateAPIView, ListAPIView
+from rest_framework.generics import ListCreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myapp.models import User, Address, Follow, Order, Discount
+from myapp.models import User, Address, Follow, Order, Discount, FeedbackCategory
 from myapp.serializers import UserSerializer, AddressSerializer, AddressPostSerializer, FollowGetSerializer, \
-    OrderGetSerializer, DiscountGetSerializer
+    OrderGetSerializer, DiscountGetSerializer, FeedbackCategorySerializer
 
 
 # todo create user using authentication
@@ -84,3 +84,13 @@ class DisplayShopDiscounts(ListAPIView):
         [shop_id_list.append(x.shop_id) for x in follows]
         print(shop_id_list)
         return Discount.objects.filter(product__shop_id__in=shop_id_list)
+
+
+class FeedbackCategoryView(ListCreateAPIView):
+    queryset = FeedbackCategory.objects.all()
+    serializer_class = FeedbackCategorySerializer
+
+
+class FeedbackCategoryDetailsView(RetrieveUpdateDestroyAPIView):
+    queryset = FeedbackCategory.objects.all()
+    serializer_class = FeedbackCategorySerializer

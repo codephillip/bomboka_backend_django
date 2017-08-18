@@ -13,7 +13,7 @@ from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProd
     DiscountDetailsView, BrandView, BrandDetailsView, ProductBrandView, ProductBrandDetailsView, SubscriptionView, \
     SubscriptionDetailsView
 from myapp.view.UserView import UserView, AddressView, UserAddressView, FollowedShopsView, UserOrdersDetailsView, \
-    DisplayShopDiscounts
+    DisplayShopDiscounts, FeedbackCategoryView, FeedbackCategoryDetailsView
 from myapp.view.VendorView import VendorView, GetVendorShopsView, VendorEditView, VendorOrdersDetailsView
 
 urlpatterns = [
@@ -26,6 +26,10 @@ urlpatterns = [
         name='user-orders'),
     url(r'api/v1/users/(?P<pk>[-\w]+)/discounts$', DisplayShopDiscounts.as_view(),
         name='user-discounts'),
+
+    url(r'api/v1/feedbackcategorys$', FeedbackCategoryView.as_view(), name='feedback-categorys'),
+    url(r'api/v1/feedbackcategorys/(?P<pk>[-\w]+)$', FeedbackCategoryDetailsView.as_view(),
+        name='feedback-category-details'),
 
     url(r'api/v1/addresses$', AddressView.as_view(), name='address'),
 
@@ -52,7 +56,8 @@ urlpatterns = [
     url(r'api/v1/products$', ProductView.as_view(), name='products'),
     url(r'api/v1/product_edit/(?P<product_id>[-\w]+)$', ProductEditView.as_view(), name='edit_product'),
     url(r'api/v1/products/(?P<pk>[-\w]+)/brands$', ProductBrandView.as_view(), name='product-brand'),
-    url(r'api/v1/products/(?P<pk>[-\w]+)/brands/(?P<pk2>[-\w]+)$', ProductBrandDetailsView.as_view(), name='product-brand'),
+    url(r'api/v1/products/(?P<pk>[-\w]+)/brands/(?P<pk2>[-\w]+)$', ProductBrandDetailsView.as_view(),
+        name='product-brand'),
 
     url(r'api/v1/brands$', BrandView.as_view(), name='brands'),
     url(r'api/v1/brands/(?P<pk>[-\w]+)$', BrandDetailsView.as_view(), name='brand-details'),

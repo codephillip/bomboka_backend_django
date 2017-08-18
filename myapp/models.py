@@ -252,3 +252,19 @@ class ProductBrand(models.Model):
 
     def __str__(self):
         return self.product.name
+
+
+class FeedbackCategory(models.Model):
+    name = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.name
+
+
+class Feedback(models.Model):
+    content = models.TextField()
+    category = models.ForeignKey(FeedbackCategory)
+    user = models.ForeignKey(User)
+
+    def __str__(self):
+        return self.user.name

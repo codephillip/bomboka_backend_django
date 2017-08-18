@@ -332,3 +332,21 @@ class SubscriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subscription
         fields = '__all__'
+
+
+class FeedbackCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FeedbackCategory
+        fields = '__all__'
+
+
+class FeedbackGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Feedback
+        fields = '__all__'
+
+
+class FeedbackPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Feedback
+        fields = '__all__'
