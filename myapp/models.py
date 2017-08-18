@@ -268,8 +268,3 @@ class Feedback(models.Model):
 
     def __str__(self):
         return self.user.name
-
-
-class MyPhoto(models.Model):
-    name = models.CharField(max_length=255)
-    image = models.ImageField(upload_to='myphoto/%Y/%m/%d/', null=True, max_length=255)
