@@ -6,12 +6,13 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from myapp.models import Vendor, Shop, Product, SubCategory, ShopReview, ProductReview, Follow, Order, Attribute, \
-    Discount, Brand, ProductBrand
+    Discount, Brand, ProductBrand, Subscription
 from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetSerializer, ProductPostSerializer, \
     ShopReviewGetSerializer, ShopReviewPostSerializer, ProductReviewPostSerializer, ProductReviewGetSerializer, \
     FollowPostSerializer, \
     FollowGetSerializer, OrderGetSerializer, AttributePostSerializer, AttributeGetSerializer, DiscountGetSerializer, \
-    DiscountPostSerializer, BrandSerializer, ProductBrandPostSerializer, ProductBrandGetSerializer
+    DiscountPostSerializer, BrandSerializer, ProductBrandPostSerializer, ProductBrandGetSerializer, \
+    SubscriptionSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
     RetrieveUpdateDestroyAPIView, ListAPIView, DestroyAPIView
 
@@ -298,3 +299,13 @@ class ProductBrandDetailsView(RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return ProductBrand.objects.filter(product_id=self.kwargs['pk'])
+
+
+class SubscriptionView(ListCreateAPIView):
+    queryset = Subscription.objects.all()
+    serializer_class = SubscriptionSerializer
+
+
+class SubscriptionDetailsView(RetrieveUpdateDestroyAPIView):
+    queryset = Subscription.objects.all()
+    serializer_class = SubscriptionSerializer

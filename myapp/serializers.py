@@ -326,3 +326,9 @@ class ProductBrandGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductBrand
         fields = ('id', 'product', 'brand')
+
+
+class SubscriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subscription
+        fields = '__all__'

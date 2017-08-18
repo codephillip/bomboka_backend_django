@@ -44,11 +44,22 @@ class Vendor(models.Model):
         return str(self.user.name)
 
 
+class Subscription(models.Model):
+    # todo upload image
+    name = models.CharField(max_length=250)
+    description = models.TextField()
+    price = models.FloatField()
+
+    def __str__(self):
+        return self.name
+
+
 class Shop(models.Model):
     name = models.CharField(max_length=250)
     createdAt = models.DateTimeField(auto_now_add=True)
     modifiedAt = models.DateTimeField(auto_now_add=True)
     is_blocked = models.BooleanField(default=False)
+    subscription = models.ForeignKey(Subscription)
     vendor = models.ForeignKey(Vendor)
 
     def __str__(self):

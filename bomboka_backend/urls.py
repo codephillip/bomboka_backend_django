@@ -10,7 +10,8 @@ from myapp.view.OrderView import OrderDetailsView, OrdersListView, UserOrders
 from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProductView, ShopEditView, ProductEditView, \
     ShopReviewView, ShopReviewDetailsView, ProductReviewsView, ProductReviewDetailsView, ShopFollowersView, \
     ShopFollowerDetailsView, ShopOrdersDetailsView, AttributeView, AttributeDetailsView, DiscountView, \
-    DiscountDetailsView, BrandView, BrandDetailsView, ProductBrandView, ProductBrandDetailsView
+    DiscountDetailsView, BrandView, BrandDetailsView, ProductBrandView, ProductBrandDetailsView, SubscriptionView, \
+    SubscriptionDetailsView
 from myapp.view.UserView import UserView, AddressView, UserAddressView, FollowedShopsView, UserOrdersDetailsView, \
     DisplayShopDiscounts
 from myapp.view.VendorView import VendorView, GetVendorShopsView, VendorEditView, VendorOrdersDetailsView
@@ -64,6 +65,9 @@ urlpatterns = [
     url(r'api/v1/shops/(?P<shop_id>[-\w]+)/products$', ShopProductView.as_view(), name='shop_product'),
     url(r'api/v1/shops/(?P<pk>[-\w]+)/orders$', ShopOrdersDetailsView.as_view(),
         name='shop-orders'),
+
+    url(r'api/v1/subscriptions$', SubscriptionView.as_view(), name='subscriptions'),
+    url(r'api/v1/subscriptions/(?P<pk>[-\w]+)$', SubscriptionDetailsView.as_view(), name='subscription-details'),
 
     url(r'api/v1/orders$', OrdersListView.as_view(), name='orders'),
     url(r'api/v1/orders/(?P<pk>[-\w]+)$', OrderDetailsView.as_view(), name='order-details'),
