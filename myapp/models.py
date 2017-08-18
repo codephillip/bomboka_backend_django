@@ -18,7 +18,7 @@ class User(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=250)
-    image = models.CharField(max_length=250)
+    image = models.ImageField(upload_to='category/', max_length=254)
 
     def __str__(self):
         return self.name
@@ -26,7 +26,7 @@ class Category(models.Model):
 
 class SubCategory(models.Model):
     name = models.CharField(max_length=250)
-    image = models.CharField(max_length=250)
+    image = models.ImageField(upload_to='sub_category/', max_length=254)
     category = models.ForeignKey(Category)
 
     def __str__(self):
@@ -45,8 +45,8 @@ class Vendor(models.Model):
 
 
 class Subscription(models.Model):
-    # todo upload image
     name = models.CharField(max_length=250)
+    image = models.ImageField(upload_to='subscription/', max_length=254)
     description = models.TextField()
     price = models.FloatField()
 
@@ -88,7 +88,7 @@ class Follow(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=250)
-    image = models.CharField(max_length=250)
+    image = models.ImageField(upload_to='product/', max_length=254)
     brand = models.CharField(max_length=250)
     price = models.FloatField()
     description = models.TextField()
@@ -203,8 +203,7 @@ class CourierDriver(models.Model):
 
 class Vehicle(models.Model):
     name = models.CharField(max_length=250)
-
-    # todo upload image
+    image = models.ImageField(upload_to='vehicle/', max_length=254)
 
     def __str__(self):
         return self.name
@@ -239,8 +238,8 @@ class Discount(models.Model):
 
 
 class Brand(models.Model):
-    # todo upload image
     name = models.CharField(max_length=250)
+    image = models.ImageField(upload_to='brand/', max_length=254)
 
     def __str__(self):
         return self.name
