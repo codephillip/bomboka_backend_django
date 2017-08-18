@@ -9,7 +9,7 @@ class User(models.Model):
     createdAt = models.DateTimeField(auto_now_add=True)
     modifiedAt = models.DateTimeField(auto_now_add=True)
     is_blocked = models.BooleanField(default=False)
-    image = models.CharField(max_length=250)
+    image = models.ImageField(upload_to='profile/', max_length=254)
     dob = models.CharField(max_length=250)
 
     def __str__(self):
@@ -268,3 +268,8 @@ class Feedback(models.Model):
 
     def __str__(self):
         return self.user.name
+
+
+class MyPhoto(models.Model):
+    name = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='myphoto/%Y/%m/%d/', null=True, max_length=255)

@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from django.contrib import admin
+from django.conf.urls.static import static
 
+from bomboka_backend import settings
 from myapp.view.CourierView import CourierView, VendorCouriers, AllCoveragesListView, CourierCoveragesListView, \
     CourierCoveragesUpdateView, CourierDriversListView, CourierDriversDetailsView, CourierOrdersDetailsView, \
     VehicleView, \
@@ -13,7 +15,8 @@ from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProd
     DiscountDetailsView, BrandView, BrandDetailsView, ProductBrandView, ProductBrandDetailsView, SubscriptionView, \
     SubscriptionDetailsView
 from myapp.view.UserView import UserView, AddressView, UserAddressView, FollowedShopsView, UserOrdersDetailsView, \
-    DisplayShopDiscounts, FeedbackCategoryView, FeedbackCategoryDetailsView, FeedbackDetailsView, FeedbackView
+    DisplayShopDiscounts, FeedbackCategoryView, FeedbackCategoryDetailsView, FeedbackDetailsView, FeedbackView, \
+    PhotoList
 from myapp.view.VendorView import VendorView, GetVendorShopsView, VendorEditView, VendorOrdersDetailsView
 
 urlpatterns = [
@@ -33,6 +36,8 @@ urlpatterns = [
     url(r'api/v1/feedbacks$', FeedbackView.as_view(), name='feedbacks'),
     url(r'api/v1/feedbacks/(?P<pk>[-\w]+)$', FeedbackDetailsView.as_view(),
         name='feedback-details'),
+
+    url(r'api/v1/photo$', PhotoList.as_view(), name='photo'),
 
     url(r'api/v1/addresses$', AddressView.as_view(), name='address'),
 
@@ -104,3 +109,5 @@ urlpatterns = [
     url(r'api/v1/vehicles/(?P<pk>[-\w]+)$', VehicleDetailsView.as_view(), name='vehicle'),
 
 ]
+
+urlpatterns += static(settings.MEDIA_ROOT, document_root=settings.MEDIA_ROOT)

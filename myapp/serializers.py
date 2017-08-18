@@ -353,3 +353,9 @@ class FeedbackGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feedback
         fields = ('id', 'content', 'category', 'user')
+
+
+class MyPhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MyPhoto
+        fields = ('id', 'name', 'image')

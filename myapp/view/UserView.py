@@ -9,7 +9,8 @@ from rest_framework.views import APIView
 
 from myapp.models import User, Address, Follow, Order, Discount, FeedbackCategory, Feedback
 from myapp.serializers import UserSerializer, AddressSerializer, AddressPostSerializer, FollowGetSerializer, \
-    OrderGetSerializer, DiscountGetSerializer, FeedbackCategorySerializer, FeedbackPostSerializer, FeedbackGetSerializer
+    OrderGetSerializer, DiscountGetSerializer, FeedbackCategorySerializer, FeedbackPostSerializer, FeedbackGetSerializer, \
+    MyPhotoSerializer
 
 
 # todo create user using authentication
@@ -20,6 +21,7 @@ class UserView(APIView):
         return Response({"User": serializer.data})
 
     def post(self, request, format=None):
+        self.request.POST._mutable = True
         request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").now()
         request.data['modifiedAt'] = datetime.strptime('24052010', "%d%m%Y").now()
         serializer = UserSerializer(data=request.data)
@@ -109,3 +111,13 @@ class FeedbackView(ListCreateAPIView):
 class FeedbackDetailsView(RetrieveDestroyAPIView):
     queryset = Feedback.objects.all()
     serializer_class = FeedbackGetSerializer
+
+
+class PhotoList(APIView):
+    def post(self, request, format=None):
+        serializer = MyPhotoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
