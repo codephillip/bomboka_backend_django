@@ -3,6 +3,7 @@ import uuid
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
+from django.db.models.base import ModelBase
 
 from myapp.utils.constants import *
 
@@ -32,6 +33,7 @@ class User(AbstractUser):
 
 
 class Category(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
     image = models.ImageField(upload_to='category/', max_length=254)
 
@@ -40,6 +42,7 @@ class Category(models.Model):
 
 
 class SubCategory(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
     image = models.ImageField(upload_to='sub_category/', max_length=254)
     category = models.ForeignKey(Category)
@@ -49,6 +52,7 @@ class SubCategory(models.Model):
 
 
 class Vendor(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     is_verified = models.BooleanField(default=False)
     is_blocked = models.BooleanField(default=False)
     createdAt = models.DateTimeField(auto_now_add=True)
@@ -56,10 +60,11 @@ class Vendor(models.Model):
     user = models.OneToOneField(User)
 
     def __str__(self):
-        return str(self.user.name)
+        return str(self.user.username)
 
 
 class Subscription(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
     image = models.ImageField(upload_to='subscription/', max_length=254)
     description = models.TextField()
@@ -70,6 +75,7 @@ class Subscription(models.Model):
 
 
 class Shop(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
     createdAt = models.DateTimeField(auto_now_add=True)
     modifiedAt = models.DateTimeField(auto_now_add=True)
@@ -82,6 +88,7 @@ class Shop(models.Model):
 
 
 class ShopReview(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     comment = models.TextField()
     count = models.FloatField(default=0)
     createdAt = models.DateTimeField(auto_now_add=True)
@@ -93,15 +100,17 @@ class ShopReview(models.Model):
 
 
 class Follow(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     createdAt = models.DateTimeField(auto_now_add=True)
     shop = models.ForeignKey(Shop)
     user = models.ForeignKey(User)
 
     def __str__(self):
-        return self.user.name
+        return self.user.username
 
 
 class Product(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
     image = models.ImageField(upload_to='product/', max_length=254)
     brand = models.CharField(max_length=250)
@@ -117,6 +126,7 @@ class Product(models.Model):
 
 
 class ProductReview(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     comment = models.TextField()
     count = models.FloatField(default=0)
     createdAt = models.DateTimeField(auto_now_add=True)
@@ -128,6 +138,7 @@ class ProductReview(models.Model):
 
 
 class Comment(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField()
     content = models.CharField(max_length=200)
     user = models.ForeignKey(User)
@@ -137,6 +148,7 @@ class Comment(models.Model):
 
 
 class Address(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -149,6 +161,7 @@ class Address(models.Model):
 
 
 class Courier(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     is_verified = models.BooleanField(default=False)
     is_blocked = models.BooleanField(default=False)
     createdAt = models.DateTimeField(auto_now_add=True)
@@ -156,10 +169,11 @@ class Courier(models.Model):
     user = models.OneToOneField(User)
 
     def __str__(self):
-        return self.user.name
+        return self.user.username
 
 
 class Coverage(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     area = models.CharField(max_length=200)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -171,6 +185,7 @@ class Coverage(models.Model):
 
 
 class Order(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User)
     address = models.ForeignKey(Address)
     product = models.ForeignKey(Product)
@@ -188,15 +203,17 @@ class Order(models.Model):
 
 
 class VendorCourier(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     createdAt = models.DateTimeField(auto_now_add=True)
     vendor = models.ForeignKey(Vendor)
     courier = models.ForeignKey(Courier)
 
     def __str__(self):
-        return str(self.courier.user.name)
+        return str(self.courier.user.username)
 
 
 class Driver(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     is_verified = models.BooleanField(default=False)
     is_blocked = models.BooleanField(default=False)
     createdAt = models.DateTimeField(auto_now_add=True)
@@ -204,19 +221,21 @@ class Driver(models.Model):
     user = models.OneToOneField(User)
 
     def __str__(self):
-        return self.user.name
+        return self.user.username
 
 
 class CourierDriver(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     createdAt = models.DateTimeField(auto_now_add=True)
     courier = models.ForeignKey(Courier)
     driver = models.ForeignKey(Driver)
 
     def __str__(self):
-        return self.courier.user.name
+        return self.courier.user.username
 
 
 class Vehicle(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
     image = models.ImageField(upload_to='vehicle/', max_length=254)
 
@@ -225,14 +244,16 @@ class Vehicle(models.Model):
 
 
 class CourierVehicle(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     courier = models.ForeignKey(Courier)
     vehicle = models.OneToOneField(Vehicle)
 
     def __str__(self):
-        return self.courier.user.name
+        return self.courier.user.username
 
 
 class Attribute(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
     element = models.CharField(max_length=250, null=True, blank=True)
     parameter = models.CharField(max_length=250, null=True, blank=True)
@@ -244,6 +265,7 @@ class Attribute(models.Model):
 
 
 class Discount(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     product = models.OneToOneField(Product)
     percentage = models.IntegerField(default=0)
     activated = models.BooleanField(default=True)
@@ -253,6 +275,7 @@ class Discount(models.Model):
 
 
 class Brand(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
     image = models.ImageField(upload_to='brand/', max_length=254)
 
@@ -261,6 +284,7 @@ class Brand(models.Model):
 
 
 class ProductBrand(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     product = models.OneToOneField(Product)
     brand = models.ForeignKey(Brand)
 
@@ -269,6 +293,7 @@ class ProductBrand(models.Model):
 
 
 class FeedbackCategory(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
 
     def __str__(self):
@@ -276,9 +301,10 @@ class FeedbackCategory(models.Model):
 
 
 class Feedback(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     content = models.TextField()
     category = models.ForeignKey(FeedbackCategory)
     user = models.ForeignKey(User)
 
     def __str__(self):
-        return self.user.name
+        return self.user.username
