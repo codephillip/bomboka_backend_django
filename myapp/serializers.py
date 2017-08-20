@@ -11,6 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
             'id', 'first_name', 'last_name', 'username', 'email', 'phone', 'password', 'is_blocked', 'createdAt',
             'image',
             'dob')
+        read_only = 'id'
 
     def create(self, validated_data):
         user = User(
@@ -20,7 +21,6 @@ class UserSerializer(serializers.ModelSerializer):
             email=validated_data['email'],
             phone=validated_data['phone'],
             is_blocked=validated_data['is_blocked'],
-            createdAt=validated_data['username'],
             image=validated_data['image'],
             dob=validated_data['dob']
         )
@@ -28,8 +28,8 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
-    # def update(self, instance, validated_data):
-    #     instance.password.set_password(validated_data.get('password', instance.password))
+        # def update(self, instance, validated_data):
+        #     instance.password.set_password(validated_data.get('password', instance.password))
 
 
 class VendorGetSerializer(serializers.ModelSerializer):
