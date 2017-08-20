@@ -28,7 +28,7 @@ class User(AbstractUser):
     dob = models.DateField(null=True, blank=True)
 
     def __str__(self):
-        return self.id
+        return self.username
 
 
 class Category(models.Model):
