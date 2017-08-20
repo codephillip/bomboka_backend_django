@@ -25,6 +25,7 @@ SECRET_KEY = 'abcd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# todo restrict hosts on launch
 ALLOWED_HOSTS = ['*']
 
 
@@ -102,6 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'myapp.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/

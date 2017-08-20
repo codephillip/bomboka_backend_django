@@ -1,19 +1,22 @@
+from django.contrib.auth.models import AbstractUser
+from django.core.validators import RegexValidator
 from django.db import models
 
 
-class User(models.Model):
-    name = models.CharField(max_length=250)
-    email = models.EmailField()
-    phone = models.CharField(max_length=250)
-    password = models.CharField(max_length=250)
+class User(AbstractUser):
+    phone = models.CharField(max_length=12, validators=[
+        RegexValidator(
+            regex='^(256|254|255).*',
+            message='Wrong phone number format',
+        ),
+    ])
     createdAt = models.DateTimeField(auto_now_add=True)
-    modifiedAt = models.DateTimeField(auto_now_add=True)
     is_blocked = models.BooleanField(default=False)
     image = models.ImageField(upload_to='profile/', max_length=254)
-    dob = models.CharField(max_length=250)
+    dob = models.DateField(null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.username
 
 
 class Category(models.Model):

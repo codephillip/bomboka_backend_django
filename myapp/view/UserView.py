@@ -13,7 +13,7 @@ from myapp.serializers import UserSerializer, AddressSerializer, AddressPostSeri
 
 
 # todo create user using authentication
-class UserView(APIView):
+class UserCreateView(APIView):
     def get(self, request, format=None):
         user = User.objects.all()
         serializer = UserSerializer(user, many=True)
@@ -22,7 +22,6 @@ class UserView(APIView):
     def post(self, request, format=None):
         self.request.POST._mutable = True
         request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").now()
-        request.data['modifiedAt'] = datetime.strptime('24052010', "%d%m%Y").now()
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
