@@ -87,14 +87,14 @@ class ProductGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = (
-            'id', 'name', 'image', 'price', 'createdAt', 'modifiedAt', 'shop', 'subCategory')
+            'id', 'name', 'image', 'price', 'description', 'createdAt', 'modifiedAt', 'shop', 'subCategory')
 
 
 class ProductPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = (
-            'id', 'name', 'image', 'price', 'createdAt', 'modifiedAt', 'shop', 'subCategory')
+            'id', 'name', 'image', 'price', 'description', 'createdAt', 'modifiedAt', 'shop', 'subCategory')
 
 
 class AddressSerializer(serializers.ModelSerializer):
