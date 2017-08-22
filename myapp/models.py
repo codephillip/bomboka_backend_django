@@ -3,7 +3,6 @@ import uuid
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
-from django.db.models.base import ModelBase
 
 from myapp.utils.constants import *
 
@@ -22,6 +21,7 @@ class User(AbstractUser):
             message='Wrong phone number format',
         ),
     ])
+    email2 = models.EmailField()
     gender = models.IntegerField(choices=GENDER_CHOICES, default=GENDER_NOT_SPECIFIED)
     createdAt = models.DateTimeField(auto_now_add=True)
     is_blocked = models.BooleanField(default=False)

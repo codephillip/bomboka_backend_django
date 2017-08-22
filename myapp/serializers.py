@@ -1,24 +1,59 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
+from rest_framework.fields import EmailField
 
 from myapp.models import *
 
 
 class UserSerializer(serializers.ModelSerializer):
+    email = EmailField(label='Email Address')
+    email2 = EmailField(label='Confirm Email')
+
     class Meta:
         model = User
+        # todo refine user fields for signup
         fields = (
-            'id', 'first_name', 'last_name', 'username', 'email', 'phone', 'password', 'is_blocked', 'createdAt',
+            'id', 'first_name', 'last_name', 'email', 'email2', 'phone', 'password', 'is_blocked', 'createdAt',
             'image',
             'dob')
-        read_only = 'id'
+        read_only = ['id', 'email2']
+        extra_kwargs = {"password": {"write_only": True}}
+
+    def validate_email(self, value):
+        # user can only register one email address.
+        # verify that user inserted correct email address
+        # todo check if email exists by sending welcome message
+        data = self.get_initial()
+        email1 = data.get("email2")
+        email2 = value
+        if email1 != email2:
+            raise ValidationError("Emails must match.")
+
+        user_qs = User.objects.filter(email=email2)
+        if user_qs.exists():
+            raise ValidationError("This user has already registered.")
+        return value
+
+    def validate_phone(self, value):
+        # user can only register one phone number
+        user = User.objects.filter(phone=value)
+        if user.exists():
+            raise ValidationError("This user has already registered with the phone number")
+        return value
+
+    def validate(self, data):
+        return data
 
     def create(self, validated_data):
         user = User(
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
-            username=validated_data['username'],
+            # username is a combination of first and last name
+            username=validated_data['first_name'] + validated_data['last_name'],
             email=validated_data['email'],
+            # email2 is redundant. however it prevents
+            # 500 response when user is successfully created
+            email2=validated_data['email2'],
             phone=validated_data['phone'],
             is_blocked=validated_data['is_blocked'],
             image=validated_data['image'],
@@ -30,6 +65,18 @@ class UserSerializer(serializers.ModelSerializer):
 
         # def update(self, instance, validated_data):
         #     instance.password.set_password(validated_data.get('password', instance.password))
+
+
+class UserGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        # todo refine user fields for signup
+        fields = (
+            'id', 'first_name', 'last_name', 'username', 'email', 'phone', 'password', 'is_blocked', 'createdAt',
+            'image',
+            'dob')
+        read_only = 'id'
+        extra_kwargs = {"password": {"write_only": True}}
 
 
 class VendorGetSerializer(serializers.ModelSerializer):
