@@ -1,7 +1,11 @@
+import jwt
+from django.db.models import Q
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-from rest_framework.fields import EmailField
+from rest_framework.fields import EmailField, CharField
+from rest_framework_jwt.utils import jwt_payload_handler
 
+from bomboka_backend.settings import SECRET_KEY
 from myapp.models import *
 
 
@@ -67,16 +71,77 @@ class UserSerializer(serializers.ModelSerializer):
         #     instance.password.set_password(validated_data.get('password', instance.password))
 
 
+def create_token(user=None):
+    payload = jwt_payload_handler(user)
+    token = jwt.encode(payload, SECRET_KEY)
+    return token.decode('unicode_escape')
+
+
+class UserLoginSerializer(serializers.ModelSerializer):
+    token = CharField(allow_blank=True, read_only=True)
+    username = CharField(allow_blank=True, required=False)
+    email = EmailField(label='Email Address', allow_blank=True, required=False)
+    phone = CharField(label='Phone Number', allow_blank=True, required=False)
+
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'email',
+            'phone',
+            'password',
+            'token',
+        ]
+        extra_kwargs = {"password": {"write_only": True}}
+
+    def validate(self, data):
+        user_object = None
+        username = data.get('username', None)
+        email = data.get('email', None)
+        phone = data.get('phone', None)
+        password = data['password']
+        # User logs in with username, email or phone. Plus password
+        if username or email or phone:
+            # Q allows robust filtering,
+            # distinct returns only one object incase there are duplicates
+            user = User.objects.filter(
+                Q(username=username) |
+                Q(email=email) |
+                Q(phone=phone)
+            ).distinct()
+
+            if user.exists() and user.count() == 1:
+                user_object = user.first()
+                if user_object:
+                    if not user_object.check_password(password):
+                        raise ValidationError("Incorrect credentials. Please try again")
+            else:
+                raise ValidationError("Login failure. Invalid username, email or phone number.")
+
+            data['token'] = create_token(user_object)
+            return data
+        else:
+            raise ValidationError("A username, email or phone number is required to login")
+
+
 class UserGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         # todo refine user fields for signup
         fields = (
-            'id', 'first_name', 'last_name', 'username', 'email', 'phone', 'password', 'is_blocked', 'createdAt',
+            'id', 'user_permissions', 'first_name', 'last_name', 'username', 'email', 'phone', 'password', 'is_blocked', 'createdAt',
             'image',
             'dob')
         read_only = 'id'
         extra_kwargs = {"password": {"write_only": True}}
+
+
+class ChangePasswordSerializer(serializers.Serializer):
+    """
+    Serializer for password change endpoint.
+    """
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
 
 
 class VendorGetSerializer(serializers.ModelSerializer):

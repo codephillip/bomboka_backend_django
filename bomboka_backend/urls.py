@@ -1,8 +1,10 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
 
 from bomboka_backend import settings
+from myapp import views
 from myapp.view.CourierView import CourierView, VendorCouriers, AllCoveragesListView, CourierCoveragesListView, \
     CourierCoveragesUpdateView, CourierDriversListView, CourierDriversDetailsView, CourierOrdersDetailsView, \
     VehicleView, \
@@ -15,12 +17,27 @@ from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProd
     DiscountDetailsView, BrandView, BrandDetailsView, ProductBrandView, ProductBrandDetailsView, SubscriptionView, \
     SubscriptionDetailsView
 from myapp.view.UserView import UserCreateView, AddressView, UserAddressView, FollowedShopsView, UserOrdersDetailsView, \
-    DisplayShopDiscounts, FeedbackCategoryView, FeedbackCategoryDetailsView, FeedbackDetailsView, FeedbackView
+    DisplayShopDiscounts, FeedbackCategoryView, FeedbackCategoryDetailsView, FeedbackDetailsView, FeedbackView, \
+    UserLoginAPIView, UserView, UserDetailsView, ChangePasswordView
 from myapp.view.VendorView import VendorView, GetVendorShopsView, VendorEditView, VendorOrdersDetailsView
-
+"""
+PLEASE FIRST TRY THE CURL TEST IN api_curl_tests.py BEFORE USING THE ENDPOINTS
+"""
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    # NOTE: this must be called first before accessing any endpoint
+    # FOR DEBUGGING ONLY: activate 'AllowAny' in settings.py under DEFAULT_PERMISSION_CLASSES
+    url(r'^api-token-auth', obtain_jwt_token),
+    url(r'^api-token-refresh', refresh_jwt_token),
+    url(r'^api-token-verify', verify_jwt_token),
+
+    # password reset using email
+    url('^', include('django.contrib.auth.urls')),
+    url(r'accounts/login/$', views.successful_reset, name='register-user'),
+
     url(r'api/v1/users/register$', UserCreateView.as_view(), name='register-user'),
+    url(r'api/v1/users/login$', UserLoginAPIView.as_view(), name='user-login'),
+    url(r'api/v1/users/(?P<pk>[-\w]+)/reset_password$', ChangePasswordView.as_view(), name='change-user-password'),
     url(r'api/v1/users/(?P<user_id>[-\w]+)/addresses$', UserAddressView.as_view(), name='user_addresses'),
     url(r'api/v1/users/(?P<pk>[-\w]+)/orders', UserOrders.as_view(), name='user_orders'),
     url(r'api/v1/users/(?P<pk>[-\w]+)/followedShops', FollowedShopsView.as_view(), name='user-followed-shops'),
@@ -28,6 +45,8 @@ urlpatterns = [
         name='user-orders'),
     url(r'api/v1/users/(?P<pk>[-\w]+)/discounts$', DisplayShopDiscounts.as_view(),
         name='user-discounts'),
+    url(r'api/v1/users$', UserView.as_view(), name='users'),
+    url(r'api/v1/users/(?P<pk>[-\w]+)$', UserDetailsView.as_view(), name='user-details'),
 
     url(r'api/v1/feedbackcategorys$', FeedbackCategoryView.as_view(), name='feedback-categorys'),
     url(r'api/v1/feedbackcategorys/(?P<pk>[-\w]+)$', FeedbackCategoryDetailsView.as_view(),

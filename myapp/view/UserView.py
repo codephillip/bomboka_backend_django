@@ -3,20 +3,83 @@ from datetime import datetime
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import ListCreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView, RetrieveDestroyAPIView, \
-    CreateAPIView
+    CreateAPIView, UpdateAPIView
+from rest_framework.permissions import *
 
 from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
 
 from myapp.models import User, Address, Follow, Order, Discount, FeedbackCategory, Feedback
 from myapp.serializers import UserSerializer, AddressSerializer, AddressPostSerializer, FollowGetSerializer, \
-    OrderGetSerializer, DiscountGetSerializer, FeedbackCategorySerializer, FeedbackPostSerializer, FeedbackGetSerializer
+    OrderGetSerializer, DiscountGetSerializer, FeedbackCategorySerializer, FeedbackPostSerializer, FeedbackGetSerializer, \
+    UserLoginSerializer, UserGetSerializer, ChangePasswordSerializer
 
 
 # todo create user using authentication
 class UserCreateView(CreateAPIView):
+    permission_classes = [AllowAny]
     serializer_class = UserSerializer
     queryset = User
+
+
+# use base APIView when you dont want to use the
+# native functionality like GET, PUT, DELETE, POST..
+class UserLoginAPIView(APIView):
+    permission_classes = [AllowAny]
+    serializer_class = UserLoginSerializer
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        serializer = UserLoginSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            new_data = serializer.data
+            return Response(new_data, status=HTTP_200_OK)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+
+
+class UserView(ListAPIView):
+    # list all users in the system
+    queryset = User.objects.all()
+    serializer_class = UserGetSerializer
+    permission_classes = (IsAdminUser,)
+
+
+class UserDetailsView(RetrieveUpdateDestroyAPIView):
+    # view single user, update or delete user
+    queryset = User.objects.all()
+    serializer_class = UserGetSerializer
+    permission_classes = (IsAdminUser,)
+
+
+class ChangePasswordView(UpdateAPIView):
+    """
+    An endpoint for changing password.
+    """
+    serializer_class = ChangePasswordSerializer
+    model = User
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self, queryset=None):
+        obj = self.request.user
+        return obj
+
+    def update(self, request, *args, **kwargs):
+        self.object = User.objects.get(id=kwargs['pk'])
+        serializer = self.get_serializer(data=request.data)
+        print("data###")
+        print(request.data)
+
+        if serializer.is_valid():
+            # Check old password
+            if not self.object.check_password(serializer.data.get("old_password")):
+                return Response({"old_password": ["Wrong password."]}, status=status.HTTP_400_BAD_REQUEST)
+            # set_password also hashes the password that the user will get
+            self.object.set_password(serializer.data.get("new_password"))
+            self.object.save()
+            return Response("Success.", status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserAddressView(APIView):
@@ -79,11 +142,13 @@ class DisplayShopDiscounts(ListAPIView):
 class FeedbackCategoryView(ListCreateAPIView):
     queryset = FeedbackCategory.objects.all()
     serializer_class = FeedbackCategorySerializer
+    permission_classes = (IsAdminUser, IsAuthenticated)
 
 
 class FeedbackCategoryDetailsView(RetrieveUpdateDestroyAPIView):
     queryset = FeedbackCategory.objects.all()
     serializer_class = FeedbackCategorySerializer
+    permission_classes = (IsAdminUser,)
 
 
 class FeedbackView(ListCreateAPIView):
@@ -99,3 +164,4 @@ class FeedbackView(ListCreateAPIView):
 class FeedbackDetailsView(RetrieveDestroyAPIView):
     queryset = Feedback.objects.all()
     serializer_class = FeedbackGetSerializer
+    permission_classes = (IsAdminUser,)

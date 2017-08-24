@@ -13,21 +13,22 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import datetime
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'abcd'
+# todo replace with production secret
+SECRET_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MDMzOTI4OTEsImVtYWlsIjoiS3J1a292N0BleGFtcGxlLmNvbSIsInVzZXJfaWQiOiI4YWZlYWViYS1jNDYzLTQyN2MtYTNjMC0yN2JlMTAwY2UxNDEiLCJvcmlnX2lhdCI6MTUwMzM4OTI5MSwidXNlcm5hbWUiOiJLcnVrb3Y3S3J1a292NyJ9.VqaAFsoi5CE8MSYuTWbglqZuTWRmU-rwAhToApYcJWg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 # todo restrict hosts on launch
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -73,7 +74,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bomboka_backend.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
@@ -83,7 +83,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -105,6 +104,44 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = 'myapp.User'
 
+REST_FRAMEWORK = {
+    # todo activate on launch
+    # 'DEFAULT_RENDERER_CLASSES': (
+    #     'rest_framework.renderers.JSONRenderer',
+    # ),
+    # 'DEFAULT_PARSER_CLASSES': (
+    #     'rest_framework.parsers.JSONParser',
+    # ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        # 'rest_framework.permissions.IsAuthenticated',
+        # debugging only. to allow access to the api without tokens
+        # 'rest_framework.permissions.IsAdminUser',
+    )
+}
+
+JWT_AUTH = {
+    'JWT_SECRET_KEY': SECRET_KEY,
+    'JWT_VERIFY': True,
+    'JWT_VERIFY_EXPIRATION': True,
+    'JWT_LEEWAY': 0,
+    # user is logged in for 1 hour before token expires
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=6),
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+}
+
+# todo update credentials, use bomboka smtp server
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+# todo replace with info@bomboka.com
+EMAIL_HOST_USER = 'codephillip@gmail.com'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 587
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -117,7 +154,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
