@@ -34,7 +34,7 @@ class TestCountry(APITestCase):
         request = self.client.get(reverse("countrys"))
         print(request.data)
         self.assertEqual(4, Country.objects.count())
-        self.assertEqual(status.HTTP_200_OK, request.status_code)
+        self.assertEqual(request.status_code, status.HTTP_200_OK)
 
     def test_create_country(self):
         print("create country#")
@@ -42,7 +42,7 @@ class TestCountry(APITestCase):
         for x in self.countrys2:
             self.request_data["name"] = x
             request = self.client.post(reverse("countrys"), self.request_data)
-            self.assertEqual(status.HTTP_201_CREATED, request.status_code)
+            self.assertEqual(request.status_code, status.HTTP_201_CREATED)
         self.assertEqual(8, Country.objects.count())
 
     def test_get_country(self):
@@ -60,7 +60,7 @@ class TestCountry(APITestCase):
             url = reverse("country-details", kwargs={'pk': str(x.id)})
             print(url)
             request = self.client.put(url, self.request_data)
-            self.assertEqual(status.HTTP_200_OK, request.status_code)
+            self.assertEqual(request.status_code, status.HTTP_200_OK)
         self.assertEqual(4, Country.objects.count())
 
     def test_delete_country(self):
