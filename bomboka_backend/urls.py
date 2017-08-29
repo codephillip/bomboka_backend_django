@@ -10,7 +10,7 @@ from myapp.view.CourierView import CourierView, VendorCouriers, AllCoveragesList
     VehicleView, \
     VehicleDetailsView, CourierVehicleListView, CourierVehicleDetailsView
 from myapp.view.DriverView import DriversListView, DriverDetailsView, DriverEditView
-from myapp.view.LocationView import CountryListView, CountryDetailsView
+from myapp.view.LocationView import CountryListView, CountryDetailsView, CityListView, CityDetailsView
 from myapp.view.OrderView import OrderDetailsView, OrdersListView, UserOrders
 from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProductView, ShopEditView, ProductEditView, \
     ShopReviewView, ShopReviewDetailsView, ProductReviewsView, ProductReviewDetailsView, ShopFollowersView, \
@@ -127,6 +127,8 @@ urlpatterns = [
 
     url(r'api/v1/countrys$', CountryListView.as_view(), name='countrys'),
     url(r'api/v1/countrys/(?P<pk>[-\w]+)$', CountryDetailsView.as_view(), name='country-details'),
+    url(r'api/v1/citys$', CityListView.as_view(), name='citys'),
+    url(r'api/v1/citys/(?P<pk>[-\w]+)$', CityDetailsView.as_view(), name='city-details'),
 
 ]
 

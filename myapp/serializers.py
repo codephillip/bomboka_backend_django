@@ -129,7 +129,8 @@ class UserGetSerializer(serializers.ModelSerializer):
         model = User
         # todo refine user fields for signup
         fields = (
-            'id', 'user_permissions', 'first_name', 'last_name', 'username', 'email', 'phone', 'password', 'is_blocked', 'createdAt',
+            'id', 'user_permissions', 'first_name', 'last_name', 'username', 'email', 'phone', 'password', 'is_blocked',
+            'createdAt',
             'image',
             'dob')
         read_only = 'id'
@@ -491,3 +492,17 @@ class CountrySerializer(serializers.ModelSerializer):
     class Meta:
         model = Country
         fields = '__all__'
+
+
+class CityGetSerializer(serializers.ModelSerializer):
+    country = CountrySerializer(required=False, read_only=True)
+
+    class Meta:
+        model = City
+        fields = ('id', 'name', 'country', 'latitude', 'longitude')
+
+
+class CityPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = City
+        fields = ('id', 'name', 'country', 'latitude', 'longitude')

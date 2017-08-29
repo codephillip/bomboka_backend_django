@@ -318,3 +318,14 @@ class Country(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class City(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=250, unique=True)
+    latitude = models.FloatField(null=True)
+    longitude = models.FloatField(null=True)
+    country = models.ForeignKey(Country)
+
+    def __str__(self):
+        return self.name
