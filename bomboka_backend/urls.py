@@ -19,8 +19,9 @@ from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProd
     SubscriptionDetailsView
 from myapp.view.UserView import UserCreateView, AddressView, UserAddressView, FollowedShopsView, UserOrdersDetailsView, \
     DisplayShopDiscounts, FeedbackCategoryView, FeedbackCategoryDetailsView, FeedbackDetailsView, FeedbackView, \
-    UserLoginAPIView, UserView, UserDetailsView, ChangePasswordView
+    UserLoginAPIView, UserView, UserDetailsView, ChangePasswordView, UserWishListView, UserWishDetailsView
 from myapp.view.VendorView import VendorView, GetVendorShopsView, VendorEditView, VendorOrdersDetailsView
+
 """
 PLEASE FIRST TRY THE CURL TEST IN api_curl_tests.py BEFORE USING THE ENDPOINTS
 """
@@ -48,6 +49,9 @@ urlpatterns = [
         name='user-discounts'),
     url(r'api/v1/users$', UserView.as_view(), name='users'),
     url(r'api/v1/users/(?P<pk>[-\w]+)$', UserDetailsView.as_view(), name='user-details'),
+    url(r'api/v1/users/(?P<pk>[-\w]+)/wishlist$', UserWishListView.as_view(), name='user-wishlist'),
+    url(r'api/v1/users/(?P<pk>[-\w]+)/wishlist/(?P<pk2>[-\w]+)$', UserWishDetailsView.as_view(),
+        name='user-wishlist-details'),
 
     url(r'api/v1/feedbackcategorys$', FeedbackCategoryView.as_view(), name='feedback-categorys'),
     url(r'api/v1/feedbackcategorys/(?P<pk>[-\w]+)$', FeedbackCategoryDetailsView.as_view(),

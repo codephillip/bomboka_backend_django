@@ -329,3 +329,13 @@ class City(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class WishList(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    product = models.ForeignKey(Product)
+    user = models.ForeignKey(User)
+
+    def __str__(self):
+        return self.product.name

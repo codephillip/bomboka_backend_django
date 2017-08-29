@@ -10,10 +10,11 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
 
-from myapp.models import User, Address, Follow, Order, Discount, FeedbackCategory, Feedback
+from myapp.models import User, Address, Follow, Order, Discount, FeedbackCategory, Feedback, Product, WishList
 from myapp.serializers import UserSerializer, AddressSerializer, AddressPostSerializer, FollowGetSerializer, \
-    OrderGetSerializer, DiscountGetSerializer, FeedbackCategorySerializer, FeedbackPostSerializer, FeedbackGetSerializer, \
-    UserLoginSerializer, UserGetSerializer, ChangePasswordSerializer
+    OrderGetSerializer, DiscountGetSerializer, FeedbackCategorySerializer, FeedbackPostSerializer, \
+    FeedbackGetSerializer, \
+    UserLoginSerializer, UserGetSerializer, ChangePasswordSerializer, WishListGetSerializer, WishListPostSerializer
 
 
 # todo create user using authentication
@@ -165,3 +166,24 @@ class FeedbackDetailsView(RetrieveDestroyAPIView):
     queryset = Feedback.objects.all()
     serializer_class = FeedbackGetSerializer
     permission_classes = (IsAdminUser,)
+
+
+class UserWishListView(ListCreateAPIView):
+    def get_queryset(self):
+        return WishList.objects.filter(user=self.kwargs['pk'])
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return WishListPostSerializer
+        else:
+            return WishListGetSerializer
+
+
+class UserWishDetailsView(RetrieveDestroyAPIView):
+    serializer_class = WishListGetSerializer
+    lookup_url_kwarg = 'pk2'
+
+    def get_queryset(self):
+        wishlist = WishList.objects.filter(user=self.kwargs['pk'])
+        return wishlist
+

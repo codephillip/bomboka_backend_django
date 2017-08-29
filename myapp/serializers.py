@@ -506,3 +506,22 @@ class CityPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = City
         fields = ('id', 'name', 'country', 'latitude', 'longitude')
+
+
+class WishListGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WishList
+        fields = '__all__'
+
+
+class WishListPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WishList
+        fields = ('id', 'product', 'user', 'createdAt')
+
+    def validate(self, data):
+        # user can like the product only once
+        wishlist = WishList.objects.filter(user=data['user'], product=data['product'])
+        if wishlist.exists():
+            raise ValidationError("This user has already liked the product.")
+        return data
