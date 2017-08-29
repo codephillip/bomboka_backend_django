@@ -485,3 +485,9 @@ class FeedbackGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feedback
         fields = ('id', 'content', 'category', 'user')
+
+
+class CountrySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Country
+        fields = '__all__'

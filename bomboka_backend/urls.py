@@ -10,6 +10,7 @@ from myapp.view.CourierView import CourierView, VendorCouriers, AllCoveragesList
     VehicleView, \
     VehicleDetailsView, CourierVehicleListView, CourierVehicleDetailsView
 from myapp.view.DriverView import DriversListView, DriverDetailsView, DriverEditView
+from myapp.view.LocationView import CountryListView, CountryDetailsView
 from myapp.view.OrderView import OrderDetailsView, OrdersListView, UserOrders
 from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProductView, ShopEditView, ProductEditView, \
     ShopReviewView, ShopReviewDetailsView, ProductReviewsView, ProductReviewDetailsView, ShopFollowersView, \
@@ -123,6 +124,9 @@ urlpatterns = [
         name='courier-vehicles'),
     url(r'api/v1/vehicles$', VehicleView.as_view(), name='vehicles'),
     url(r'api/v1/vehicles/(?P<pk>[-\w]+)$', VehicleDetailsView.as_view(), name='vehicle'),
+
+    url(r'api/v1/countrys$', CountryListView.as_view(), name='countrys'),
+    url(r'api/v1/countrys/(?P<pk>[-\w]+)$', CountryDetailsView.as_view(), name='country-details'),
 
 ]
 
