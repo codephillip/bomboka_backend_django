@@ -16,6 +16,9 @@ class CountryDetailsView(RetrieveUpdateDestroyAPIView):
 
 
 class CityListView(ListCreateAPIView):
+    """
+    Create and list citys
+    """
     # Get all citys / Create city
     queryset = City.objects.all()
 

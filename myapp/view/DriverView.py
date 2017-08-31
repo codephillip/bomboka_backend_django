@@ -32,6 +32,8 @@ class DriverDetailsView(RetrieveDestroyAPIView):
 
 
 class DriverEditView(RetrieveUpdateAPIView):
+    serializer_class = DriverPostSerializer
+
     # edit driver
     def put(self, request, *args, **kwargs):
         # post all the field when editing

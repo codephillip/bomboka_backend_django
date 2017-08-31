@@ -16,3 +16,4 @@ six==1.10.0
 uritemplate==3.0.0
 whitenoise==3.2.2
 Pillow==4.2.1
+django-rest-swagger==2.1.2

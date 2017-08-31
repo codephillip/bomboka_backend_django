@@ -1,4 +1,3 @@
-from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
@@ -7,9 +6,9 @@ from myapp.models import *
 
 """
 TESTS GUIDE
-assert expected == actual
-assertEqual(expected, actual)
-assert 1 == 1
+assert actual == expected
+assertEqual(actual, expected)
+assert getOne() == 1
 """
 
 

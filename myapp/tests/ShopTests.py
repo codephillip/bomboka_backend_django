@@ -7,9 +7,9 @@ from myapp.models import *
 
 """
 TESTS GUIDE
-assert expected == actual
-assertEqual(expected, actual)
-assert 1 == 1
+assert actual == expected
+assertEqual(actual, expected)
+assert getOne() == 1
 """
 
 

@@ -16,16 +16,21 @@ from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProd
     ShopReviewView, ShopReviewDetailsView, ProductReviewsView, ProductReviewDetailsView, ShopFollowersView, \
     ShopFollowerDetailsView, ShopOrdersDetailsView, AttributeView, AttributeDetailsView, DiscountView, \
     DiscountDetailsView, BrandView, BrandDetailsView, ProductBrandView, ProductBrandDetailsView, SubscriptionView, \
-    SubscriptionDetailsView
+    SubscriptionDetailsView, ShopReportListView
 from myapp.view.UserView import UserCreateView, AddressView, UserAddressView, FollowedShopsView, UserOrdersDetailsView, \
     DisplayShopDiscounts, FeedbackCategoryView, FeedbackCategoryDetailsView, FeedbackDetailsView, FeedbackView, \
     UserLoginAPIView, UserView, UserDetailsView, ChangePasswordView, UserWishListView, UserWishDetailsView
 from myapp.view.VendorView import VendorView, GetVendorShopsView, VendorEditView, VendorOrdersDetailsView
+from rest_framework_swagger.views import get_swagger_view
 
 """
 PLEASE FIRST TRY THE CURL TEST IN api_curl_tests.py BEFORE USING THE ENDPOINTS
 """
+
+schema_view = get_swagger_view(title='Pastebin API')
+
 urlpatterns = [
+    url(r'^$', schema_view),
     url(r'^admin/', admin.site.urls),
     # NOTE: this must be called first before accessing any endpoint
     # FOR DEBUGGING ONLY: activate 'AllowAny' in settings.py under DEFAULT_PERMISSION_CLASSES
@@ -65,7 +70,7 @@ urlpatterns = [
     url(r'api/v1/vendors$', VendorView.as_view(), name='vendors'),
     url(r'api/v1/vendors/(?P<vendor_id>[-\w]+)/shops$', GetVendorShopsView.as_view(), name='vendors_shops'),
     url(r'api/v1/vendors/(?P<vendor_id>[-\w]+)/couriers$', VendorCouriers.as_view(), name='vendors_couriers'),
-    url(r'api/v1/vendor_edit/(?P<vendor_id>[-\w]+)$', VendorEditView.as_view(), name='edit_vendor'),
+    # url(r'api/v1/vendor_edit/(?P<vendor_id>[-\w]+)$', VendorEditView.as_view(), name='edit_vendor'),
     url(r'api/v1/vendors/(?P<pk>[-\w]+)/orders$', VendorOrdersDetailsView.as_view(),
         name='vendor-orders'),
 
@@ -83,7 +88,7 @@ urlpatterns = [
         name='product-review'),
     url(r'api/v1/products/(?P<pk>[-\w]+)/reviews$', ProductReviewsView.as_view(), name='product-reviews'),
     url(r'api/v1/products$', ProductView.as_view(), name='products'),
-    url(r'api/v1/product_edit/(?P<product_id>[-\w]+)$', ProductEditView.as_view(), name='edit_product'),
+    # url(r'api/v1/product_edit/(?P<product_id>[-\w]+)$', ProductEditView.as_view(), name='edit_product'),
     url(r'api/v1/products/(?P<pk>[-\w]+)/brands$', ProductBrandView.as_view(), name='product-brand'),
     url(r'api/v1/products/(?P<pk>[-\w]+)/brands/(?P<pk2>[-\w]+)$', ProductBrandDetailsView.as_view(),
         name='product-brand'),
@@ -108,7 +113,7 @@ urlpatterns = [
 
     url(r'api/v1/drivers$', DriversListView.as_view(), name='drivers'),
     url(r'api/v1/drivers/(?P<pk>[-\w]+)$', DriverDetailsView.as_view(), name='driver-details'),
-    url(r'api/v1/drivers_edit/(?P<pk>[-\w]+)$', DriverEditView.as_view(), name='edit-driver'),
+    # url(r'api/v1/drivers_edit/(?P<pk>[-\w]+)$', DriverEditView.as_view(), name='edit-driver'),
 
     url(r'api/v1/coverages$', AllCoveragesListView.as_view(), name='courier-coverages'),
 
@@ -133,6 +138,8 @@ urlpatterns = [
     url(r'api/v1/countrys/(?P<pk>[-\w]+)$', CountryDetailsView.as_view(), name='country-details'),
     url(r'api/v1/citys$', CityListView.as_view(), name='citys'),
     url(r'api/v1/citys/(?P<pk>[-\w]+)$', CityDetailsView.as_view(), name='city-details'),
+
+    url(r'api/v1/shops_report$', ShopReportListView.as_view(), name='vendors-own-shops'),
 
 ]
 

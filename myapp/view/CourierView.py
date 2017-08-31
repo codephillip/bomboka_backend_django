@@ -67,7 +67,10 @@ class CourierCoveragesListView(ListCreateAPIView):
     def get_serializer_class(self):
         if self.request.method == 'POST':
             self.request.POST._mutable = True
-            self.request.data['courier'] = self.kwargs['pk']
+            try:
+                self.request.data['courier'] = self.kwargs['pk']
+            except Exception as e:
+                print(e)
             return CoveragePostSerializer
         else:
             return CoverageGetSerializer
@@ -80,7 +83,10 @@ class CourierCoveragesUpdateView(RetrieveUpdateDestroyAPIView):
 
     def get_serializer_class(self):
         self.request.POST._mutable = True
-        self.request.data['courier'] = self.kwargs['pk']
+        try:
+            self.request.data['courier'] = self.kwargs['pk']
+        except Exception as e:
+            print(e)
         return CoveragePostSerializer
 
     def get_queryset(self):
@@ -97,7 +103,10 @@ class CourierDriversListView(ListCreateAPIView):
     def get_serializer_class(self):
         if self.request.method == 'POST':
             self.request.POST._mutable = True
-            self.request.data['courier'] = self.kwargs['pk']
+            try:
+                self.request.data['courier'] = self.kwargs['pk']
+            except Exception as e:
+                print(e)
             return CourierDriversPostSerializer
         else:
             return CourierDriversGetSerializer
@@ -141,7 +150,10 @@ class CourierVehicleListView(ListCreateAPIView):
     def get_serializer_class(self):
         if self.request.method == 'POST':
             self.request.POST._mutable = True
-            self.request.data['courier'] = self.kwargs['pk']
+            try:
+                self.request.data['courier'] = self.kwargs['pk']
+            except Exception as e:
+                print(e)
             return CourierVehiclePostSerializer
         else:
             return CourierVehicleGetSerializer

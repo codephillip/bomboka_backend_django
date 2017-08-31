@@ -525,3 +525,9 @@ class WishListPostSerializer(serializers.ModelSerializer):
         if wishlist.exists():
             raise ValidationError("This user has already liked the product.")
         return data
+
+
+class ShopReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WishList
+        fields = '__all__'
