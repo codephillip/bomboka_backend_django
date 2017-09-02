@@ -2,19 +2,22 @@ from datetime import datetime
 
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
-from rest_framework.generics import ListCreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView, RetrieveDestroyAPIView, \
+from rest_framework.generics import ListCreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView, \
+    RetrieveDestroyAPIView, \
     CreateAPIView, UpdateAPIView
 from rest_framework.permissions import *
 
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
+from rest_framework.viewsets import ViewSet
 
-from myapp.models import User, Address, Follow, Order, Discount, FeedbackCategory, Feedback, Product, WishList
+from myapp.models import User, Address, Follow, Order, Discount, FeedbackCategory, Feedback, Product, WishList, Task
 from myapp.serializers import UserSerializer, AddressSerializer, AddressPostSerializer, FollowGetSerializer, \
     OrderGetSerializer, DiscountGetSerializer, FeedbackCategorySerializer, FeedbackPostSerializer, \
     FeedbackGetSerializer, \
-    UserLoginSerializer, UserGetSerializer, ChangePasswordSerializer, WishListGetSerializer, WishListPostSerializer
+    UserLoginSerializer, UserGetSerializer, ChangePasswordSerializer, WishListGetSerializer, WishListPostSerializer, \
+    TaskSerializer
 
 
 # todo create user using authentication
@@ -169,6 +172,9 @@ class FeedbackDetailsView(RetrieveDestroyAPIView):
 
 
 class UserWishListView(ListCreateAPIView):
+    """
+    User wishlist is a list of products that the user has liked
+    """
     def get_queryset(self):
         return WishList.objects.filter(user=self.kwargs['pk'])
 
@@ -187,3 +193,18 @@ class UserWishDetailsView(RetrieveDestroyAPIView):
         wishlist = WishList.objects.filter(user=self.kwargs['pk'])
         return wishlist
 
+tasks = {
+    1: Task(id=1, name='Demo', owner='xordoquy', status='Done', product=Product.objects.all()[0]),
+    2: Task(id=2, name='Model less demo', owner='xordoquy', status='Ongoing',  product=Product.objects.all()[0]),
+    3: Task(id=3, name='Sleep more', owner='xordoquy', status='New',  product=Product.objects.all()[0]),
+}
+
+
+class TaskViewSet(ViewSet):
+    # Required for the Browsable API renderer to have a nice form.
+    serializer_class = TaskSerializer
+
+    def list(self, request):
+        serializer = TaskSerializer(
+            instance=tasks.values(), many=True)
+        return Response({"results": serializer.data})

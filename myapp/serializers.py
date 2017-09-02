@@ -452,7 +452,7 @@ class ProductBrandPostSerializer(serializers.ModelSerializer):
         model = ProductBrand
         fields = '__all__'
 
-
+# todo move to product
 class ProductBrandGetSerializer(serializers.ModelSerializer):
     brand = BrandSerializer()
 
@@ -509,15 +509,17 @@ class CityPostSerializer(serializers.ModelSerializer):
 
 
 class WishListGetSerializer(serializers.ModelSerializer):
+    product = ProductGetSerializer()
+
     class Meta:
         model = WishList
-        fields = '__all__'
+        fields = ('id', 'user', 'product', 'createdAt')
 
 
 class WishListPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = WishList
-        fields = ('id', 'product', 'user', 'createdAt')
+        fields = ('id', 'user', 'product', 'createdAt')
 
     def validate(self, data):
         # user can like the product only once
@@ -531,3 +533,27 @@ class ShopReportSerializer(serializers.ModelSerializer):
     class Meta:
         model = WishList
         fields = '__all__'
+
+
+STATUSES = (
+    'New',
+    'Ongoing',
+    'Done',
+)
+
+
+class TaskSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
+    name = serializers.CharField(max_length=256)
+    owner = serializers.CharField(max_length=256)
+    status = serializers.ChoiceField(choices=STATUSES, default='New')
+    product = ProductGetSerializer(read_only=True)
+
+    def create(self, validated_data):
+        # validated_data['product'] = Product.objects.all()[0]
+        return Task(id=None, **validated_data)
+
+    def update(self, instance, validated_data):
+        for field, value in validated_data.items():
+            setattr(instance, field, value)
+        return instance

@@ -339,3 +339,9 @@ class WishList(models.Model):
 
     def __str__(self):
         return self.product.name
+
+
+class Task(object):
+    def __init__(self, **kwargs):
+        for field in ('id', 'name', 'owner', 'status', 'product'):
+            setattr(self, field, kwargs.get(field, None))

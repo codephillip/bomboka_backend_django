@@ -1,6 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
+from rest_framework import routers
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
 
 from bomboka_backend import settings
@@ -19,7 +20,7 @@ from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProd
     SubscriptionDetailsView, ShopReportListView
 from myapp.view.UserView import UserCreateView, AddressView, UserAddressView, FollowedShopsView, UserOrdersDetailsView, \
     DisplayShopDiscounts, FeedbackCategoryView, FeedbackCategoryDetailsView, FeedbackDetailsView, FeedbackView, \
-    UserLoginAPIView, UserView, UserDetailsView, ChangePasswordView, UserWishListView, UserWishDetailsView
+    UserLoginAPIView, UserView, UserDetailsView, ChangePasswordView, UserWishListView, UserWishDetailsView, TaskViewSet
 from myapp.view.VendorView import VendorView, GetVendorShopsView, VendorEditView, VendorOrdersDetailsView
 from rest_framework_swagger.views import get_swagger_view
 
@@ -144,3 +145,8 @@ urlpatterns = [
 ]
 
 urlpatterns += static(settings.MEDIA_ROOT, document_root=settings.MEDIA_ROOT)
+
+# report urls use DefaultRouter since they use the ViewSet
+router = routers.DefaultRouter()
+router.register(r'api/v1/tasks', TaskViewSet, base_name='tasks')
+urlpatterns += router.urls
