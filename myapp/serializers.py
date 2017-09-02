@@ -548,12 +548,3 @@ class TaskSerializer(serializers.Serializer):
     owner = serializers.CharField(max_length=256)
     status = serializers.ChoiceField(choices=STATUSES, default='New')
     product = ProductGetSerializer(read_only=True)
-
-    def create(self, validated_data):
-        # validated_data['product'] = Product.objects.all()[0]
-        return Task(id=None, **validated_data)
-
-    def update(self, instance, validated_data):
-        for field, value in validated_data.items():
-            setattr(instance, field, value)
-        return instance

@@ -28,7 +28,7 @@ from rest_framework_swagger.views import get_swagger_view
 PLEASE FIRST TRY THE CURL TEST IN api_curl_tests.py BEFORE USING THE ENDPOINTS
 """
 
-schema_view = get_swagger_view(title='Pastebin API')
+schema_view = get_swagger_view(title='Bomboka API')
 
 urlpatterns = [
     url(r'^$', schema_view),

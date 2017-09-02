@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f7b8070-45c0-49ab-ba4d-341c04384b99" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bomboka_backend/urls.py" afterPath="$PROJECT_DIR$/bomboka_backend/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myapp/admin.py" afterPath="$PROJECT_DIR$/myapp/admin.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myapp/models.py" afterPath="$PROJECT_DIR$/myapp/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myapp/serializers.py" afterPath="$PROJECT_DIR$/myapp/serializers.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myapp/view/UserView.py" afterPath="$PROJECT_DIR$/myapp/view/UserView.py" />
@@ -53,34 +50,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bomboka_backend/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20">
-              <caret line="57" column="59" lean-forward="false" selection-start-line="57" selection-start-column="59" selection-end-line="57" selection-end-column="59" />
+            <state relative-caret-position="288">
+              <caret line="148" column="27" lean-forward="true" selection-start-line="148" selection-start-column="27" selection-end-line="148" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/myapp/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="322">
+              <caret line="343" column="8" lean-forward="true" selection-start-line="343" selection-start-column="8" selection-end-line="343" selection-end-column="8" />
               <folding>
-                <element signature="e#0#41#0" expanded="true" />
+                <element signature="e#0#11#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CourierView.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myapp/view/CourierView.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShopView.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myapp/view/ShopView.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="640">
-              <caret line="48" column="50" lean-forward="false" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="50" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -88,53 +75,9 @@
       <file leaf-file-name="UserView.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myapp/view/UserView.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="203" column="66" lean-forward="true" selection-start-line="203" selection-start-column="66" selection-end-line="203" selection-end-column="66" />
+            <state relative-caret-position="407">
+              <caret line="208" column="0" lean-forward="false" selection-start-line="208" selection-start-column="0" selection-end-line="208" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myapp/admin.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
-              <caret line="30" column="28" lean-forward="false" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShopTests.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myapp/tests/ShopTests.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="27" column="25" lean-forward="false" selection-start-line="27" selection-start-column="25" selection-end-line="27" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShopReportTests.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myapp/tests/ShopReportTests.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="35" column="21" lean-forward="false" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestUtils.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myapp/tests/TestUtils.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -142,22 +85,10 @@
       <file leaf-file-name="serializers.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myapp/serializers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="428">
-              <caret line="553" column="18" lean-forward="false" selection-start-line="553" selection-start-column="18" selection-end-line="553" selection-end-column="18" />
+            <state relative-caret-position="342">
+              <caret line="552" column="0" lean-forward="false" selection-start-line="552" selection-start-column="0" selection-end-line="552" selection-end-column="0" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/myapp/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="344" column="8" lean-forward="false" selection-start-line="344" selection-start-column="8" selection-end-line="344" selection-end-column="8" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -230,11 +161,11 @@
         <option value="$PROJECT_DIR$/myapp/view/ShopView.py" />
         <option value="$PROJECT_DIR$/myapp/view/LocationView.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/myapp/admin.py" />
         <option value="$PROJECT_DIR$/bomboka_backend/urls.py" />
         <option value="$PROJECT_DIR$/myapp/models.py" />
-        <option value="$PROJECT_DIR$/myapp/admin.py" />
-        <option value="$PROJECT_DIR$/myapp/serializers.py" />
         <option value="$PROJECT_DIR$/myapp/view/UserView.py" />
+        <option value="$PROJECT_DIR$/myapp/serializers.py" />
       </list>
     </option>
   </component>
@@ -246,7 +177,6 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-1" />
-    <option name="y" value="-768" />
     <option name="width" value="1368" />
     <option name="height" value="769" />
   </component>
@@ -302,12 +232,6 @@
               <item name="bomboka_backend" type="b2602c69:ProjectViewProjectNode" />
               <item name="bomboka_backend" type="462c0819:PsiDirectoryNode" />
               <item name="photos" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bomboka_backend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="bomboka_backend" type="462c0819:PsiDirectoryNode" />
-              <item name="photos" type="462c0819:PsiDirectoryNode" />
-              <item name="product" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -760,7 +684,7 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="-768" width="1368" height="769" extended-state="6" />
+    <frame x="-1" y="0" width="1368" height="769" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19838946" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -769,7 +693,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2057057" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="0" y="24" width="1366" height="744" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2057057" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="0" y="24" width="1366" height="744" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2824074" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1082,24 +1006,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bomboka_backend/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="57" column="59" lean-forward="false" selection-start-line="57" selection-start-column="59" selection-end-line="57" selection-end-column="59" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myapp/view/UserView.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="203" column="66" lean-forward="true" selection-start-line="203" selection-start-column="66" selection-end-line="203" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/myapp/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="362">
@@ -1108,23 +1014,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/myapp/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="343" column="8" lean-forward="true" selection-start-line="343" selection-start-column="8" selection-end-line="343" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myapp/view/UserView.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="208" column="0" lean-forward="false" selection-start-line="208" selection-start-column="0" selection-end-line="208" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/myapp/serializers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="553" column="18" lean-forward="false" selection-start-line="553" selection-start-column="18" selection-end-line="553" selection-end-column="18" />
+        <state relative-caret-position="342">
+          <caret line="552" column="0" lean-forward="false" selection-start-line="552" selection-start-column="0" selection-end-line="552" selection-end-column="0" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myapp/models.py">
+    <entry file="file://$PROJECT_DIR$/bomboka_backend/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="344" column="8" lean-forward="false" selection-start-line="344" selection-start-column="8" selection-end-line="344" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="288">
+          <caret line="148" column="27" lean-forward="true" selection-start-line="148" selection-start-column="27" selection-end-line="148" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
