@@ -15,6 +15,7 @@ from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetS
     SubscriptionSerializer, VendorGetSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
     RetrieveUpdateDestroyAPIView, ListAPIView, DestroyAPIView
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class ShopView(APIView):

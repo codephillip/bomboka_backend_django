@@ -193,18 +193,17 @@ class UserWishDetailsView(RetrieveDestroyAPIView):
         wishlist = WishList.objects.filter(user=self.kwargs['pk'])
         return wishlist
 
-tasks = {
-    1: Task(id=1, name='Demo', owner='xordoquy', status='Done', product=Product.objects.all()[0]),
-    2: Task(id=2, name='Model less demo', owner='xordoquy', status='Ongoing',  product=Product.objects.all()[0]),
-    3: Task(id=3, name='Sleep more', owner='xordoquy', status='New',  product=Product.objects.all()[0]),
-}
-
 
 class TaskViewSet(ViewSet):
     # Required for the Browsable API renderer to have a nice form.
     serializer_class = TaskSerializer
 
     def list(self, request):
+        tasks = {
+            1: Task(id=1, name='Demo', owner='xordoquy', status='Done', product=Product.objects.all()[0]),
+            2: Task(id=2, name='Model less demo', owner='xordoquy', status='Ongoing', product=Product.objects.all()[0]),
+            3: Task(id=3, name='Sleep more', owner='xordoquy', status='New', product=Product.objects.all()[0]),
+        }
         serializer = TaskSerializer(
             instance=tasks.values(), many=True)
         return Response({"results": serializer.data})

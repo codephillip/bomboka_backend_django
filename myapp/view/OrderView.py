@@ -15,6 +15,7 @@ class UserOrders(ListCreateAPIView):
 class OrdersListView(ListCreateAPIView):
     # Get all orders / Create order
     queryset = Order.objects.all()
+    filter_fields = ('is_completed', 'is_cancelled', 'is_accepted', 'is_received')
 
     def get_serializer_class(self):
         if self.request.method == 'POST':
