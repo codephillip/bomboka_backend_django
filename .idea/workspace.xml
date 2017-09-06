@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f7b8070-45c0-49ab-ba4d-341c04384b99" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myapp/filters.py" afterPath="$PROJECT_DIR$/myapp/filters.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myapp/view/UserView.py" afterPath="$PROJECT_DIR$/myapp/view/UserView.py" />
     </list>
     <ignored path="bomboka_backend.iws" />
@@ -49,17 +47,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="UserView.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UserView.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/myapp/view/UserView.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1776">
-              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="204">
+              <caret line="54" column="36" lean-forward="false" selection-start-line="54" selection-start-column="36" selection-end-line="54" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="filters.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="filters.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myapp/filters.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="140">
@@ -164,8 +164,8 @@
         <option value="$PROJECT_DIR$/myapp/models.py" />
         <option value="$PROJECT_DIR$/myapp/view/OrderView.py" />
         <option value="$PROJECT_DIR$/myapp/serializers.py" />
-        <option value="$PROJECT_DIR$/myapp/view/UserView.py" />
         <option value="$PROJECT_DIR$/myapp/filters.py" />
+        <option value="$PROJECT_DIR$/myapp/view/UserView.py" />
       </list>
     </option>
   </component>
@@ -946,7 +946,7 @@
         <state relative-caret-position="6420">
           <caret line="337" column="30" lean-forward="false" selection-start-line="337" selection-start-column="30" selection-end-line="337" selection-end-column="30" />
           <folding>
-            <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#0#29#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -956,7 +956,7 @@
         <state relative-caret-position="2260">
           <caret line="116" column="4" lean-forward="false" selection-start-line="116" selection-start-column="4" selection-end-line="116" selection-end-column="4" />
           <folding>
-            <element signature="e#319#328#0" expanded="true" />
+            <element signature="e#319#328#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1023,20 +1023,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myapp/view/UserView.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1776">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/myapp/filters.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
           <caret line="7" column="54" lean-forward="false" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myapp/view/UserView.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="54" column="36" lean-forward="false" selection-start-line="54" selection-start-column="36" selection-end-line="54" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>

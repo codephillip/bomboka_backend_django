@@ -2,6 +2,7 @@ from datetime import datetime
 
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
+from rest_framework.filters import OrderingFilter, DjangoFilterBackend
 from rest_framework.generics import ListCreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView, \
     RetrieveDestroyAPIView, \
     CreateAPIView, UpdateAPIView
@@ -47,10 +48,14 @@ class UserView(ListAPIView):
     # list all users in the system
     serializer_class = UserGetSerializer
     permission_classes = (IsAdminUser,)
+    filter_backends = (OrderingFilter, DjangoFilterBackend)
     filter_class = UserFilter
+    # '&ordering=-last_login' gives most active users
+    # '&ordering=last_login' gives domant users
+    ordering_fields = ('last_login',)
 
     def get_queryset(self):
-        return User.objects.all().order_by('-last_login')
+        return User.objects.all()
 
 
 class UserDetailsView(RetrieveUpdateDestroyAPIView):
