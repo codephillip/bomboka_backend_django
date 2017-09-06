@@ -15,6 +15,7 @@ from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
 from rest_framework.viewsets import ViewSet
 
+from myapp.filters import UserFilter
 from myapp.models import User, Address, Follow, Order, Discount, FeedbackCategory, Feedback, Product, WishList, Task
 from myapp.serializers import UserSerializer, AddressSerializer, AddressPostSerializer, FollowGetSerializer, \
     OrderGetSerializer, DiscountGetSerializer, FeedbackCategorySerializer, FeedbackPostSerializer, \
@@ -49,13 +50,13 @@ class UserView(ListAPIView):
     # list all users in the system
     serializer_class = UserGetSerializer
     permission_classes = (IsAdminUser,)
-    filter_fields = ('is_blocked',)
+    filter_class = UserFilter
 
     def get_queryset(self):
-        start_date = self.request.GET.get("start_date", None)
-        end_date = self.request.GET.get("end_date", None)
-        if start_date and end_date:
-            return User.objects.filter(date_joined__range=[start_date, end_date]).order_by('-last_login')
+        # start_date = self.request.GET.get("start_date", None)
+        # end_date = self.request.GET.get("end_date", None)
+        # if start_date and end_date:
+        #     return User.objects.filter(date_joined__range=[start_date, end_date]).order_by('-last_login')
         return User.objects.all().order_by('-last_login')
 
 
