@@ -1,8 +1,5 @@
 from datetime import datetime
 
-import django_filters
-from django_filters.rest_framework import DjangoFilterBackend
-from django_filters import filters
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import ListCreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView, \
@@ -53,10 +50,6 @@ class UserView(ListAPIView):
     filter_class = UserFilter
 
     def get_queryset(self):
-        # start_date = self.request.GET.get("start_date", None)
-        # end_date = self.request.GET.get("end_date", None)
-        # if start_date and end_date:
-        #     return User.objects.filter(date_joined__range=[start_date, end_date]).order_by('-last_login')
         return User.objects.all().order_by('-last_login')
 
 
