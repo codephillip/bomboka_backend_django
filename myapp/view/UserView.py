@@ -24,6 +24,10 @@ from myapp.serializers import UserSerializer, AddressSerializer, AddressPostSeri
 
 # todo create user using authentication
 class UserCreateView(CreateAPIView):
+    """
+    Allows creation of user.
+    The only operation acceptable is buying products until they upgrade to Vendor, Driver, Courier.
+    """
     permission_classes = [AllowAny]
     serializer_class = UserSerializer
     queryset = User
@@ -32,6 +36,10 @@ class UserCreateView(CreateAPIView):
 # use base APIView when you dont want to use the
 # native functionality like GET, PUT, DELETE, POST..
 class UserLoginAPIView(APIView):
+    """
+    Allows the users to login into the system. 
+    Returns a token that will be used for accessing other endpoints.
+    """
     permission_classes = [AllowAny]
     serializer_class = UserLoginSerializer
 
@@ -45,7 +53,9 @@ class UserLoginAPIView(APIView):
 
 
 class UserView(ListAPIView):
-    # list all users in the system
+    """
+    Returns all users in the system(admins, vendors, users, drivers, couriers).
+    """ 
     serializer_class = UserGetSerializer
     permission_classes = (IsAdminUser,)
     filter_backends = (OrderingFilter, DjangoFilterBackend)
@@ -59,7 +69,9 @@ class UserView(ListAPIView):
 
 
 class UserDetailsView(RetrieveUpdateDestroyAPIView):
-    # view single user, update or delete user
+    """
+    Allows RUD user
+    """
     queryset = User.objects.all()
     serializer_class = UserGetSerializer
     permission_classes = (IsAdminUser,)
@@ -67,7 +79,7 @@ class UserDetailsView(RetrieveUpdateDestroyAPIView):
 
 class ChangePasswordView(UpdateAPIView):
     """
-    An endpoint for changing password.
+    Allows user to change password by providing their old and new password.
     """
     serializer_class = ChangePasswordSerializer
     model = User
@@ -124,6 +136,10 @@ class AddressView(APIView):
 
 
 class FollowedShopsView(ListCreateAPIView):
+    """
+    Returns all shops followed by the user. 
+    Allows a user to follow a shop.
+    """
     # Get all shops followed by user
     serializer_class = FollowGetSerializer
 
@@ -135,6 +151,9 @@ class FollowedShopsView(ListCreateAPIView):
 
 
 class UserOrdersDetailsView(ListAPIView):
+    """
+    Returns all the user's orders.
+    """
     serializer_class = OrderGetSerializer
 
     def get_queryset(self):
@@ -142,6 +161,9 @@ class UserOrdersDetailsView(ListAPIView):
 
 
 class DisplayShopDiscounts(ListAPIView):
+    """
+    Returns discounts to the user from the shops that they have followed.
+    """
     serializer_class = DiscountGetSerializer
 
     def get_queryset(self):
@@ -153,18 +175,28 @@ class DisplayShopDiscounts(ListAPIView):
 
 
 class FeedbackCategoryView(ListCreateAPIView):
+    """
+    Create and list feedback categorys that will be selected by the user when writing feedback.
+    """
     queryset = FeedbackCategory.objects.all()
     serializer_class = FeedbackCategorySerializer
     permission_classes = (IsAdminUser, IsAuthenticated)
 
 
 class FeedbackCategoryDetailsView(RetrieveUpdateDestroyAPIView):
+    """
+    Allows RUD of feedback category.
+    """
     queryset = FeedbackCategory.objects.all()
     serializer_class = FeedbackCategorySerializer
     permission_classes = (IsAdminUser,)
 
 
 class FeedbackView(ListCreateAPIView):
+    """
+    Allows user to insert feedback.
+    Returns all feedbacks.
+    """
     queryset = Feedback.objects.all()
 
     def get_serializer_class(self):
@@ -175,6 +207,9 @@ class FeedbackView(ListCreateAPIView):
 
 
 class FeedbackDetailsView(RetrieveDestroyAPIView):
+    """
+    Allows RD of feedback.
+    """
     queryset = Feedback.objects.all()
     serializer_class = FeedbackGetSerializer
     permission_classes = (IsAdminUser,)
@@ -182,7 +217,9 @@ class FeedbackDetailsView(RetrieveDestroyAPIView):
 
 class UserWishListView(ListCreateAPIView):
     """
-    User wishlist is a list of products that the user has liked
+    Returns all products that the user has liked.
+    User wishlist is a list of products that the user has liked.
+    Allows a user to like a product. Which will be appended to the users Wishlist.
     """
 
     def get_queryset(self):
@@ -196,6 +233,10 @@ class UserWishListView(ListCreateAPIView):
 
 
 class UserWishDetailsView(RetrieveDestroyAPIView):
+    """
+    Returns one liked product.
+    Allows the user to unlike a product.
+    """
     serializer_class = WishListGetSerializer
     lookup_url_kwarg = 'pk2'
 

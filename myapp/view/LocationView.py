@@ -4,20 +4,26 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 
 
 class CountryListView(ListCreateAPIView):
-    # Get all countrys / Create country
+    """
+    Returns all countrys.
+    Allows the admin to add country
+    """
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
 
 
 class CountryDetailsView(RetrieveUpdateDestroyAPIView):
-    # Get one country / Delete country / Update country
+    """
+    Allows RUD country
+    """
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
 
 
 class CityListView(ListCreateAPIView):
     """
-    Create and list citys
+    Returns all citys.
+    Allows the admin to add city
     """
     # Get all citys / Create city
     queryset = City.objects.all()
@@ -30,7 +36,9 @@ class CityListView(ListCreateAPIView):
 
 
 class CityDetailsView(RetrieveUpdateDestroyAPIView):
-    # Get one city / Delete city / Update city
+    """
+    Allows RUD city
+    """
     queryset = City.objects.all()
 
     def get_serializer_class(self):

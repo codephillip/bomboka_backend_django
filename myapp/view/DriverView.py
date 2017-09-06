@@ -10,7 +10,10 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, Re
 
 
 class DriversListView(ListCreateAPIView):
-    # Get all drivers / Create driver
+    """
+    Returns all drivers.
+    Allows user to upgrade to driver
+    """
     queryset = Driver.objects.all()
 
     def get_serializer_class(self):
@@ -21,7 +24,9 @@ class DriversListView(ListCreateAPIView):
 
 
 class DriverDetailsView(RetrieveDestroyAPIView):
-    # Get one driver / Delete driver / Update driver
+    """
+    Allows RUD driver
+    """
     queryset = Driver.objects.all()
 
     def get_serializer_class(self):

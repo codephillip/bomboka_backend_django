@@ -266,6 +266,10 @@ class ShopOrdersDetailsView(ListAPIView):
 
 
 class DiscountView(ListCreateAPIView):
+    """
+    Returns all discounts.
+    Allows creation of discount by the vendor.
+    """
     queryset = Discount.objects.all()
 
     def get_serializer_class(self):
@@ -286,11 +290,18 @@ class DiscountDetailsView(RetrieveUpdateDestroyAPIView):
 
 
 class BrandView(ListCreateAPIView):
+    """
+    Returns all brands.
+    Allows admin to create brand.
+    """
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer
 
 
 class BrandDetailsView(RetrieveUpdateDestroyAPIView):
+    """
+    Allows RUD brand by admin.
+    """
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer
 
@@ -307,6 +318,7 @@ class ProductBrandView(ListCreateAPIView):
 
 
 class ProductBrandDetailsView(RetrieveUpdateDestroyAPIView):
+    # todo move brand into product model
     # Get one product_brand, Delete product_brand
     # pk2->brand.id passed to the queryset
     lookup_url_kwarg = 'pk2'
@@ -319,11 +331,18 @@ class ProductBrandDetailsView(RetrieveUpdateDestroyAPIView):
 
 
 class SubscriptionView(ListCreateAPIView):
+    """
+    Returns all the subscriptions.
+    Allows admin to create subscription.
+    """
     queryset = Subscription.objects.all()
     serializer_class = SubscriptionSerializer
 
 
 class SubscriptionDetailsView(RetrieveUpdateDestroyAPIView):
+    """
+    Allows RUD subscription.
+    """
     queryset = Subscription.objects.all()
     serializer_class = SubscriptionSerializer
 

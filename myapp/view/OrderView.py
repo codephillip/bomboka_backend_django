@@ -4,7 +4,11 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 
 
 class UserOrders(ListCreateAPIView):
-    # get user orders
+    # todo add post serializer. VALIDATE CODE
+    """
+    Returns all orders made by current user
+    Allows user to create an order
+    """
     serializer_class = OrderGetSerializer
 
     def get_queryset(self):
@@ -13,7 +17,10 @@ class UserOrders(ListCreateAPIView):
 
 
 class OrdersListView(ListCreateAPIView):
-    # Get all orders / Create order
+    # todo make ListAPIView
+    """
+    Returns all orders made by all the users
+    """
     queryset = Order.objects.all()
     filter_fields = ('is_completed', 'is_cancelled', 'is_accepted', 'is_received')
 
@@ -25,7 +32,9 @@ class OrdersListView(ListCreateAPIView):
 
 
 class OrderDetailsView(RetrieveUpdateDestroyAPIView):
-    # Get one order / Delete order / Update order
+    """
+    Allows RUD order
+    """
     queryset = Order.objects.all()
 
     def get_serializer_class(self):

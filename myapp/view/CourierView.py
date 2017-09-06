@@ -59,6 +59,7 @@ class AllCoveragesListView(ListAPIView):
 
 
 class CourierCoveragesListView(ListCreateAPIView):
+    # todo merge with country and date tables
     # Get all courier coverages / Create courier coverage
     def get_queryset(self):
         print("courier id " + self.kwargs['pk'])
@@ -94,6 +95,10 @@ class CourierCoveragesUpdateView(RetrieveUpdateDestroyAPIView):
 
 
 class CourierDriversListView(ListCreateAPIView):
+    """
+    Lists all courier drivers
+    Allows courier to add drivers as their partner
+    """
     # Get all courier drivers / Create courier driver partnership
     # Courier can also be the driver
     def get_queryset(self):
@@ -125,6 +130,10 @@ class CourierDriversDetailsView(RetrieveDestroyAPIView):
 
 
 class CourierOrdersDetailsView(ListAPIView):
+    """
+    Returns all the orders that the courier has to deliver.
+    Displays delivered and undelivered orders
+    """
     serializer_class = OrderGetSerializer
 
     def get_queryset(self):
@@ -132,16 +141,27 @@ class CourierOrdersDetailsView(ListAPIView):
 
 
 class VehicleView(ListCreateAPIView):
+    """
+    Returns all vehicles(means of transport)
+    Allows the admin to add vehicle that will be selected by the courier
+    """
     queryset = Vehicle.objects.all()
     serializer_class = VehicleSerializer
 
 
 class VehicleDetailsView(RetrieveUpdateDestroyAPIView):
+    """
+    Allows RUD of vehicle
+    """
     queryset = Vehicle.objects.all()
     serializer_class = VehicleSerializer
 
 
 class CourierVehicleListView(ListCreateAPIView):
+    """
+    Returns all courier vehicles
+    Allows a courier to select their means of transport
+    """
     # Get all courier vehicle / Create courier vehicle
     def get_queryset(self):
         print("courier id " + self.kwargs['pk'])
@@ -160,7 +180,10 @@ class CourierVehicleListView(ListCreateAPIView):
 
 
 class CourierVehicleDetailsView(RetrieveDestroyAPIView):
-    # Get one courier_vehicle, Delete courier_vehicle
+    """
+    Returns single courier vehicle.
+    Allows deletion of courier vehicle
+    """
     # pk2->vehicle.id passed to the queryset
     lookup_url_kwarg = 'pk2'
 

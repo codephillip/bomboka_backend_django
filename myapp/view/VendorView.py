@@ -58,6 +58,9 @@ class VendorEditView(RetrieveUpdateAPIView):
 
 
 class VendorOrdersDetailsView(ListAPIView):
+    """
+    Returns orders from all the shops of the vendor
+    """
     serializer_class = OrderGetSerializer
 
     def get_queryset(self):
