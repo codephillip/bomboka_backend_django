@@ -17,7 +17,7 @@ from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProd
     ShopReviewView, ShopReviewDetailsView, ProductReviewsView, ProductReviewDetailsView, ShopFollowersView, \
     ShopFollowerDetailsView, ShopOrdersDetailsView, AttributeView, AttributeDetailsView, DiscountView, \
     DiscountDetailsView, BrandView, BrandDetailsView, ProductBrandView, ProductBrandDetailsView, SubscriptionView, \
-    SubscriptionDetailsView, ShopReportListView
+    SubscriptionDetailsView, ShopReportListView, FollowersReportListView
 from myapp.view.UserView import UserCreateView, AddressView, UserAddressView, FollowedShopsView, UserOrdersDetailsView, \
     DisplayShopDiscounts, FeedbackCategoryView, FeedbackCategoryDetailsView, FeedbackDetailsView, FeedbackView, \
     UserLoginAPIView, UserView, UserDetailsView, ChangePasswordView, UserWishListView, UserWishDetailsView, TaskViewSet
@@ -140,7 +140,8 @@ urlpatterns = [
     url(r'api/v1/citys$', CityListView.as_view(), name='citys'),
     url(r'api/v1/citys/(?P<pk>[-\w]+)$', CityDetailsView.as_view(), name='city-details'),
 
-    url(r'api/v1/shops_report$', ShopReportListView.as_view(), name='vendors-own-shops'),
+    url(r'api/v1/shops_report$', ShopReportListView.as_view(), name='shops-report'),
+    url(r'api/v1/followers_report$', FollowersReportListView.as_view(), name='followers-report'),
 
 ]
 

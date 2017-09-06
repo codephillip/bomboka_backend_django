@@ -108,6 +108,10 @@ class Follow(models.Model):
     def __str__(self):
         return self.user.username
 
+    def buyers_percentage(self):
+        # todo get percentage of buyers
+        return 'stuff'
+
 
 class Product(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

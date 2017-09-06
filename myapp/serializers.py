@@ -132,6 +132,8 @@ class UserGetSerializer(serializers.ModelSerializer):
             'id', 'user_permissions', 'first_name', 'last_name', 'username', 'email', 'phone', 'password', 'is_blocked',
             'createdAt',
             'image',
+            'last_login',
+            'date_joined',
             'dob')
         read_only = 'id'
         extra_kwargs = {"password": {"write_only": True}}
@@ -413,6 +415,16 @@ class FollowGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Follow
         fields = ('id', 'createdAt', 'shop', 'user')
+
+
+class FollowReportSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    shop = ShopGetSerializer()
+    buyers_percentage = serializers.ReadOnlyField()
+
+    class Meta:
+        model = Follow
+        fields = ('id', 'createdAt', 'shop', 'user', 'buyers_percentage')
 
 
 class FollowPostSerializer(serializers.ModelSerializer):

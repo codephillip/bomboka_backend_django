@@ -12,10 +12,9 @@ from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetS
     FollowPostSerializer, \
     FollowGetSerializer, OrderGetSerializer, AttributePostSerializer, AttributeGetSerializer, DiscountGetSerializer, \
     DiscountPostSerializer, BrandSerializer, ProductBrandPostSerializer, ProductBrandGetSerializer, \
-    SubscriptionSerializer, VendorGetSerializer
+    SubscriptionSerializer, VendorGetSerializer, FollowReportSerializer
 from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
     RetrieveUpdateDestroyAPIView, ListAPIView, DestroyAPIView
-from django_filters.rest_framework import DjangoFilterBackend
 
 
 class ShopView(APIView):
@@ -332,3 +331,8 @@ class SubscriptionDetailsView(RetrieveUpdateDestroyAPIView):
 class ShopReportListView(APIView):
     def get(self, request, format=None):
         pass
+
+
+class FollowersReportListView(ListAPIView):
+    queryset = Follow.objects.all()
+    serializer_class = FollowReportSerializer

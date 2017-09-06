@@ -1,5 +1,8 @@
 from datetime import datetime
 
+import django_filters
+from django_filters.rest_framework import DjangoFilterBackend
+from django_filters import filters
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import ListCreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView, \
@@ -44,9 +47,16 @@ class UserLoginAPIView(APIView):
 
 class UserView(ListAPIView):
     # list all users in the system
-    queryset = User.objects.all()
     serializer_class = UserGetSerializer
     permission_classes = (IsAdminUser,)
+    filter_fields = ('is_blocked',)
+
+    def get_queryset(self):
+        start_date = self.request.GET.get("start_date", None)
+        end_date = self.request.GET.get("end_date", None)
+        if start_date and end_date:
+            return User.objects.filter(date_joined__range=[start_date, end_date]).order_by('-last_login')
+        return User.objects.all().order_by('-last_login')
 
 
 class UserDetailsView(RetrieveUpdateDestroyAPIView):
@@ -175,6 +185,7 @@ class UserWishListView(ListCreateAPIView):
     """
     User wishlist is a list of products that the user has liked
     """
+
     def get_queryset(self):
         return WishList.objects.filter(user=self.kwargs['pk'])
 
