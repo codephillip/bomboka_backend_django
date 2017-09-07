@@ -34,22 +34,3 @@ class DriverDetailsView(RetrieveDestroyAPIView):
             return DriverPostSerializer
         else:
             return DriverGetSerializer
-
-
-class DriverEditView(RetrieveUpdateAPIView):
-    serializer_class = DriverPostSerializer
-
-    # edit driver
-    def put(self, request, *args, **kwargs):
-        # post all the field when editing
-        print("put##")
-        driver = Driver.objects.filter(id=kwargs['pk'])
-        is_verified = request.data['is_verified']
-        is_blocked = request.data['is_blocked']
-
-        if driver and is_verified and is_blocked:
-            driver.update(is_verified=(is_verified == "true"), is_blocked=(is_blocked == "true"),
-                          modifiedAt=datetime.strptime('24052010', "%d%m%Y").now())
-            serializer = DriverGetSerializer(driver, many=True)
-            return Response({"Drivers": serializer.data})
-        return Response("Failed to edit driver", status=status.HTTP_400_BAD_REQUEST)

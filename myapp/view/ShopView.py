@@ -119,7 +119,10 @@ class ProductEditView(RetrieveUpdateAPIView):
 
 
 class ShopReviewView(ListCreateAPIView):
-    # Get all shop ratings / Create shop rating
+    """
+    Returns all shop reviews
+    Allows user to create shop review
+    """
     def get_queryset(self):
         ratings = ShopReview.objects.filter(shop=self.kwargs['pk'])
         return ratings
@@ -137,7 +140,10 @@ class ShopReviewView(ListCreateAPIView):
 
 
 class ShopReviewDetailsView(RetrieveUpdateDestroyAPIView):
-    # Get one shop_rating, Edit shop_rating, Delete shop_rating
+    """
+    Returns single shop review
+    Allows UD of shop review
+    """
     # pk2->rating.id passed to the queryset
     lookup_url_kwarg = 'pk2'
 
@@ -153,7 +159,10 @@ class ShopReviewDetailsView(RetrieveUpdateDestroyAPIView):
 
 
 class ProductReviewsView(ListCreateAPIView):
-    # Get all product reviews / Create product review
+    """
+    Returns all product reviews
+    Allows user to create product review
+    """
     def get_queryset(self):
         reviews = ProductReview.objects.filter(product=self.kwargs['pk'])
         return reviews
@@ -171,7 +180,10 @@ class ProductReviewsView(ListCreateAPIView):
 
 
 class ProductReviewDetailsView(RetrieveUpdateDestroyAPIView):
-    # Get one product_review, Edit product_review, Delete product_review
+    """
+    Returns single product review
+    Allows UD of review
+    """
     # pk2->review.id passed to the queryset
     lookup_url_kwarg = 'pk2'
 
@@ -204,6 +216,7 @@ class AttributeView(ListCreateAPIView):
 
 
 class AttributeDetailsView(RetrieveUpdateDestroyAPIView):
+    # todo move into product
     # Get one product_attribute, Edit product_attribute, Delete product_attribute
     # pk2->attribute.id passed to the queryset
     lookup_url_kwarg = 'pk2'
@@ -225,9 +238,10 @@ class AttributeDetailsView(RetrieveUpdateDestroyAPIView):
 
 
 class ShopFollowersView(ListCreateAPIView):
-    # Get all user_followed_shops / Follow shop
-    print("follow get###")
-
+    """
+    Returns all followers of the shop
+    Allows user to follow shop
+    """
     def get_queryset(self):
         follows = Follow.objects.filter(shop=self.kwargs['pk'])
         print(follows)
@@ -246,7 +260,10 @@ class ShopFollowersView(ListCreateAPIView):
 
 
 class ShopFollowerDetailsView(RetrieveDestroyAPIView):
-    # Get one followed shop, Edit follow, Unfollow shop
+    """
+    Returns single shop follower
+    Allows user unfollow shop
+    """
     # pk2->stop.id passed to the queryset
     lookup_url_kwarg = 'pk2'
 
@@ -259,6 +276,9 @@ class ShopFollowerDetailsView(RetrieveDestroyAPIView):
 
 
 class ShopOrdersDetailsView(ListAPIView):
+    """
+    Returns all orders made from shop
+    """
     serializer_class = OrderGetSerializer
 
     def get_queryset(self):
@@ -280,6 +300,10 @@ class DiscountView(ListCreateAPIView):
 
 
 class DiscountDetailsView(RetrieveUpdateDestroyAPIView):
+    """
+    Returns single discount
+    Allows deletion of discount
+    """
     queryset = Discount.objects.all()
 
     def get_serializer_class(self):

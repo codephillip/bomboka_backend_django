@@ -10,7 +10,7 @@ from myapp.view.CourierView import CourierView, VendorCouriers, AllCoveragesList
     CourierCoveragesUpdateView, CourierDriversListView, CourierDriversDetailsView, CourierOrdersDetailsView, \
     VehicleView, \
     VehicleDetailsView, CourierVehicleListView, CourierVehicleDetailsView
-from myapp.view.DriverView import DriversListView, DriverDetailsView, DriverEditView
+from myapp.view.DriverView import DriversListView, DriverDetailsView
 from myapp.view.LocationView import CountryListView, CountryDetailsView, CityListView, CityDetailsView
 from myapp.view.OrderView import OrderDetailsView, OrdersListView, UserOrders
 from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProductView, ShopEditView, ProductEditView, \

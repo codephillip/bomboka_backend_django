@@ -53,13 +53,19 @@ class VendorCouriers(APIView):
 
 
 class AllCoveragesListView(ListAPIView):
-    # Get all coverages from all couriers
+    """
+    Returns all coverages from all couriers.
+    Coverage is the area where the courier operates
+    """
     queryset = Coverage.objects.all()
     serializer_class = CoverageGetSerializer
 
 
 class CourierCoveragesListView(ListCreateAPIView):
-    # todo merge with country and date tables
+    """
+    Returns all courier coverages
+    Allows courier to create coverage
+    """
     # Get all courier coverages / Create courier coverage
     def get_queryset(self):
         print("courier id " + self.kwargs['pk'])
@@ -78,7 +84,10 @@ class CourierCoveragesListView(ListCreateAPIView):
 
 
 class CourierCoveragesUpdateView(RetrieveUpdateDestroyAPIView):
-    # Get one courier_coverage, Edit courier_coverage, Delete courier_coverage
+    """
+    Returns single courier coverage
+    Allows UD of courier coverage
+    """
     # pk2->coverages.id passed to the queryset
     lookup_url_kwarg = 'pk2'
 
@@ -96,10 +105,9 @@ class CourierCoveragesUpdateView(RetrieveUpdateDestroyAPIView):
 
 class CourierDriversListView(ListCreateAPIView):
     """
-    Lists all courier drivers
+    Lists all courier driver partnerships
     Allows courier to add drivers as their partner
     """
-    # Get all courier drivers / Create courier driver partnership
     # Courier can also be the driver
     def get_queryset(self):
         print("courier id " + self.kwargs['pk'])
@@ -118,7 +126,10 @@ class CourierDriversListView(ListCreateAPIView):
 
 
 class CourierDriversDetailsView(RetrieveDestroyAPIView):
-    # Get one courier_driver, Delete courier_driver
+    """
+    Returns single courier driver partner
+    Allows courier to cancel partnership with driver
+    """
     # pk2->driver.id passed to the queryset
     lookup_url_kwarg = 'pk2'
 

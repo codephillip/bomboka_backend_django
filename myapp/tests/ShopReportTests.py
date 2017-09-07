@@ -32,9 +32,9 @@ class TestShopReport(APITestCase):
             "is_blocked": "False"
         }
 
-    def test_get_vendors_own_shops(self):
-        print("vendors own shops#")
-        request = self.client.get(reverse("vendors-own-shops"))
+    def test_get_vendors(self):
+        print("vendors#")
+        request = self.client.get(reverse("vendors"))
         print(request.data)
         self.assertEqual(request.status_code, status.HTTP_200_OK)
 
