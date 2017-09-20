@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from rest_framework.filters import OrderingFilter
 from rest_framework import status
 
 from rest_framework.response import Response
@@ -156,6 +157,26 @@ class ShopReviewDetailsView(RetrieveUpdateDestroyAPIView):
             return ShopReviewPostSerializer
         else:
             return ShopReviewGetSerializer
+
+
+class MostPopularShopsView(ListAPIView):
+    """
+    Returns most popular shops
+    """
+    serializer_class = ShopGetSerializer
+    # filter_backends = (OrderingFilter,)
+    # ordering_fields = ('count',)
+
+    def get_queryset(self):
+        # TODO FIX SERIOUS BUG
+        shopReviews = ShopReview.objects.all().order_by('-shop__shopreview__count').distinct()
+        print("Count# " + str(shopReviews.count()))
+        count = 0
+        for z in shopReviews:
+            count += 1
+            print(count)
+        shops = [x.shop for x in shopReviews]
+        return shops
 
 
 class ProductReviewsView(ListCreateAPIView):

@@ -17,7 +17,7 @@ from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProd
     ShopReviewView, ShopReviewDetailsView, ProductReviewsView, ProductReviewDetailsView, ShopFollowersView, \
     ShopFollowerDetailsView, ShopOrdersDetailsView, AttributeView, AttributeDetailsView, DiscountView, \
     DiscountDetailsView, BrandView, BrandDetailsView, ProductBrandView, ProductBrandDetailsView, SubscriptionView, \
-    SubscriptionDetailsView, ShopReportListView, FollowersReportListView
+    SubscriptionDetailsView, ShopReportListView, FollowersReportListView, MostPopularShopsView
 from myapp.view.UserView import UserCreateView, AddressView, UserAddressView, FollowedShopsView, UserOrdersDetailsView, \
     DisplayShopDiscounts, FeedbackCategoryView, FeedbackCategoryDetailsView, FeedbackDetailsView, FeedbackView, \
     UserLoginAPIView, UserView, UserDetailsView, ChangePasswordView, UserWishListView, UserWishDetailsView, TaskViewSet
@@ -81,6 +81,7 @@ urlpatterns = [
     url(r'api/v1/shops/(?P<pk>[-\w]+)/followers$', ShopFollowersView.as_view(), name='shop-followers'),
     url(r'api/v1/shops/(?P<pk>[-\w]+)/followers/(?P<pk2>[-\w]+)$', ShopFollowerDetailsView.as_view(),
         name='shop-follower'),
+    url(r'api/v1/most_popular_shops$', MostPopularShopsView.as_view(), name='most-popular-shops'),
 
     url(r'api/v1/products/(?P<pk>[-\w]+)/attributes$', AttributeView.as_view(), name='product-attributes'),
     url(r'api/v1/products/(?P<pk>[-\w]+)/attributes/(?P<pk2>[-\w]+)$', AttributeDetailsView.as_view(),

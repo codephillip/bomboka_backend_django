@@ -1,7 +1,7 @@
 import uuid
 
 from django.contrib.auth.models import AbstractUser
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator, MinValueValidator, MaxValueValidator
 from django.db import models
 
 from myapp.utils.constants import *
@@ -90,7 +90,7 @@ class Shop(models.Model):
 class ShopReview(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     comment = models.TextField()
-    count = models.FloatField(default=0)
+    count = models.FloatField(default=0, validators=[MinValueValidator(0.0), MaxValueValidator(5.0)])
     createdAt = models.DateTimeField(auto_now_add=True)
     shop = models.ForeignKey(Shop)
     user = models.ForeignKey(User)
@@ -132,7 +132,7 @@ class Product(models.Model):
 class ProductReview(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     comment = models.TextField()
-    count = models.FloatField(default=0)
+    count = models.FloatField(default=0, validators=[MinValueValidator(0.0), MaxValueValidator(5.0)])
     createdAt = models.DateTimeField(auto_now_add=True)
     product = models.ForeignKey(Product)
     user = models.ForeignKey(User)
