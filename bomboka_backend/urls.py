@@ -103,7 +103,7 @@ urlpatterns = [
 
     url(r'api/v1/shops$', ShopView.as_view(), name='shops'),
     url(r'api/v1/shop_edit/(?P<shop_id>[-\w]+)$', ShopEditView.as_view(), name='edit_shop'),
-    url(r'api/v1/shops/(?P<shop_id>[-\w]+)/products$', ShopProductView.as_view(), name='shop_product'),
+    url(r'api/v1/shops/(?P<pk>[-\w]+)/products$', ShopProductView.as_view(), name='shop-products'),
     url(r'api/v1/shops/(?P<pk>[-\w]+)/orders$', ShopOrdersDetailsView.as_view(),
         name='shop-orders'),
 

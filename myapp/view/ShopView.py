@@ -21,7 +21,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, R
 
 class ShopView(ListAPIView):
     """
-    Returns all shops(Admin Only)
+    Returns all shops in the System(Admin Only)
     """
     queryset = Shop.objects.all()
     serializer_class = ShopGetSerializer
@@ -57,35 +57,31 @@ class ShopEditView(RetrieveUpdateAPIView):
 
 class ProductView(ListAPIView):
     """
-    Returns all products(Admin Only)
+    Returns all products in the System(Admin Only)
     """
     queryset = Product.objects.all()
     serializer_class = ProductGetSerializer
     permission_classes = [IsAdminUser]
 
 
-class ShopProductView(APIView):
-    # get shop products
-    def get(self, request, shop_id):
-        print("shopproducts##")
-        products = Product.objects.filter(shop_id=shop_id)
-        serializer = ProductGetSerializer(products, many=True)
-        return Response({"Products": serializer.data})
+class ShopProductView(ListCreateAPIView):
+    """
+    Returns all Shop Products
+    Allows User to add Product to Shop
+    """
+    def get_queryset(self):
+        return Product.objects.filter(shop_id=self.kwargs['pk'])
 
-    # add product to shop
-    def post(self, request, shop_id):
-        print("post product##")
-        request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").now()
-        request.data['modifiedAt'] = datetime.strptime('24052010', "%d%m%Y").now()
-        request.data['shop'] = shop_id
-        serializer = ProductPostSerializer(data=request.data)
-
-        print("db#")
-        serializer.subCategory = SubCategory.objects.get(id=request.data['subCategory'])
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"Shops": serializer.data}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            self.request.POST._mutable = True
+            try:
+                self.request.data['shop'] = self.kwargs['pk']
+            except Exception as e:
+                print(e)
+            return ProductPostSerializer
+        else:
+            return ProductGetSerializer
 
 
 class ProductEditView(RetrieveUpdateAPIView):

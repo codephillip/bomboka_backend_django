@@ -32,7 +32,6 @@ class UserSerializer(serializers.ModelSerializer):
         email2 = value
         if email1 != email2:
             raise ValidationError("Emails must match.")
-
         user_qs = User.objects.filter(email=email2)
         if user_qs.exists():
             raise ValidationError("This user has already registered.")
