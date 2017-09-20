@@ -1,6 +1,5 @@
 import io
 import random
-import uuid
 
 from PIL import Image
 
