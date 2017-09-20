@@ -123,7 +123,7 @@ class TestUser(APITestCase):
 
     def test_list_all_addresses(self):
         """
-        Retuns list all addresses created by all users
+        Returns list all addresses created by all users
         """
         url = reverse("address")
         print(url)

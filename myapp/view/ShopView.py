@@ -2,6 +2,7 @@ from datetime import datetime
 
 from rest_framework.filters import OrderingFilter
 from rest_framework import status
+from rest_framework.permissions import IsAdminUser
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -18,27 +19,13 @@ from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, R
     RetrieveUpdateDestroyAPIView, ListAPIView, DestroyAPIView
 
 
-class ShopView(APIView):
-    # get all shops
-    def get(self, request, format=None):
-        print("shopview")
-        shop = Shop.objects.all()
-        serializer = ShopGetSerializer(shop, many=True)
-        return Response({"Shops": serializer.data})
-
-    # create shop
-    def post(self, request, format=None):
-        request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").now()
-        request.data['modifiedAt'] = datetime.strptime('24052010', "%d%m%Y").now()
-        serializer = ShopPostSerializer(data=request.data)
-
-        print("db#")
-        print(Vendor.objects.get(id=request.data['vendor']))
-        serializer.vendor = Vendor.objects.get(id=request.data['vendor'])
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"Shops": serializer.data}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class ShopView(ListAPIView):
+    """
+    Returns all shops(Admin Only)
+    """
+    queryset = Shop.objects.all()
+    serializer_class = ShopGetSerializer
+    permission_classes = [IsAdminUser]
 
 
 class ShopDetailsView(APIView):
@@ -68,12 +55,13 @@ class ShopEditView(RetrieveUpdateAPIView):
         return Response({"Shops": serializer.data})
 
 
-class ProductView(APIView):
-    # get all products
-    def get(self, request):
-        products = Product.objects.all()
-        serializer = ProductGetSerializer(products, many=True)
-        return Response({"Products": serializer.data})
+class ProductView(ListAPIView):
+    """
+    Returns all products(Admin Only)
+    """
+    queryset = Product.objects.all()
+    serializer_class = ProductGetSerializer
+    permission_classes = [IsAdminUser]
 
 
 class ShopProductView(APIView):
