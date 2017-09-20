@@ -124,12 +124,12 @@ class UserAddressView(ListCreateAPIView):
             return AddressSerializer
 
 
-class AddressView(APIView):
-    # get all addresses
-    def get(self, request, format=None):
-        address = Address.objects.all()
-        serializer = AddressSerializer(address, many=True)
-        return Response({"Address": serializer.data})
+class AddressView(ListAPIView):
+    """
+    Returns all addresses created by users
+    """
+    queryset = Address.objects.all()
+    serializer_class = AddressSerializer
 
 
 class FollowedShopsView(ListCreateAPIView):

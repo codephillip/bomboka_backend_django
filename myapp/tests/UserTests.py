@@ -5,7 +5,6 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from myapp.models import *
-from myapp.serializers import AddressSerializer
 
 """
 TESTS GUIDE
@@ -28,6 +27,10 @@ class TestUser(APITestCase):
         for x in ["iphone1", "iphone2", "iphone3", "iphone4"]:
             product = Product.objects.create(name=x, price=40000, shop=self.shop, subCategory=self.subcategory)
             WishList.objects.create(product=product, user=self.user2)
+
+        for x in ["Wandegeya", "Lumumba", "Kamwokya"]:
+            Address.objects.create(user=self.user, name=x, latitude=23.5, longitude=99.4)
+            Address.objects.create(user=self.user2, name=x, latitude=23.5, longitude=99.4)
 
         self.products = Product.objects.all()
         # create one extract product for testing
@@ -95,10 +98,6 @@ class TestUser(APITestCase):
         """
         lists users addresses that are displayed to the user when making an order
         """
-        addresses = ["Wandegeya", "Lumumba", "Kamwokya"]
-        for x in addresses:
-            Address.objects.create(user=self.user, name=x, latitude=23.5, longitude=99.4)
-            Address.objects.create(user=self.user2, name=x, latitude=23.5, longitude=99.4)
         self.assertEqual(Address.objects.count(), 6)
         url = reverse("user-addresses", kwargs={'pk': self.user.id})
         print(url)
@@ -120,4 +119,14 @@ class TestUser(APITestCase):
         request = self.client.post(url, request_data)
         print(request.data)
         self.assertEqual(request.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(Address.objects.count(), 1)
+        self.assertEqual(Address.objects.count(), 7)
+
+    def test_list_all_addresses(self):
+        """
+        Retuns list all addresses created by all users
+        """
+        url = reverse("address")
+        print(url)
+        request = self.client.get(url)
+        self.assertEqual(request.status_code, status.HTTP_200_OK)
+        self.assertEqual(request.data['count'], 6)
