@@ -86,3 +86,13 @@ class TestUser(APITestCase):
         request = self.client.delete(url)
         self.assertEqual(request.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(WishList.objects.count(), 3)
+
+    def test_user_addresses(self):
+        addresses = ["Wandegeya", "Lumumba", "Kamwokya"]
+        for x in addresses:
+            Address.objects.create(user=self.user, name=x, latitude=23.5, longitude=99.4)
+        self.assertEqual(Address.objects.count(), 3)
+        url = reverse("user-addresses", kwargs={'user_id': self.user.id})
+        print(url)
+        request = self.client.get(url)
+        self.assertEqual(request.status_code, status.HTTP_200_OK)
