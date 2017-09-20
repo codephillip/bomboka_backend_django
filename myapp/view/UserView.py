@@ -107,24 +107,21 @@ class ChangePasswordView(UpdateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class UserAddressView(APIView):
-    # get user addresses
-    def get(self, request, user_id):
-        address = Address.objects.filter(user=User.objects.get(id=user_id))
-        serializer = AddressSerializer(address, many=True)
-        return Response({"Address": serializer.data})
+class UserAddressView(ListCreateAPIView):
+    def get_queryset(self):
+        return Address.objects.filter(user=self.kwargs['pk'])
 
-    # add user delivery addresses
-    def post(self, request, user_id):
-        request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").now()
-        request.data['modifiedAt'] = datetime.strptime('24052010', "%d%m%Y").now()
-        request.data['user'] = user_id
-        serializer = AddressPostSerializer(data=request.data)
-        print("db#")
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"Orders": serializer.data}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            self.request.POST._mutable = True
+            # exception handling only used for swagger
+            try:
+                self.request.data['user'] = self.kwargs['pk']
+            except Exception as e:
+                print(e)
+            return AddressPostSerializer
+        else:
+            return AddressSerializer
 
 
 class AddressView(APIView):

@@ -1,8 +1,11 @@
+import json
+
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
 from myapp.models import *
+from myapp.serializers import AddressSerializer
 
 """
 TESTS GUIDE
@@ -28,7 +31,8 @@ class TestUser(APITestCase):
 
         self.products = Product.objects.all()
         # create one extract product for testing
-        self.product = Product.objects.create(name="Samsung S7", price=80000, shop=self.shop, subCategory=self.subcategory)
+        self.product = Product.objects.create(name="Samsung S7", price=80000, shop=self.shop,
+                                              subCategory=self.subcategory)
 
         # post data template
         self.request_data = {
@@ -87,12 +91,33 @@ class TestUser(APITestCase):
         self.assertEqual(request.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(WishList.objects.count(), 3)
 
-    def test_user_addresses(self):
+    def test_list_user_addresses(self):
+        """
+        lists users addresses that are displayed to the user when making an order
+        """
         addresses = ["Wandegeya", "Lumumba", "Kamwokya"]
         for x in addresses:
             Address.objects.create(user=self.user, name=x, latitude=23.5, longitude=99.4)
-        self.assertEqual(Address.objects.count(), 3)
-        url = reverse("user-addresses", kwargs={'user_id': self.user.id})
+            Address.objects.create(user=self.user2, name=x, latitude=23.5, longitude=99.4)
+        self.assertEqual(Address.objects.count(), 6)
+        url = reverse("user-addresses", kwargs={'pk': self.user.id})
         print(url)
         request = self.client.get(url)
         self.assertEqual(request.status_code, status.HTTP_200_OK)
+        self.assertEqual(request.data['count'], Address.objects.filter(user=self.user).count())
+
+    def test_create_user_address(self):
+        """
+        user creates an address that will be used when making a purchase
+        """
+        request_data = {
+            "name": "Kiwatule",
+            "latitude": 76.8,
+            "longitude": 92.4,
+        }
+        url = reverse("user-addresses", kwargs={'pk': self.user2.id})
+        print(url)
+        request = self.client.post(url, request_data)
+        print(request.data)
+        self.assertEqual(request.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Address.objects.count(), 1)

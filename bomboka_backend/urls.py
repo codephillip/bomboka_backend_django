@@ -46,7 +46,7 @@ urlpatterns = [
     url(r'api/v1/users/register$', UserCreateView.as_view(), name='register-user'),
     url(r'api/v1/users/login$', UserLoginAPIView.as_view(), name='user-login'),
     url(r'api/v1/users/(?P<pk>[-\w]+)/reset_password$', ChangePasswordView.as_view(), name='change-user-password'),
-    url(r'api/v1/users/(?P<user_id>[-\w]+)/addresses$', UserAddressView.as_view(), name='user-addresses'),
+    url(r'api/v1/users/(?P<pk>[-\w]+)/addresses$', UserAddressView.as_view(), name='user-addresses'),
     url(r'api/v1/users/(?P<pk>[-\w]+)/orders', UserOrders.as_view(), name='user_orders'),
     url(r'api/v1/users/(?P<pk>[-\w]+)/followedShops', FollowedShopsView.as_view(), name='user-followed-shops'),
     url(r'api/v1/users/(?P<pk>[-\w]+)/orders$', UserOrdersDetailsView.as_view(),
