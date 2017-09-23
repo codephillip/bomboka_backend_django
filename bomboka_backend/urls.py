@@ -81,7 +81,6 @@ urlpatterns = [
     url(r'api/v1/shops/(?P<pk>[-\w]+)/products$', ShopProductView.as_view(), name='shop-products'),
     url(r'api/v1/shops/(?P<pk>[-\w]+)/orders$', ShopOrdersDetailsView.as_view(),
         name='shop-orders'),
-    # url(r'api/v1/shops/(?P<pk>[-\w]+)$', ShopDetailsView.as_view(), name='shop-details'),
     url(r'api/v1/shops/(?P<pk>[-\w]+)/ratings$', ShopReviewView.as_view(), name='shop-ratings'),
     url(r'api/v1/shops/(?P<pk>[-\w]+)/ratings/(?P<pk2>[-\w]+)$', ShopReviewDetailsView.as_view(), name='shop-rating'),
     url(r'api/v1/shops/(?P<pk>[-\w]+)/followers$', ShopFollowersView.as_view(), name='shop-followers'),

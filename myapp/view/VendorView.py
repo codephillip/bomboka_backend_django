@@ -4,32 +4,20 @@ from rest_framework import status
 from rest_framework.generics import RetrieveUpdateAPIView, ListAPIView, ListCreateAPIView
 
 from rest_framework.response import Response
-from rest_framework.views import APIView
 
-from myapp.models import Vendor, User, Shop, Order
+from myapp.models import Vendor, Shop, Order
 from myapp.serializers import VendorGetSerializer, VendorPostSerializer, ShopGetSerializer, OrderGetSerializer, \
     ShopPostSerializer
 
 
-class VendorView(APIView):
-    def get(self, request, format=None):
-        vendor = Vendor.objects.all()
-        serializer = VendorGetSerializer(vendor, many=True)
-        return Response(serializer.data)
-        # return Response({"Vendor": serializer.data})
+class VendorView(ListCreateAPIView):
+    queryset = Vendor.objects.all()
 
-    def post(self, request, format=None):
-        request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").now()
-        request.data['modifiedAt'] = datetime.strptime('24052010', "%d%m%Y").now()
-
-        serializer = VendorPostSerializer(data=request.data)
-        print("db#")
-        print(User.objects.get(id=request.data['user']))
-        serializer.user = User.objects.get(id=request.data['user'])
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def get_serializer_class(self):
+        if self.request.POST:
+            return VendorPostSerializer
+        else:
+            return VendorGetSerializer
 
 
 class VendorShopsView(ListCreateAPIView):
@@ -38,8 +26,8 @@ class VendorShopsView(ListCreateAPIView):
 
     def get_serializer_class(self):
         if self.request.POST:
-            self.request.POST._mutable = True
             try:
+                self.request.POST._mutable = True
                 self.request.data['vendor'] = self.kwargs['pk']
             except Exception as e:
                 print(e)

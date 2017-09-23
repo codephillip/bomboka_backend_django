@@ -1,5 +1,6 @@
 from django.template.defaulttags import lorem
 from django.urls import reverse
+from django.utils.crypto import get_random_string
 from rest_framework import status
 from rest_framework.test import APITestCase
 
@@ -27,6 +28,11 @@ class TestVendor(APITestCase):
         self.shop = Shop.objects.create(name="makarovShop", vendor=self.vendor, subscription=self.subscription)
         self.shop2 = Shop.objects.create(name="makarovShop2", vendor=self.vendor, subscription=self.subscription)
 
+        self.request_data = {
+            "name": "Uganda",
+            "user" : "abc"
+        }
+
     def test_get_vendor_shops(self):
         """
         Vendor views all his shops
@@ -51,3 +57,20 @@ class TestVendor(APITestCase):
         request = self.client.post(url, request_data)
         self.assertEqual(request.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Shop.objects.filter(vendor=self.vendor).count(), 3)
+
+    def test_get_vendors(self):
+        print("vendors#")
+        request = self.client.get(reverse("vendors"))
+        print(request.data)
+        self.assertEqual(request.data['count'], Vendor.objects.all().count())
+        self.assertEqual(request.status_code, status.HTTP_200_OK)
+
+    def test_create_vendor(self):
+        print("create vendor#")
+        # create four more vendors
+        for x in range(4):
+            user_id = User.objects.create(username=get_random_string(length=10)).id
+            self.request_data["user"] = user_id
+            request = self.client.post(reverse("vendors"), self.request_data)
+            self.assertEqual(request.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Vendor.objects.count(), 5)
