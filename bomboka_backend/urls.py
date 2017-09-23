@@ -13,7 +13,7 @@ from myapp.view.CourierView import CourierView, VendorCouriers, AllCoveragesList
 from myapp.view.DriverView import DriversListView, DriverDetailsView
 from myapp.view.LocationView import CountryListView, CountryDetailsView, CityListView, CityDetailsView
 from myapp.view.OrderView import OrderDetailsView, OrdersListView, UserOrders
-from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProductView, ShopEditView, ProductEditView, \
+from myapp.view.ShopView import ShopView, ProductView, ShopProductView, ProductEditView, \
     ShopReviewView, ShopReviewDetailsView, ProductReviewsView, ProductReviewDetailsView, ShopFollowersView, \
     ShopFollowerDetailsView, ShopOrdersDetailsView, AttributeView, AttributeDetailsView, DiscountView, \
     DiscountDetailsView, BrandView, BrandDetailsView, ProductBrandView, ProductBrandDetailsView, SubscriptionView, \
@@ -21,7 +21,7 @@ from myapp.view.ShopView import ShopView, ShopDetailsView, ProductView, ShopProd
 from myapp.view.UserView import UserCreateView, AddressView, UserAddressView, FollowedShopsView, UserOrdersDetailsView, \
     DisplayShopDiscounts, FeedbackCategoryView, FeedbackCategoryDetailsView, FeedbackDetailsView, FeedbackView, \
     UserLoginAPIView, UserView, UserDetailsView, ChangePasswordView, UserWishListView, UserWishDetailsView, TaskViewSet
-from myapp.view.VendorView import VendorView, VendorShopsView, VendorEditView, VendorOrdersDetailsView
+from myapp.view.VendorView import VendorView, VendorShopsView, VendorOrdersDetailsView, VendorShopDetailsView
 from rest_framework_swagger.views import get_swagger_view
 
 """
@@ -69,18 +69,19 @@ urlpatterns = [
     url(r'api/v1/addresses$', AddressView.as_view(), name='address'),
 
     url(r'api/v1/vendors$', VendorView.as_view(), name='vendors'),
-    url(r'api/v1/vendors/(?P<pk>[-\w]+)/shops$', VendorShopsView.as_view(), name='vendors-shops'),
+    url(r'api/v1/vendors/(?P<pk>[-\w]+)/shops$', VendorShopsView.as_view(), name='vendor-shops'),
+    # todo refactore ShopDetailsView
+    url(r'api/v1/vendors/(?P<pk>[-\w]+)/shops/(?P<pk2>[-\w]+)$', VendorShopDetailsView.as_view(), name='vendor-shop-details'),
     url(r'api/v1/vendors/(?P<vendor_id>[-\w]+)/couriers$', VendorCouriers.as_view(), name='vendors_couriers'),
     # url(r'api/v1/vendor_edit/(?P<vendor_id>[-\w]+)$', VendorEditView.as_view(), name='edit_vendor'),
     url(r'api/v1/vendors/(?P<pk>[-\w]+)/orders$', VendorOrdersDetailsView.as_view(),
         name='vendor-orders'),
 
     url(r'api/v1/shops$', ShopView.as_view(), name='shops'),
-    url(r'api/v1/shop_edit/(?P<shop_id>[-\w]+)$', ShopEditView.as_view(), name='edit_shop'),
     url(r'api/v1/shops/(?P<pk>[-\w]+)/products$', ShopProductView.as_view(), name='shop-products'),
     url(r'api/v1/shops/(?P<pk>[-\w]+)/orders$', ShopOrdersDetailsView.as_view(),
         name='shop-orders'),
-    url(r'api/v1/shops/(?P<shop_id>[-\w]+)$', ShopDetailsView.as_view(), name='shop-details'),
+    # url(r'api/v1/shops/(?P<pk>[-\w]+)$', ShopDetailsView.as_view(), name='shop-details'),
     url(r'api/v1/shops/(?P<pk>[-\w]+)/ratings$', ShopReviewView.as_view(), name='shop-ratings'),
     url(r'api/v1/shops/(?P<pk>[-\w]+)/ratings/(?P<pk2>[-\w]+)$', ShopReviewDetailsView.as_view(), name='shop-rating'),
     url(r'api/v1/shops/(?P<pk>[-\w]+)/followers$', ShopFollowersView.as_view(), name='shop-followers'),

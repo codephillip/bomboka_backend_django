@@ -31,7 +31,7 @@ class TestVendor(APITestCase):
         """
         Vendor views all his shops
         """
-        url = reverse("vendors-shops", kwargs={'pk': self.vendor.id})
+        url = reverse("vendor-shops", kwargs={'pk': self.vendor.id})
         print(url)
         request = self.client.get(url)
         self.assertEqual(request.status_code, status.HTTP_200_OK)
@@ -46,7 +46,7 @@ class TestVendor(APITestCase):
             "description": "Lorem Ipsum",
             "subscription": self.subscription.id
         }
-        url = reverse("vendors-shops", kwargs={'pk': self.vendor.id})
+        url = reverse("vendor-shops", kwargs={'pk': self.vendor.id})
         print(url)
         request = self.client.post(url, request_data)
         self.assertEqual(request.status_code, status.HTTP_201_CREATED)

@@ -1,22 +1,20 @@
 from datetime import datetime
 
-from rest_framework.filters import OrderingFilter
 from rest_framework import status
+from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
+    RetrieveUpdateDestroyAPIView, ListAPIView
 from rest_framework.permissions import IsAdminUser
-
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from myapp.models import Vendor, Shop, Product, SubCategory, ShopReview, ProductReview, Follow, Order, Attribute, \
+from myapp.models import Shop, Product, ShopReview, ProductReview, Follow, Order, Attribute, \
     Discount, Brand, ProductBrand, Subscription
-from myapp.serializers import ShopPostSerializer, ShopGetSerializer, ProductGetSerializer, ProductPostSerializer, \
+from myapp.serializers import ShopGetSerializer, ProductGetSerializer, ProductPostSerializer, \
     ShopReviewGetSerializer, ShopReviewPostSerializer, ProductReviewPostSerializer, ProductReviewGetSerializer, \
     FollowPostSerializer, \
     FollowGetSerializer, OrderGetSerializer, AttributePostSerializer, AttributeGetSerializer, DiscountGetSerializer, \
     DiscountPostSerializer, BrandSerializer, ProductBrandPostSerializer, ProductBrandGetSerializer, \
-    SubscriptionSerializer, VendorGetSerializer, FollowReportSerializer
-from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, RetrieveUpdateAPIView, \
-    RetrieveUpdateDestroyAPIView, ListAPIView, DestroyAPIView
+    SubscriptionSerializer, FollowReportSerializer
 
 
 class ShopView(ListCreateAPIView):
@@ -26,33 +24,6 @@ class ShopView(ListCreateAPIView):
     queryset = Shop.objects.all()
     serializer_class = ShopGetSerializer
     permission_classes = [IsAdminUser]
-
-
-class ShopDetailsView(APIView):
-    # get single shop details
-    def get(self, request, shop_id):
-        print(shop_id)
-        shop = Shop.objects.filter(id=shop_id)
-        serializer = ShopGetSerializer(shop, many=True)
-        return Response({"Shops": serializer.data})
-
-
-class ShopEditView(RetrieveUpdateAPIView):
-    serializer_class = ShopPostSerializer
-
-    # edit shop
-    def put(self, request, *args, **kwargs):
-        # post all the field when editing
-        print("put##")
-        print(kwargs['shop_id'])
-        shop = Shop.objects.filter(id=kwargs['shop_id'])
-        name = request.data['name']
-        is_blocked = request.data['is_blocked']
-        if name and is_blocked:
-            shop.update(name=name, is_blocked=(is_blocked == "true"),
-                        modifiedAt=datetime.strptime('24052010', "%d%m%Y").now())
-        serializer = ShopGetSerializer(shop, many=True)
-        return Response({"Shops": serializer.data})
 
 
 class ProductView(ListAPIView):
@@ -74,8 +45,8 @@ class ShopProductView(ListCreateAPIView):
 
     def get_serializer_class(self):
         if self.request.method == 'POST':
-            self.request.POST._mutable = True
             try:
+                self.request.POST._mutable = True
                 self.request.data['shop'] = self.kwargs['pk']
             except Exception as e:
                 print(e)
@@ -114,8 +85,8 @@ class ShopReviewView(ListCreateAPIView):
 
     def get_serializer_class(self):
         if self.request.method == 'POST':
-            self.request.POST._mutable = True
             try:
+                self.request.POST._mutable = True
                 self.request.data['shop'] = self.kwargs['pk']
             except Exception as e:
                 print(e)
@@ -174,8 +145,8 @@ class ProductReviewsView(ListCreateAPIView):
 
     def get_serializer_class(self):
         if self.request.method == 'POST':
-            self.request.POST._mutable = True
             try:
+                self.request.POST._mutable = True
                 self.request.data['product'] = self.kwargs['pk']
             except Exception as e:
                 print(e)
@@ -210,8 +181,8 @@ class AttributeView(ListCreateAPIView):
 
     def get_serializer_class(self):
         if self.request.method == 'POST':
-            self.request.POST._mutable = True
             try:
+                self.request.POST._mutable = True
                 self.request.data['product'] = self.kwargs['pk']
             except Exception as e:
                 print(e)
@@ -232,8 +203,8 @@ class AttributeDetailsView(RetrieveUpdateDestroyAPIView):
 
     def get_serializer_class(self):
         if self.request.method == 'PUT':
-            self.request.POST._mutable = True
             try:
+                self.request.POST._mutable = True
                 self.request.data['product'] = self.kwargs['pk']
             except Exception as e:
                 print(e)
@@ -256,6 +227,7 @@ class ShopFollowersView(ListCreateAPIView):
         if self.request.method == 'POST':
             # grab the url data then insert into the request dictionary
             try:
+                self.request.POST._mutable = True
                 self.request.data['shop'] = self.kwargs['pk']
             except Exception as e:
                 print(e)

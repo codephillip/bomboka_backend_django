@@ -40,6 +40,29 @@ class TestShop(APITestCase):
         request = self.client.get(reverse("shops"))
         self.assertEqual(request.status_code, status.HTTP_200_OK)
 
+    def test_get_shop(self):
+        """
+        View details of a single shop
+        """
+        url = reverse("vendor-shop-details", kwargs={'pk': self.vendor.id, 'pk2': self.shop.id})
+        print(url)
+        request = self.client.get(url)
+        self.assertEqual(request.status_code, status.HTTP_200_OK)
+
+    def test_edit_shop(self):
+        """
+        Vendor edits shop
+        """
+        request_data = {
+            "name": "NewName",
+            "description": "Lorem Ipsum Lorem Default",
+            "subscription": self.subscription.id
+        }
+        url = reverse("vendor-shop-details", kwargs={'pk': self.vendor.id, 'pk2': self.shop.id})
+        print(url)
+        request = self.client.put(url, request_data)
+        self.assertEqual(request.status_code, status.HTTP_200_OK)
+
     def test_get_products(self):
         """
         Admin views all products in the platform

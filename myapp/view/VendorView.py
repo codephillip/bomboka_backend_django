@@ -33,8 +33,8 @@ class VendorView(APIView):
 
 
 class VendorShopsView(ListCreateAPIView):
-    queryset = Shop.objects.all()
-    lookup_field = 'vendor_id'
+    def get_queryset(self):
+        return Shop.objects.filter(vendor=self.kwargs['pk'])
 
     def get_serializer_class(self):
         if self.request.POST:
@@ -72,3 +72,23 @@ class VendorOrdersDetailsView(ListAPIView):
 
     def get_queryset(self):
         return Order.objects.filter(product__shop__vendor=self.kwargs['pk'])
+
+
+class VendorShopDetailsView(RetrieveUpdateAPIView):
+    """
+    Returns details of a Shop
+    Allows User to update shop
+    """
+    lookup_url_kwarg = 'pk2'
+    queryset = Shop.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'PUT':
+            try:
+                self.request.POST._mutable = True
+                self.request.data['vendor'] = self.kwargs['pk']
+            except Exception as e:
+                print(e)
+            return ShopPostSerializer
+        else:
+            return ShopGetSerializer
