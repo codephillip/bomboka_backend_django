@@ -19,7 +19,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, R
     RetrieveUpdateDestroyAPIView, ListAPIView, DestroyAPIView
 
 
-class ShopView(ListAPIView):
+class ShopView(ListCreateAPIView):
     """
     Returns all shops in the System(Admin Only)
     """

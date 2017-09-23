@@ -1,13 +1,14 @@
 from datetime import datetime
 
 from rest_framework import status
-from rest_framework.generics import RetrieveUpdateAPIView, ListAPIView
+from rest_framework.generics import RetrieveUpdateAPIView, ListAPIView, ListCreateAPIView
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from myapp.models import Vendor, User, Shop, Order
-from myapp.serializers import VendorGetSerializer, VendorPostSerializer, ShopGetSerializer, OrderGetSerializer
+from myapp.serializers import VendorGetSerializer, VendorPostSerializer, ShopGetSerializer, OrderGetSerializer, \
+    ShopPostSerializer
 
 
 class VendorView(APIView):
@@ -31,14 +32,20 @@ class VendorView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class GetVendorShopsView(APIView):
-    def get(self, request, vendor_id):
-        print("shopDetails")
-        print(vendor_id)
-        shops = Shop.objects.filter(vendor_id=vendor_id)
-        # shop = Shop.objects.all()
-        serializer = ShopGetSerializer(shops, many=True)
-        return Response({"Shops": serializer.data})
+class VendorShopsView(ListCreateAPIView):
+    queryset = Shop.objects.all()
+    lookup_field = 'vendor_id'
+
+    def get_serializer_class(self):
+        if self.request.POST:
+            self.request.POST._mutable = True
+            try:
+                self.request.data['vendor'] = self.kwargs['pk']
+            except Exception as e:
+                print(e)
+            return ShopPostSerializer
+        else:
+            return ShopGetSerializer
 
 
 class VendorEditView(RetrieveUpdateAPIView):

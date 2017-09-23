@@ -1,4 +1,5 @@
 from django.urls import reverse
+from django.utils.crypto import get_random_string
 from rest_framework import status
 from rest_framework.test import APITestCase
 
@@ -30,7 +31,7 @@ class TestShop(APITestCase):
         # add products to two shops, self.shop and self.shop2
         for x in ["iphone1", "iphone2", "iphone3", "iphone4"]:
             Product.objects.create(name=x, price=40000, shop=self.shop, subCategory=self.subcategory)
-            Product.objects.create(name=(x+"Product"), price=66000, shop=self.shop2, subCategory=self.subcategory)
+            Product.objects.create(name=(x + "Product"), price=66000, shop=self.shop2, subCategory=self.subcategory)
 
     def test_get_shops(self):
         """
@@ -64,7 +65,7 @@ class TestShop(APITestCase):
         request_data = {
             "name": "Iphone 10",
             "price": 5690000,
-            "description": "Nice phone",
+            "description": get_random_string(length=100),
             "image": generate_photo_file(),
             "subCategory": self.subcategory.id
         }

@@ -168,14 +168,14 @@ class ShopGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shop
         fields = (
-            'id', 'name', 'is_blocked', 'vendor', 'createdAt', 'modifiedAt')
+            'id', 'name', 'is_blocked', 'vendor', 'subscription', 'createdAt', 'modifiedAt')
 
 
 class ShopPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shop
         fields = (
-            'id', 'name', 'is_blocked', 'vendor', 'createdAt', 'modifiedAt')
+            'id', 'name', 'is_blocked', 'vendor', 'subscription', 'createdAt', 'modifiedAt')
 
 
 class CategoryGetSerializer(serializers.ModelSerializer):
