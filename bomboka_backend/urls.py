@@ -21,7 +21,8 @@ from myapp.view.ShopView import ShopView, ProductView, ShopProductView, ProductE
 from myapp.view.UserView import UserCreateView, AddressView, UserAddressView, FollowedShopsView, UserOrdersDetailsView, \
     DisplayShopDiscounts, FeedbackCategoryView, FeedbackCategoryDetailsView, FeedbackDetailsView, FeedbackView, \
     UserLoginAPIView, UserView, UserDetailsView, ChangePasswordView, UserWishListView, UserWishDetailsView, TaskViewSet
-from myapp.view.VendorView import VendorView, VendorShopsView, VendorOrdersDetailsView, VendorShopDetailsView
+from myapp.view.VendorView import VendorView, VendorShopsView, VendorOrdersDetailsView, VendorShopDetailsView, \
+    VendorDetailsView
 from rest_framework_swagger.views import get_swagger_view
 
 """
@@ -69,11 +70,11 @@ urlpatterns = [
     url(r'api/v1/addresses$', AddressView.as_view(), name='address'),
 
     url(r'api/v1/vendors$', VendorView.as_view(), name='vendors'),
+    url(r'api/v1/vendors/(?P<pk>[-\w]+)$', VendorDetailsView.as_view(), name='vendor-details'),
     url(r'api/v1/vendors/(?P<pk>[-\w]+)/shops$', VendorShopsView.as_view(), name='vendor-shops'),
-    # todo refactore ShopDetailsView
+    # todo refactor ShopDetailsView
     url(r'api/v1/vendors/(?P<pk>[-\w]+)/shops/(?P<pk2>[-\w]+)$', VendorShopDetailsView.as_view(), name='vendor-shop-details'),
     url(r'api/v1/vendors/(?P<vendor_id>[-\w]+)/couriers$', VendorCouriers.as_view(), name='vendors_couriers'),
-    # url(r'api/v1/vendor_edit/(?P<vendor_id>[-\w]+)$', VendorEditView.as_view(), name='edit_vendor'),
     url(r'api/v1/vendors/(?P<pk>[-\w]+)/orders$', VendorOrdersDetailsView.as_view(),
         name='vendor-orders'),
 

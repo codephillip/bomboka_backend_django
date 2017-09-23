@@ -1,11 +1,9 @@
-from django.template.defaulttags import lorem
 from django.urls import reverse
 from django.utils.crypto import get_random_string
 from rest_framework import status
 from rest_framework.test import APITestCase
 
 from myapp.models import *
-
 
 """
 TESTS GUIDE
@@ -30,7 +28,7 @@ class TestVendor(APITestCase):
 
         self.request_data = {
             "name": "Uganda",
-            "user" : "abc"
+            "user": "abc"
         }
 
     def test_get_vendor_shops(self):
@@ -65,6 +63,15 @@ class TestVendor(APITestCase):
         self.assertEqual(request.data['count'], Vendor.objects.all().count())
         self.assertEqual(request.status_code, status.HTTP_200_OK)
 
+    def test_get_vendor(self):
+        """
+        Display Vendor details
+        """
+        url = reverse("vendor-details", kwargs={'pk': self.vendor.id})
+        print(url)
+        request = self.client.get(url)
+        self.assertEqual(request.status_code, status.HTTP_200_OK)
+
     def test_create_vendor(self):
         print("create vendor#")
         # create four more vendors
@@ -74,3 +81,17 @@ class TestVendor(APITestCase):
             request = self.client.post(reverse("vendors"), self.request_data)
             self.assertEqual(request.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Vendor.objects.count(), 5)
+
+    def test_edit_vendor(self):
+        """
+        Edit Vendor details
+        """
+        request_data = {
+            "user": self.vendor.user_id,
+            "is_blocked": False,
+            "is_verified": True
+        }
+        url = reverse("vendor-details", kwargs={'pk': self.vendor.id})
+        print(url)
+        request = self.client.put(url, request_data)
+        self.assertEqual(request.status_code, status.HTTP_200_OK)

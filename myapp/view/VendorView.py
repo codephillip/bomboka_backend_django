@@ -1,16 +1,15 @@
-from datetime import datetime
-
-from rest_framework import status
 from rest_framework.generics import RetrieveUpdateAPIView, ListAPIView, ListCreateAPIView
-
-from rest_framework.response import Response
-
+from rest_framework.permissions import IsAdminUser
 from myapp.models import Vendor, Shop, Order
 from myapp.serializers import VendorGetSerializer, VendorPostSerializer, ShopGetSerializer, OrderGetSerializer, \
     ShopPostSerializer
 
 
 class VendorView(ListCreateAPIView):
+    """
+    Returns all Vendors in the System
+    Allows User to upgrade to Vendor
+    """
     queryset = Vendor.objects.all()
 
     def get_serializer_class(self):
@@ -21,6 +20,10 @@ class VendorView(ListCreateAPIView):
 
 
 class VendorShopsView(ListCreateAPIView):
+    """
+    Returns all Vendor Shops
+    Allows Vendor to create a Shop
+    """
     def get_queryset(self):
         return Shop.objects.filter(vendor=self.kwargs['pk'])
 
@@ -36,25 +39,23 @@ class VendorShopsView(ListCreateAPIView):
             return ShopGetSerializer
 
 
-class VendorEditView(RetrieveUpdateAPIView):
-    # edit vendor
-    def put(self, request, *args, **kwargs):
-        # post all the field when editing
-        print("put##")
-        vendor = Vendor.objects.filter(id=kwargs['vendor_id'])
-        is_blocked = request.data['is_blocked']
-        is_verified = request.data['is_verified']
-        if vendor and is_blocked and is_verified:
-            vendor.update(is_blocked=(is_blocked == "true"), is_verified=(is_verified == "true"),
-                          modifiedAt=datetime.strptime('24052010', "%d%m%Y").now())
-            serializer = VendorGetSerializer(vendor, many=True)
-            return Response({"Vendors": serializer.data})
-        return Response("Failed to edit vendor", status=status.HTTP_400_BAD_REQUEST)
+class VendorDetailsView(RetrieveUpdateAPIView):
+    """
+    Returns details of a Vendor
+    Allows Admin to update Vendor
+    """
+    queryset = Vendor.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'PUT':
+            return VendorPostSerializer
+        else:
+            return VendorGetSerializer
 
 
 class VendorOrdersDetailsView(ListAPIView):
     """
-    Returns orders from all the shops of the vendor
+    Returns Orders from all the Shops of the Vendor
     """
     serializer_class = OrderGetSerializer
 
@@ -65,7 +66,7 @@ class VendorOrdersDetailsView(ListAPIView):
 class VendorShopDetailsView(RetrieveUpdateAPIView):
     """
     Returns details of a Shop
-    Allows User to update shop
+    Allows User to update Shop
     """
     lookup_url_kwarg = 'pk2'
     queryset = Shop.objects.all()
