@@ -36,6 +36,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     # NOTE: this must be called first before accessing any endpoint
     # FOR DEBUGGING ONLY: activate 'AllowAny' in settings.py under DEFAULT_PERMISSION_CLASSES
+    # todo replace with djoser
     url(r'^api-token-auth', obtain_jwt_token),
     url(r'^api-token-refresh', refresh_jwt_token),
     url(r'^api-token-verify', verify_jwt_token),
@@ -72,7 +73,6 @@ urlpatterns = [
     url(r'api/v1/vendors$', VendorView.as_view(), name='vendors'),
     url(r'api/v1/vendors/(?P<pk>[-\w]+)$', VendorDetailsView.as_view(), name='vendor-details'),
     url(r'api/v1/vendors/(?P<pk>[-\w]+)/shops$', VendorShopsView.as_view(), name='vendor-shops'),
-    # todo refactor ShopDetailsView
     url(r'api/v1/vendors/(?P<pk>[-\w]+)/shops/(?P<pk2>[-\w]+)$', VendorShopDetailsView.as_view(), name='vendor-shop-details'),
     url(r'api/v1/vendors/(?P<vendor_id>[-\w]+)/couriers$', VendorCouriers.as_view(), name='vendors_couriers'),
     url(r'api/v1/vendors/(?P<pk>[-\w]+)/orders$', VendorOrdersDetailsView.as_view(),
@@ -115,7 +115,6 @@ urlpatterns = [
 
     url(r'api/v1/drivers$', DriversListView.as_view(), name='drivers'),
     url(r'api/v1/drivers/(?P<pk>[-\w]+)$', DriverDetailsView.as_view(), name='driver-details'),
-    # url(r'api/v1/drivers_edit/(?P<pk>[-\w]+)$', DriverEditView.as_view(), name='edit-driver'),
 
     url(r'api/v1/coverages$', AllCoveragesListView.as_view(), name='courier-coverages'),
 
