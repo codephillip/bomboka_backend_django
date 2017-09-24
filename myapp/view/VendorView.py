@@ -66,7 +66,7 @@ class VendorOrdersDetailsView(ListAPIView):
 class VendorShopDetailsView(RetrieveUpdateAPIView):
     """
     Returns details of a Shop
-    Allows User to update Shop
+    Allows Vendor to update Shop
     """
     lookup_url_kwarg = 'pk2'
     queryset = Shop.objects.all()

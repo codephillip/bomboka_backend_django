@@ -17,7 +17,7 @@ from myapp.serializers import ShopGetSerializer, ProductGetSerializer, ProductPo
     SubscriptionSerializer, FollowReportSerializer
 
 
-class ShopView(ListCreateAPIView):
+class ShopView(ListAPIView):
     """
     Returns all shops in the System(Admin Only)
     """
@@ -38,13 +38,33 @@ class ProductView(ListAPIView):
 class ShopProductView(ListCreateAPIView):
     """
     Returns all Shop Products
-    Allows User to add Product to Shop
+    Allows Vendor to add Product to Shop
     """
     def get_queryset(self):
         return Product.objects.filter(shop_id=self.kwargs['pk'])
 
     def get_serializer_class(self):
         if self.request.method == 'POST':
+            try:
+                self.request.POST._mutable = True
+                self.request.data['shop'] = self.kwargs['pk']
+            except Exception as e:
+                print(e)
+            return ProductPostSerializer
+        else:
+            return ProductGetSerializer
+
+
+class ShopProductDetailsView(RetrieveUpdateAPIView):
+    """
+    Returns details of a Product
+    Allows Vendor to update Product
+    """
+    lookup_url_kwarg = 'pk2'
+    queryset = Product.objects.all()
+
+    def get_serializer_class(self):
+        if self.request.method == 'PUT':
             try:
                 self.request.POST._mutable = True
                 self.request.data['shop'] = self.kwargs['pk']

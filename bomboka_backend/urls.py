@@ -17,7 +17,7 @@ from myapp.view.ShopView import ShopView, ProductView, ShopProductView, ProductE
     ShopReviewView, ShopReviewDetailsView, ProductReviewsView, ProductReviewDetailsView, ShopFollowersView, \
     ShopFollowerDetailsView, ShopOrdersDetailsView, AttributeView, AttributeDetailsView, DiscountView, \
     DiscountDetailsView, BrandView, BrandDetailsView, ProductBrandView, ProductBrandDetailsView, SubscriptionView, \
-    SubscriptionDetailsView, ShopReportListView, FollowersReportListView, MostPopularShopsView
+    SubscriptionDetailsView, ShopReportListView, FollowersReportListView, MostPopularShopsView, ShopProductDetailsView
 from myapp.view.UserView import UserCreateView, AddressView, UserAddressView, FollowedShopsView, UserOrdersDetailsView, \
     DisplayShopDiscounts, FeedbackCategoryView, FeedbackCategoryDetailsView, FeedbackDetailsView, FeedbackView, \
     UserLoginAPIView, UserView, UserDetailsView, ChangePasswordView, UserWishListView, UserWishDetailsView, TaskViewSet
@@ -73,13 +73,16 @@ urlpatterns = [
     url(r'api/v1/vendors$', VendorView.as_view(), name='vendors'),
     url(r'api/v1/vendors/(?P<pk>[-\w]+)$', VendorDetailsView.as_view(), name='vendor-details'),
     url(r'api/v1/vendors/(?P<pk>[-\w]+)/shops$', VendorShopsView.as_view(), name='vendor-shops'),
-    url(r'api/v1/vendors/(?P<pk>[-\w]+)/shops/(?P<pk2>[-\w]+)$', VendorShopDetailsView.as_view(), name='vendor-shop-details'),
+    url(r'api/v1/vendors/(?P<pk>[-\w]+)/shops/(?P<pk2>[-\w]+)$', VendorShopDetailsView.as_view(),
+        name='vendor-shop-details'),
     url(r'api/v1/vendors/(?P<vendor_id>[-\w]+)/couriers$', VendorCouriers.as_view(), name='vendors_couriers'),
     url(r'api/v1/vendors/(?P<pk>[-\w]+)/orders$', VendorOrdersDetailsView.as_view(),
         name='vendor-orders'),
 
     url(r'api/v1/shops$', ShopView.as_view(), name='shops'),
     url(r'api/v1/shops/(?P<pk>[-\w]+)/products$', ShopProductView.as_view(), name='shop-products'),
+    url(r'api/v1/shops/(?P<pk>[-\w]+)/products/(?P<pk2>[-\w]+)$', ShopProductDetailsView.as_view(),
+        name='shop-product'),
     url(r'api/v1/shops/(?P<pk>[-\w]+)/orders$', ShopOrdersDetailsView.as_view(),
         name='shop-orders'),
     url(r'api/v1/shops/(?P<pk>[-\w]+)/ratings$', ShopReviewView.as_view(), name='shop-ratings'),

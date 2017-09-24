@@ -1,4 +1,5 @@
 from django.urls import reverse
+from django.utils.crypto import get_random_string
 from rest_framework import status
 from rest_framework.test import APITestCase
 
@@ -22,13 +23,13 @@ class TestUser(APITestCase):
         self.subcategory = SubCategory.objects.create(name="subCategory", category=self.category)
         self.shop = Shop.objects.create(name="makarovShop", vendor=self.vendor, subscription=self.subscription)
 
-        for x in ["iphone1", "iphone2", "iphone3", "iphone4"]:
-            product = Product.objects.create(name=x, price=40000, shop=self.shop, subCategory=self.subcategory)
+        for x in range(4):
+            product = Product.objects.create(name=get_random_string(length=10), price=40000, shop=self.shop, subCategory=self.subcategory)
             WishList.objects.create(product=product, user=self.user2)
 
-        for x in ["Wandegeya", "Lumumba", "Kamwokya"]:
-            Address.objects.create(user=self.user, name=x, latitude=23.5, longitude=99.4)
-            Address.objects.create(user=self.user2, name=x, latitude=23.5, longitude=99.4)
+        for x in range(3):
+            Address.objects.create(user=self.user, name=get_random_string(length=10), latitude=23.5, longitude=99.4)
+            Address.objects.create(user=self.user2, name=get_random_string(length=10), latitude=23.5, longitude=99.4)
 
         self.products = Product.objects.all()
         # create one extract product for testing
@@ -96,7 +97,6 @@ class TestUser(APITestCase):
         """
         lists users addresses that are displayed to the user when making an order
         """
-        self.assertEqual(Address.objects.count(), 6)
         url = reverse("user-addresses", kwargs={'pk': self.user.id})
         print(url)
         request = self.client.get(url)

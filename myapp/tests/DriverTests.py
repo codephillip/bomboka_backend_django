@@ -1,4 +1,5 @@
 from django.urls import reverse
+from django.utils.crypto import get_random_string
 from rest_framework import status
 from rest_framework.test import APITestCase
 
@@ -14,8 +15,8 @@ assert getOne() == 1
 
 class TestDriver(APITestCase):
     def setUp(self):
-        for x in ["makarov", "krukov", "vladimir", "yuri"]:
-            user = User.objects.create(username=x)
+        for x in range(4):
+            user = User.objects.create(username=get_random_string(length=10))
             # keep reference of last driver to use in the delete, update test
             self.driver = Driver.objects.create(user=user)
         self.request_data = {
