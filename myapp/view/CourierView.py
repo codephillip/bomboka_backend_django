@@ -34,7 +34,8 @@ class VendorCouriers(ListCreateAPIView):
     Vendor registers Vendor Courier (Courier partner)
     Courier partner handles User orders made to the Vendor's Shop
     """
-    queryset = VendorCourier.objects.all()
+    def get_queryset(self):
+        return VendorCourier.objects.filter(courier=self.kwargs['pk'])
 
     def get_serializer_class(self):
         if self.request.method == 'POST':
@@ -62,7 +63,6 @@ class CourierCoveragesListView(ListCreateAPIView):
     Returns all courier coverages
     Allows courier to create coverage
     """
-    # Get all courier coverages / Create courier coverage
     def get_queryset(self):
         print("courier id " + self.kwargs['pk'])
         return Coverage.objects.filter(courier=self.kwargs['pk'])
@@ -169,9 +169,7 @@ class CourierVehicleListView(ListCreateAPIView):
     Returns all courier vehicles
     Allows a courier to select their means of transport
     """
-    # Get all courier vehicle / Create courier vehicle
     def get_queryset(self):
-        print("courier id " + self.kwargs['pk'])
         return CourierVehicle.objects.filter(courier=self.kwargs['pk'])
 
     def get_serializer_class(self):

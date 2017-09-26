@@ -25,7 +25,6 @@ class CityListView(ListCreateAPIView):
     Returns all citys.
     Allows the admin to add city
     """
-    # Get all citys / Create city
     queryset = City.objects.all()
 
     def get_serializer_class(self):
