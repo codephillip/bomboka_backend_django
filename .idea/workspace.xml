@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f7b8070-45c0-49ab-ba4d-341c04384b99" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/myapp/tests/CourierTests.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bomboka_backend/urls.py" afterPath="$PROJECT_DIR$/bomboka_backend/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myapp/tests/DriverTests.py" afterPath="$PROJECT_DIR$/myapp/tests/DriverTests.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myapp/tests/ShopReportTests.py" afterPath="$PROJECT_DIR$/myapp/tests/ShopReportTests.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myapp/tests/ShopTests.py" afterPath="$PROJECT_DIR$/myapp/tests/ShopTests.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myapp/tests/UserTests.py" afterPath="$PROJECT_DIR$/myapp/tests/UserTests.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myapp/tests/VendorTests.py" afterPath="$PROJECT_DIR$/myapp/tests/VendorTests.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myapp/view/CourierView.py" afterPath="$PROJECT_DIR$/myapp/view/CourierView.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myapp/view/ShopView.py" afterPath="$PROJECT_DIR$/myapp/view/ShopView.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/myapp/view/VendorView.py" afterPath="$PROJECT_DIR$/myapp/view/VendorView.py" />
     </list>
     <ignored path="bomboka_backend.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,6 +30,7 @@
     <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests_DriverTests_TestDriver_test_create_driver.coverage" NAME="Test: myapp.tests.DriverTests.TestDriver.test_create_driver Coverage Results" MODIFIED="1503993530604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests_TestLocation_test_create_country.coverage" NAME="Test: myapp.tests.TestLocation.test_create_country Coverage Results" MODIFIED="1503979036388" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests_ShopTests_TestShop_test_edit_shop.coverage" NAME="Test: myapp.tests.ShopTests.TestShop.test_edit_shop Coverage Results" MODIFIED="1506195359798" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests_VendorTests_TestVendor_test_add_vendor_courier.coverage" NAME="Test: myapp.tests.VendorTests.TestVendor.test_add_vendor_courier Coverage Results" MODIFIED="1506434886148" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests_TestApi_test_location.coverage" NAME="Test: myapp.tests.TestApi.test_location Coverage Results" MODIFIED="1503978261203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests_UserTests_TestUser.coverage" NAME="Test: myapp.tests.UserTests.TestUser Coverage Results" MODIFIED="1505926864161" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests_ShopTests_TestShop_test_get_shop_products.coverage" NAME="Test: myapp.tests.ShopTests.TestShop.test_get_shop_products Coverage Results" MODIFIED="1505930568462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
@@ -47,7 +46,8 @@
     <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests_TestLocation.coverage" NAME="Test: myapp.tests.TestLocation Coverage Results" MODIFIED="1503988822677" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests_TestDemo_test_demo.coverage" NAME="Test: myapp.tests.TestDemo.test_demo Coverage Results" MODIFIED="1503609022961" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests_TestCountry.coverage" NAME="Test: myapp.tests.TestCountry Coverage Results" MODIFIED="1503989116681" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests.coverage" NAME="Test: myapp.tests Coverage Results" MODIFIED="1506227627100" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests.coverage" NAME="Test: myapp.tests Coverage Results" MODIFIED="1506434996630" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests_CourierTests_TestCourier_test_get_couriers.coverage" NAME="Test: myapp.tests.CourierTests.TestCourier.test_get_couriers Coverage Results" MODIFIED="1506431775216" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests_VendorTests_TestVendor_test_create_vendor.coverage" NAME="Test: myapp.tests.VendorTests.TestVendor.test_create_vendor Coverage Results" MODIFIED="1506196810791" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests_ShopTests_TestShop_test_get_shop.coverage" NAME="Test: myapp.tests.ShopTests.TestShop.test_get_shop Coverage Results" MODIFIED="1506192615771" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests_UserTests_TestUser_test_create_user_address.coverage" NAME="Test: myapp.tests.UserTests.TestUser.test_create_user_address Coverage Results" MODIFIED="1505921530290" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
@@ -59,7 +59,9 @@
     <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests_TestDemo_test_shop.coverage" NAME="Test: myapp.tests.TestDemo.test_shop Coverage Results" MODIFIED="1503610825819" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests_VendorTests_TestVendor_test_edit_shop.coverage" NAME="Test: myapp.tests.VendorTests.TestVendor.test_edit_shop Coverage Results" MODIFIED="1506199076687" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests_LocationTests_TestCity.coverage" NAME="Test: myapp.tests.LocationTests.TestCity Coverage Results" MODIFIED="1504013214247" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests_VendorTests_TestVendor_test_get_vendor_couriers.coverage" NAME="Test: myapp.tests.VendorTests.TestVendor.test_get_vendor_couriers Coverage Results" MODIFIED="1506434136776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests_UserTests_TestUser_test_list_all_addresses.coverage" NAME="Test: myapp.tests.UserTests.TestUser.test_list_all_addresses Coverage Results" MODIFIED="1505923615661" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests_CourierTests_TestCourier_test_create_courier.coverage" NAME="Test: myapp.tests.CourierTests.TestCourier.test_create_courier Coverage Results" MODIFIED="1506434088762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/bomboka_backend$Test__myapp_tests_tests.coverage" NAME="Test: myapp.tests.tests Coverage Results" MODIFIED="1503990248347" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -76,8 +78,8 @@
       <file leaf-file-name="VendorTests.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myapp/tests/VendorTests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-820">
-              <caret line="37" column="15" lean-forward="false" selection-start-line="37" selection-start-column="15" selection-end-line="37" selection-end-column="15" />
+            <state relative-caret-position="228">
+              <caret line="110" column="11" lean-forward="false" selection-start-line="110" selection-start-column="11" selection-end-line="110" selection-end-column="11" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -85,56 +87,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ShopTests.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myapp/tests/ShopTests.py">
+      <file leaf-file-name="CourierTests.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/myapp/tests/CourierTests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-20">
-              <caret line="107" column="35" lean-forward="false" selection-start-line="107" selection-start-column="35" selection-end-line="107" selection-end-column="35" />
+            <state relative-caret-position="182">
+              <caret line="34" column="30" lean-forward="false" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LocationTests.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/myapp/tests/LocationTests.py">
+      <file leaf-file-name="CourierView.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/myapp/view/CourierView.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="17" column="11" lean-forward="false" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
+            <state relative-caret-position="380">
+              <caret line="47" column="46" lean-forward="false" selection-start-line="47" selection-start-column="46" selection-end-line="47" selection-end-column="46" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DriverTests.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myapp/tests/DriverTests.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="51" column="62" lean-forward="false" selection-start-line="51" selection-start-column="62" selection-end-line="51" selection-end-column="62" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestUtils.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myapp/tests/TestUtils.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VendorView.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myapp/view/VendorView.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
-              <caret line="68" column="17" lean-forward="false" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#89#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -150,8 +118,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Foll</find>
-      <find>login</find>
       <find>created</find>
       <find>date</find>
       <find>BaseFilterBackend</find>
@@ -180,12 +146,15 @@
       <find>Vend</find>
       <find>vendor-sho</find>
       <find>name</find>
+      <find>Vendor</find>
+      <find>product</find>
     </findStrings>
     <replaceStrings>
       <replace>city</replace>
       <replace>'</replace>
       <replace>Returns</replace>
       <replace>vendor</replace>
+      <replace>Courier</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -216,23 +185,24 @@
         <option value="$PROJECT_DIR$/myapp/view/OrderView.py" />
         <option value="$PROJECT_DIR$/myapp/view/LocationView.py" />
         <option value="$PROJECT_DIR$/myapp/filters.py" />
-        <option value="$PROJECT_DIR$/myapp/view/CourierView.py" />
         <option value="$PROJECT_DIR$/myapp/view/UserView.py" />
         <option value="$PROJECT_DIR$/myapp/models.py" />
         <option value="$PROJECT_DIR$/myapp/tests/LocationTests.py" />
         <option value="$PROJECT_DIR$/myapp/tests/TestUtils.py" />
         <option value="$PROJECT_DIR$/myapp/tests/__init__.py" />
         <option value="$PROJECT_DIR$/myapp/serializers.py" />
-        <option value="$PROJECT_DIR$/myapp/tests/VendorTests.py" />
         <option value="$PROJECT_DIR$/bomboka_backend/api_curl_tests.py" />
         <option value="$PROJECT_DIR$/myapp/view/DriverView.py" />
         <option value="$PROJECT_DIR$/myapp/view/VendorView.py" />
-        <option value="$PROJECT_DIR$/bomboka_backend/urls.py" />
-        <option value="$PROJECT_DIR$/myapp/view/ShopView.py" />
         <option value="$PROJECT_DIR$/myapp/tests/ShopTests.py" />
         <option value="$PROJECT_DIR$/myapp/tests/ShopReportTests.py" />
         <option value="$PROJECT_DIR$/myapp/tests/DriverTests.py" />
         <option value="$PROJECT_DIR$/myapp/tests/UserTests.py" />
+        <option value="$PROJECT_DIR$/myapp/view/ShopView.py" />
+        <option value="$PROJECT_DIR$/bomboka_backend/urls.py" />
+        <option value="$PROJECT_DIR$/myapp/tests/VendorTests.py" />
+        <option value="$PROJECT_DIR$/myapp/view/CourierView.py" />
+        <option value="$PROJECT_DIR$/myapp/tests/CourierTests.py" />
       </list>
     </option>
   </component>
@@ -244,9 +214,9 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-1" />
-    <option name="y" value="-11" />
+    <option name="y" value="768" />
     <option name="width" value="1368" />
-    <option name="height" value="780" />
+    <option name="height" value="769" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -266,7 +236,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -317,6 +286,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -327,14 +297,14 @@
     <property name="settings.editor.selected.configurable" value="editor.breadcrumbs" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/myapp/tests" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/bomboka_backend" />
       <recent name="$PROJECT_DIR$/myapp/tests" />
+      <recent name="$PROJECT_DIR$/bomboka_backend" />
       <recent name="$PROJECT_DIR$/myapp/view" />
       <recent name="$PROJECT_DIR$/myapp" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/myapp/tests" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -369,7 +339,7 @@
       <option name="USE_OPTIONS" value="false" />
       <option name="OPTIONS" value="" />
     </configuration>
-    <configuration name="Test: myapp.tests.ShopTests.TestShop" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
+    <configuration name="Test: myapp.tests.CourierTests.TestCourier.test_create_courier" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -382,13 +352,13 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="bomboka_backend" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="TARGET" value="myapp.tests.ShopTests.TestShop" />
+      <option name="TARGET" value="myapp.tests.CourierTests.TestCourier.test_create_courier" />
       <option name="SETTINGS_FILE" value="" />
       <option name="CUSTOM_SETTINGS" value="false" />
       <option name="USE_OPTIONS" value="false" />
       <option name="OPTIONS" value="" />
     </configuration>
-    <configuration name="Test: myapp.tests.ShopTests.TestShop.test_edit_shop_product" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
+    <configuration name="Test: myapp.tests.CourierTests.TestCourier.test_get_couriers" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -401,13 +371,13 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="bomboka_backend" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="TARGET" value="myapp.tests.ShopTests.TestShop.test_edit_shop_product" />
+      <option name="TARGET" value="myapp.tests.CourierTests.TestCourier.test_get_couriers" />
       <option name="SETTINGS_FILE" value="" />
       <option name="CUSTOM_SETTINGS" value="false" />
       <option name="USE_OPTIONS" value="false" />
       <option name="OPTIONS" value="" />
     </configuration>
-    <configuration name="Test: myapp.tests.ShopTests.TestShop.test_get_shop_product" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
+    <configuration name="Test: myapp.tests.VendorTests.TestVendor.test_add_vendor_courier" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -420,13 +390,13 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="bomboka_backend" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="TARGET" value="myapp.tests.ShopTests.TestShop.test_get_shop_product" />
+      <option name="TARGET" value="myapp.tests.VendorTests.TestVendor.test_add_vendor_courier" />
       <option name="SETTINGS_FILE" value="" />
       <option name="CUSTOM_SETTINGS" value="false" />
       <option name="USE_OPTIONS" value="false" />
       <option name="OPTIONS" value="" />
     </configuration>
-    <configuration name="Test: myapp.tests.VendorTests.TestVendor" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
+    <configuration name="Test: myapp.tests.VendorTests.TestVendor.test_get_vendor_couriers" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -439,7 +409,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="bomboka_backend" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="TARGET" value="myapp.tests.VendorTests.TestVendor" />
+      <option name="TARGET" value="myapp.tests.VendorTests.TestVendor.test_get_vendor_couriers" />
       <option name="SETTINGS_FILE" value="" />
       <option name="CUSTOM_SETTINGS" value="false" />
       <option name="USE_OPTIONS" value="false" />
@@ -701,18 +671,18 @@
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Django server.bomboka_backend" />
       <item index="1" class="java.lang.String" itemvalue="Django tests.Test: myapp.tests" />
-      <item index="2" class="java.lang.String" itemvalue="Django tests.Test: myapp.tests.VendorTests.TestVendor" />
-      <item index="3" class="java.lang.String" itemvalue="Django tests.Test: myapp.tests.ShopTests.TestShop.test_edit_shop_product" />
-      <item index="4" class="java.lang.String" itemvalue="Django tests.Test: myapp.tests.ShopTests.TestShop.test_get_shop_product" />
-      <item index="5" class="java.lang.String" itemvalue="Django tests.Test: myapp.tests.ShopTests.TestShop" />
+      <item index="2" class="java.lang.String" itemvalue="Django tests.Test: myapp.tests.CourierTests.TestCourier.test_get_couriers" />
+      <item index="3" class="java.lang.String" itemvalue="Django tests.Test: myapp.tests.VendorTests.TestVendor.test_get_vendor_couriers" />
+      <item index="4" class="java.lang.String" itemvalue="Django tests.Test: myapp.tests.CourierTests.TestCourier.test_create_courier" />
+      <item index="5" class="java.lang.String" itemvalue="Django tests.Test: myapp.tests.VendorTests.TestVendor.test_add_vendor_courier" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Django tests.Test: myapp.tests" />
-        <item index="1" class="java.lang.String" itemvalue="Django tests.Test: myapp.tests.ShopTests.TestShop" />
-        <item index="2" class="java.lang.String" itemvalue="Django tests.Test: myapp.tests.ShopTests.TestShop.test_edit_shop_product" />
-        <item index="3" class="java.lang.String" itemvalue="Django tests.Test: myapp.tests.ShopTests.TestShop.test_get_shop_product" />
-        <item index="4" class="java.lang.String" itemvalue="Django tests.Test: myapp.tests.VendorTests.TestVendor" />
+        <item index="1" class="java.lang.String" itemvalue="Django tests.Test: myapp.tests.VendorTests.TestVendor.test_add_vendor_courier" />
+        <item index="2" class="java.lang.String" itemvalue="Django tests.Test: myapp.tests.VendorTests.TestVendor.test_get_vendor_couriers" />
+        <item index="3" class="java.lang.String" itemvalue="Django tests.Test: myapp.tests.CourierTests.TestCourier.test_create_courier" />
+        <item index="4" class="java.lang.String" itemvalue="Django tests.Test: myapp.tests.CourierTests.TestCourier.test_get_couriers" />
       </list>
     </recent_temporary>
   </component>
@@ -733,47 +703,47 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Test__myapp_tests - 2017.09.24 at 07h 20m 15s.xml">
+    <history-entry file="Test__myapp_tests - 2017.09.26 at 17h 10m 06s.xml">
       <configuration name="Test: myapp.tests" configurationId="DjangoTestsConfigurationType" />
     </history-entry>
-    <history-entry file="Test__myapp_tests - 2017.09.24 at 07h 29m 27s.xml">
-      <configuration name="Test: myapp.tests" configurationId="DjangoTestsConfigurationType" />
+    <history-entry file="Test__myapp_tests_CourierTests_TestCourier_test_create_courier - 2017.09.26 at 16h 53m 14s.xml">
+      <configuration name="Test: myapp.tests.CourierTests.TestCourier.test_create_courier" configurationId="DjangoTestsConfigurationType" />
     </history-entry>
-    <history-entry file="Test__myapp_tests - 2017.09.24 at 07h 31m 42s.xml">
-      <configuration name="Test: myapp.tests" configurationId="DjangoTestsConfigurationType" />
+    <history-entry file="Test__myapp_tests_CourierTests_TestCourier_test_create_courier - 2017.09.26 at 16h 53m 57s.xml">
+      <configuration name="Test: myapp.tests.CourierTests.TestCourier.test_create_courier" configurationId="DjangoTestsConfigurationType" />
     </history-entry>
-    <history-entry file="Test__myapp_tests - 2017.09.24 at 07h 34m 05s.xml">
-      <configuration name="Test: myapp.tests" configurationId="DjangoTestsConfigurationType" />
+    <history-entry file="Test__myapp_tests_CourierTests_TestCourier_test_create_courier - 2017.09.26 at 16h 54m 45s.xml">
+      <configuration name="Test: myapp.tests.CourierTests.TestCourier.test_create_courier" configurationId="DjangoTestsConfigurationType" />
     </history-entry>
-    <history-entry file="Test__myapp_tests_ShopTests_TestShop - 2017.09.24 at 07h 18m 23s.xml">
-      <configuration name="Test: myapp.tests.ShopTests.TestShop" configurationId="DjangoTestsConfigurationType" />
+    <history-entry file="Test__myapp_tests_CourierTests_TestCourier_test_create_courier - 2017.09.26 at 16h 54m 57s.xml">
+      <configuration name="Test: myapp.tests.CourierTests.TestCourier.test_create_courier" configurationId="DjangoTestsConfigurationType" />
     </history-entry>
-    <history-entry file="Test__myapp_tests_ShopTests_TestShop - 2017.09.24 at 07h 21m 54s.xml">
-      <configuration name="Test: myapp.tests.ShopTests.TestShop" configurationId="DjangoTestsConfigurationType" />
+    <history-entry file="Test__myapp_tests_VendorTests_TestVendor_test_add_vendor_courier - 2017.09.26 at 17h 06m 50s.xml">
+      <configuration name="Test: myapp.tests.VendorTests.TestVendor.test_add_vendor_courier" configurationId="DjangoTestsConfigurationType" />
     </history-entry>
-    <history-entry file="Test__myapp_tests_ShopTests_TestShop - 2017.09.24 at 07h 25m 08s.xml">
-      <configuration name="Test: myapp.tests.ShopTests.TestShop" configurationId="DjangoTestsConfigurationType" />
+    <history-entry file="Test__myapp_tests_VendorTests_TestVendor_test_add_vendor_courier - 2017.09.26 at 17h 07m 35s.xml">
+      <configuration name="Test: myapp.tests.VendorTests.TestVendor.test_add_vendor_courier" configurationId="DjangoTestsConfigurationType" />
     </history-entry>
-    <history-entry file="Test__myapp_tests_ShopTests_TestShop - 2017.09.24 at 07h 25m 37s.xml">
-      <configuration name="Test: myapp.tests.ShopTests.TestShop" configurationId="DjangoTestsConfigurationType" />
+    <history-entry file="Test__myapp_tests_VendorTests_TestVendor_test_add_vendor_courier - 2017.09.26 at 17h 07m 54s.xml">
+      <configuration name="Test: myapp.tests.VendorTests.TestVendor.test_add_vendor_courier" configurationId="DjangoTestsConfigurationType" />
     </history-entry>
-    <history-entry file="Test__myapp_tests_ShopTests_TestShop_test_edit_shop_product - 2017.09.24 at 07h 16m 03s.xml">
-      <configuration name="Test: myapp.tests.ShopTests.TestShop.test_edit_shop_product" configurationId="DjangoTestsConfigurationType" />
+    <history-entry file="Test__myapp_tests_VendorTests_TestVendor_test_add_vendor_courier - 2017.09.26 at 17h 08m 15s.xml">
+      <configuration name="Test: myapp.tests.VendorTests.TestVendor.test_add_vendor_courier" configurationId="DjangoTestsConfigurationType" />
     </history-entry>
-    <history-entry file="Test__myapp_tests_ShopTests_TestShop_test_edit_shop_product - 2017.09.24 at 07h 17m 38s.xml">
-      <configuration name="Test: myapp.tests.ShopTests.TestShop.test_edit_shop_product" configurationId="DjangoTestsConfigurationType" />
+    <history-entry file="Test__myapp_tests_VendorTests_TestVendor_test_get_vendor_couriers - 2017.09.26 at 16h 55m 45s.xml">
+      <configuration name="Test: myapp.tests.VendorTests.TestVendor.test_get_vendor_couriers" configurationId="DjangoTestsConfigurationType" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="-11" width="1368" height="780" extended-state="6" />
+    <frame x="-1" y="768" width="1368" height="769" extended-state="6" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15080526" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14934114" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36786786" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="0" y="24" width="1366" height="744" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3858859" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="0" y="24" width="1366" height="744" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2824074" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -809,13 +779,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/manage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="12" column="12" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/myapp/tests/tests.py" />
     <entry file="file://$PROJECT_DIR$/bomboka_backend/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -931,14 +894,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="163">
           <caret line="149" column="20" lean-forward="false" selection-start-line="149" selection-start-column="19" selection-end-line="149" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myapp/view/CourierView.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="60" column="44" lean-forward="false" selection-start-line="59" selection-start-column="4" selection-end-line="60" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -974,35 +929,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
           <caret line="23" column="38" lean-forward="false" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#29#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myapp/serializers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="206" column="6" lean-forward="false" selection-start-line="206" selection-start-column="6" selection-end-line="206" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myapp/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2309">
-          <caret line="119" column="44" lean-forward="true" selection-start-line="119" selection-start-column="44" selection-end-line="119" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bomboka_backend/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="81" column="31" lean-forward="true" selection-start-line="81" selection-start-column="31" selection-end-line="81" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1010,7 +936,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
           <caret line="4" column="27" lean-forward="false" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1022,120 +947,128 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myapp/view/ShopView.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="24" column="32" lean-forward="true" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myapp/tests/UserTests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="26" column="37" lean-forward="true" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myapp/tests/ShopReportTests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/photos/product/test.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/photos/product/test_0SYtax0.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/photos/product/test_7u08I7j.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/photos/product/test_9X6r3dZ.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/photos/product/test_OyeLDPp.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/photos/product/test_uiTciCZ.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/photos/product/test_VBQ4Qoj.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/photos/product/test_w2fqmD4.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myapp/view/VendorView.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="68" column="17" lean-forward="false" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#89#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myapp/tests/ShopTests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-20">
-          <caret line="107" column="35" lean-forward="false" selection-start-line="107" selection-start-column="35" selection-end-line="107" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myapp/tests/DriverTests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="51" column="62" lean-forward="false" selection-start-line="51" selection-start-column="62" selection-end-line="51" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myapp/tests/VendorTests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-820">
-          <caret line="37" column="15" lean-forward="false" selection-start-line="37" selection-start-column="15" selection-end-line="37" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/photos/product/test.png" />
+    <entry file="file://$PROJECT_DIR$/photos/product/test_0SYtax0.png" />
+    <entry file="file://$PROJECT_DIR$/photos/product/test_7u08I7j.png" />
+    <entry file="file://$PROJECT_DIR$/photos/product/test_9X6r3dZ.png" />
+    <entry file="file://$PROJECT_DIR$/photos/product/test_OyeLDPp.png" />
+    <entry file="file://$PROJECT_DIR$/photos/product/test_uiTciCZ.png" />
+    <entry file="file://$PROJECT_DIR$/photos/product/test_VBQ4Qoj.png" />
+    <entry file="file://$PROJECT_DIR$/photos/product/test_w2fqmD4.png" />
     <entry file="file://$PROJECT_DIR$/myapp/tests/TestUtils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
           <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/myapp/tests/LocationTests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="17" column="11" lean-forward="false" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
+        <state relative-caret-position="120">
+          <caret line="10" column="15" lean-forward="false" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myapp/tests/UserTests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="26" column="37" lean-forward="false" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myapp/view/VendorView.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="18" column="38" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="18" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myapp/tests/ShopReportTests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myapp/tests/ShopTests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="82" column="0" lean-forward="true" selection-start-line="73" selection-start-column="4" selection-end-line="82" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myapp/view/ShopView.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="74" column="39" lean-forward="false" selection-start-line="74" selection-start-column="39" selection-end-line="74" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myapp/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="245" column="6" lean-forward="false" selection-start-line="245" selection-start-column="6" selection-end-line="245" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bomboka_backend/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="77" column="52" lean-forward="false" selection-start-line="77" selection-start-column="52" selection-end-line="77" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#41#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myapp/tests/DriverTests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="26" column="9" lean-forward="true" selection-start-line="21" selection-start-column="8" selection-end-line="26" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myapp/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="166" column="6" lean-forward="false" selection-start-line="166" selection-start-column="6" selection-end-line="166" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myapp/tests/VendorTests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="110" column="11" lean-forward="false" selection-start-line="110" selection-start-column="11" selection-end-line="110" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myapp/view/CourierView.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="47" column="46" lean-forward="false" selection-start-line="47" selection-start-column="46" selection-end-line="47" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myapp/tests/CourierTests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="34" column="30" lean-forward="false" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
           <folding />
         </state>
       </provider>

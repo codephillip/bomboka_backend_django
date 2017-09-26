@@ -13,7 +13,7 @@ from myapp.view.CourierView import CourierView, VendorCouriers, AllCoveragesList
 from myapp.view.DriverView import DriversListView, DriverDetailsView
 from myapp.view.LocationView import CountryListView, CountryDetailsView, CityListView, CityDetailsView
 from myapp.view.OrderView import OrderDetailsView, OrdersListView, UserOrders
-from myapp.view.ShopView import ShopView, ProductView, ShopProductView, ProductEditView, \
+from myapp.view.ShopView import ShopView, ProductView, ShopProductView, \
     ShopReviewView, ShopReviewDetailsView, ProductReviewsView, ProductReviewDetailsView, ShopFollowersView, \
     ShopFollowerDetailsView, ShopOrdersDetailsView, AttributeView, AttributeDetailsView, DiscountView, \
     DiscountDetailsView, BrandView, BrandDetailsView, ProductBrandView, ProductBrandDetailsView, SubscriptionView, \
@@ -75,7 +75,7 @@ urlpatterns = [
     url(r'api/v1/vendors/(?P<pk>[-\w]+)/shops$', VendorShopsView.as_view(), name='vendor-shops'),
     url(r'api/v1/vendors/(?P<pk>[-\w]+)/shops/(?P<pk2>[-\w]+)$', VendorShopDetailsView.as_view(),
         name='vendor-shop-details'),
-    url(r'api/v1/vendors/(?P<vendor_id>[-\w]+)/couriers$', VendorCouriers.as_view(), name='vendors_couriers'),
+    url(r'api/v1/vendors/(?P<pk>[-\w]+)/couriers$', VendorCouriers.as_view(), name='vendor-couriers'),
     url(r'api/v1/vendors/(?P<pk>[-\w]+)/orders$', VendorOrdersDetailsView.as_view(),
         name='vendor-orders'),
 
@@ -99,7 +99,6 @@ urlpatterns = [
         name='product-review'),
     url(r'api/v1/products/(?P<pk>[-\w]+)/reviews$', ProductReviewsView.as_view(), name='product-reviews'),
     url(r'api/v1/products$', ProductView.as_view(), name='products'),
-    url(r'api/v1/product_edit/(?P<product_id>[-\w]+)$', ProductEditView.as_view(), name='edit_product'),
     url(r'api/v1/products/(?P<pk>[-\w]+)/brands$', ProductBrandView.as_view(), name='product-brand'),
     url(r'api/v1/products/(?P<pk>[-\w]+)/brands/(?P<pk2>[-\w]+)$', ProductBrandDetailsView.as_view(),
         name='product-brand'),

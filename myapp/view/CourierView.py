@@ -14,42 +14,38 @@ from rest_framework.generics import ListCreateAPIView, RetrieveDestroyAPIView, \
     RetrieveUpdateDestroyAPIView, ListAPIView
 
 
-class CourierView(APIView):
-    # get all couriers
-    def get(self, request, format=None):
-        print("courierview")
-        couriers = Courier.objects.all()
-        serializer = CourierGetSerializer(couriers, many=True)
-        return Response({"Couriers": serializer.data})
+class CourierView(ListCreateAPIView):
+    """
+    Returns all Couriers in the System
+    Allows User to upgrade to Courier
+    """
+    queryset = Courier.objects.all()
 
-    # create courier
-    def post(self, request, format=None):
-        request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").now()
-        request.data['modifiedAt'] = datetime.strptime('24052010', "%d%m%Y").now()
-        serializer = CourierPostSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"Couriers": serializer.data}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def get_serializer_class(self):
+        if self.request.POST:
+            return CourierPostSerializer
+        else:
+            return CourierGetSerializer
 
 
-class VendorCouriers(APIView):
-    # get vendor couriers
-    def get(self, request, vendor_id):
-        print("vendor_courier")
-        vendor_couriers = VendorCourier.objects.filter(vendor_id=vendor_id)
-        serializer = VendorCouriersGetSerializer(vendor_couriers, many=True)
-        return Response({"VendorCouriers": serializer.data})
+class VendorCouriers(ListCreateAPIView):
+    """
+    Returns all Vendor Couriers (Courier partners)
+    Vendor registers Vendor Courier (Courier partner)
+    Courier partner handles User orders made to the Vendor's Shop
+    """
+    queryset = VendorCourier.objects.all()
 
-    # add courier to vendor
-    def post(self, request, vendor_id):
-        request.data['createdAt'] = datetime.strptime('24052010', "%d%m%Y").now()
-        request.data['vendor'] = vendor_id
-        serializer = VendorCouriersPostSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"VendorCouriers": serializer.data}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            self.request.POST._mutable = True
+            try:
+                self.request.data['vendor'] = self.kwargs['pk']
+            except Exception as e:
+                print(e)
+            return VendorCouriersPostSerializer
+        else:
+            return VendorCouriersGetSerializer
 
 
 class AllCoveragesListView(ListAPIView):

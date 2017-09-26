@@ -20,6 +20,7 @@ class TestVendor(APITestCase):
         self.user = User.objects.create(is_staff=True, is_superuser=True)
         self.user2 = User.objects.create(username="krukov")
         self.vendor = Vendor.objects.create(user=self.user)
+        self.courier = Courier.objects.create(user=self.user2)
         self.subscription = Subscription.objects.create(name="gold", price=1500000)
         self.category = Category.objects.create(name="category")
         self.subcategory = SubCategory.objects.create(name="subCategory", category=self.category)
@@ -95,3 +96,26 @@ class TestVendor(APITestCase):
         print(url)
         request = self.client.put(url, request_data)
         self.assertEqual(request.status_code, status.HTTP_200_OK)
+
+    def test_get_vendor_couriers(self):
+        """
+        View Vendor Couriers (Courier partners)
+        """
+        url = reverse("vendor-couriers", kwargs={'pk': self.vendor.id})
+        print(url)
+        request = self.client.get(url)
+        self.assertEqual(request.status_code, status.HTTP_200_OK)
+        self.assertEqual(request.data['count'], VendorCourier.objects.filter(vendor=self.vendor).count())
+
+    def test_add_vendor_courier(self):
+        """
+        Vendor creates Courier partner
+        """
+        request_data = {
+            "courier": self.courier.id,
+        }
+        url = reverse("vendor-couriers", kwargs={'pk': self.vendor.id})
+        print(url)
+        request = self.client.post(url, request_data)
+        self.assertEqual(request.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(VendorCourier.objects.filter(vendor=self.vendor).count(), 1)
