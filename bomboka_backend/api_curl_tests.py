@@ -64,13 +64,29 @@ you may need to use quotes around urls
 'http://127.0.0.1:8000/api/v1/users/login'
 ####################
 
+####################
+PASSWORD RESET USING EMAIL LINK
+User is redirected to this page when they click the reset password in their email
+the <uid> and <token> is picked from
+http://127.0.0.1:8000/password/insert_new_password/{uid}/{token}
+and sent to
+http://127.0.0.1:8000/password/reset/confirm
+with post data
+data = {
+  "new_password": "string",
+  "token": "string",
+  "uid": "string"
+}
+
+###################
+
 # END
 
 
 
 Random tokens for debugging only. Most will be expired.
 however, tokens can be refresh if less than 7 days old
-# Note refresh the token to prevent user inserting credentialS(auto sign_in)
+# Note refresh the token to prevent user inserting credentials(auto sign_in)
 eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiNDhlOGZlNWQtM2NlYi00N2U3LThjYjItOGZjOWYzNjE4OGZmIiwiZXhwIjoxNTAzMzg0NDMwLCJlbWFpbCI6ImNvZGVwaGlsbGlwQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiY29kZXBoaWxsaXAifQ.3gub3cEmftftX7G3F6206r-pHxUu1FJEpF7lI9ERekg
 
 eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJvcmlnX2lhdCI6MTUwMzM4NTM3MCwiZW1haWwiOiJjb2RlcGhpbGxpcEBnbWFpbC5jb20iLCJleHAiOjE1MDMzODg5NzAsInVzZXJuYW1lIjoiY29kZXBoaWxsaXAiLCJ1c2VyX2lkIjoiNDhlOGZlNWQtM2NlYi00N2U3LThjYjItOGZjOWYzNjE4OGZmIn0.g48vmXNKNrZkif0mvA_Vchmp-q1HS9YmYg0QMlHFVcM

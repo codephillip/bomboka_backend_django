@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'myapp',
     'rest_framework',
     'rest_framework_swagger',
+    'rest_framework.authtoken',
+    'djoser',
     'django_filters'
 ]
 
@@ -129,10 +131,6 @@ REST_FRAMEWORK = {
         'PAGE_SIZE': 100,
 }
 
-# REST_FRAMEWORK += {
-#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-# }
-
 JWT_AUTH = {
     'JWT_SECRET_KEY': SECRET_KEY,
     'JWT_VERIFY': True,
@@ -144,12 +142,17 @@ JWT_AUTH = {
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
 }
 
+DJOSER = {
+    'PASSWORD_RESET_CONFIRM_URL': '#/password/insert_new_password/{uid}/{token}',
+    'ACTIVATION_URL': '#/activate/{uid}/{token}',
+}
+
 # todo update credentials, use bomboka smtp server
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 # todo replace with info@bomboka.com
 EMAIL_HOST_USER = 'codephillip@gmail.com'
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD = 'createNEWpassw07d'
 EMAIL_PORT = 587
 
 # Internationalization

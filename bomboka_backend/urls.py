@@ -34,20 +34,16 @@ schema_view = get_swagger_view(title='Bomboka API')
 urlpatterns = [
     url(r'^$', schema_view),
     url(r'^admin/', admin.site.urls),
+
     # NOTE: this must be called first before accessing any endpoint
     # FOR DEBUGGING ONLY: activate 'AllowAny' in settings.py under DEFAULT_PERMISSION_CLASSES
-    # todo replace with djoser
-    url(r'^api-token-auth', obtain_jwt_token),
-    url(r'^api-token-refresh', refresh_jwt_token),
-    url(r'^api-token-verify', verify_jwt_token),
+    # todo fix all endpoints on djoser
+    url(r'^auth/', include('djoser.urls.base')),
+    url(r'^auth/', include('djoser.urls.authtoken')),
 
-    # password reset using email
-    url('^', include('django.contrib.auth.urls')),
-    url(r'accounts/login/$', views.successful_reset, name='register-user'),
-
-    url(r'api/v1/users/register$', UserCreateView.as_view(), name='register-user'),
-    url(r'api/v1/users/login$', UserLoginAPIView.as_view(), name='user-login'),
-    url(r'api/v1/users/(?P<pk>[-\w]+)/reset_password$', ChangePasswordView.as_view(), name='change-user-password'),
+    # link received by user for email password reset
+    url(r'password/insert_new_password/(?P<uid>[-\w]+)/(?P<token>[-\w]+)$', views.insert_new_password, name='insert-new-password'),
+    url(r'hello$', views.hello, name='hello'),
     url(r'api/v1/users/(?P<pk>[-\w]+)/addresses$', UserAddressView.as_view(), name='user-addresses'),
     url(r'api/v1/users/(?P<pk>[-\w]+)/orders', UserOrders.as_view(), name='user_orders'),
     url(r'api/v1/users/(?P<pk>[-\w]+)/followedShops', FollowedShopsView.as_view(), name='user-followed-shops'),
