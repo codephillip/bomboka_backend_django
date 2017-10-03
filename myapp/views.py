@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from http import client
+
+from django.shortcuts import render, redirect
 
 from myapp.forms import PasswordResetForm
 
@@ -28,4 +30,12 @@ def insert_new_password(request, uid, token):
 
 
 def hello(request):
+    return render(request, 'index.html')
+
+
+def password_reset_redirect(request):
+    print("reset_redirect")
+    confirm_request = reversed('password_reset_confirm')
+    # print(confirm_request.)
+    # if request.status_code
     return render(request, 'index.html')

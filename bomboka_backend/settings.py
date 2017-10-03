@@ -30,6 +30,16 @@ DEBUG = True
 # todo restrict hosts on launch
 ALLOWED_HOSTS = ['*']
 
+# todo access on launch
+CORS_ORIGIN_ALLOW_ALL = True
+
+# todo activate on launch
+# CORS_ORIGIN_WHITELIST = (
+#     '127.0.0.1:8080',
+#     'localhost:8080',
+#     'hostname.example.com'
+# )
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,7 +54,8 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'rest_framework.authtoken',
     'djoser',
-    'django_filters'
+    'django_filters',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -55,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'bomboka_backend.urls'
@@ -120,9 +132,10 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        # 'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticated',
         # debugging only. to allow access to the api without tokens
         # 'rest_framework.permissions.IsAdminUser',
     ),

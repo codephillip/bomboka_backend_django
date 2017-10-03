@@ -44,6 +44,7 @@ urlpatterns = [
     # link received by user for email password reset
     url(r'password/insert_new_password/(?P<uid>[-\w]+)/(?P<token>[-\w]+)$', views.insert_new_password, name='insert-new-password'),
     url(r'hello$', views.hello, name='hello'),
+    url(r'password_reset_redirect$', views.password_reset_redirect, name='password_reset_redirect'),
     url(r'api/v1/users/(?P<pk>[-\w]+)/addresses$', UserAddressView.as_view(), name='user-addresses'),
     url(r'api/v1/users/(?P<pk>[-\w]+)/orders', UserOrders.as_view(), name='user_orders'),
     url(r'api/v1/users/(?P<pk>[-\w]+)/followedShops', FollowedShopsView.as_view(), name='user-followed-shops'),
