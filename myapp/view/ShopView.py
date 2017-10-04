@@ -32,7 +32,7 @@ class ProductView(ListAPIView):
     """
     queryset = Product.objects.all()
     serializer_class = ProductGetSerializer
-    permission_classes = [IsAdminUser]
+    # permission_classes = [IsAdminUser]
 
 
 class ShopProductView(ListCreateAPIView):

@@ -1,8 +1,8 @@
 from django.conf.urls import url, include
+from django.contrib.auth import views as auth_views
 from django.contrib import admin
 from django.conf.urls.static import static
 from rest_framework import routers
-from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
 
 from bomboka_backend import settings
 from myapp import views
@@ -41,10 +41,7 @@ urlpatterns = [
     url(r'^auth/', include('djoser.urls.base')),
     url(r'^auth/', include('djoser.urls.authtoken')),
 
-    # link received by user for email password reset
-    url(r'password/insert_new_password/(?P<uid>[-\w]+)/(?P<token>[-\w]+)$', views.insert_new_password, name='insert-new-password'),
     url(r'hello$', views.hello, name='hello'),
-    url(r'password_reset_redirect$', views.password_reset_redirect, name='password_reset_redirect'),
     url(r'api/v1/users/(?P<pk>[-\w]+)/addresses$', UserAddressView.as_view(), name='user-addresses'),
     url(r'api/v1/users/(?P<pk>[-\w]+)/orders', UserOrders.as_view(), name='user_orders'),
     url(r'api/v1/users/(?P<pk>[-\w]+)/followedShops', FollowedShopsView.as_view(), name='user-followed-shops'),
@@ -141,12 +138,18 @@ urlpatterns = [
 
     url(r'api/v1/shops_report$', ShopReportListView.as_view(), name='shops-report'),
     url(r'api/v1/followers_report$', FollowersReportListView.as_view(), name='followers-report'),
+    # password reset links using email
+    url(r'^password_reset/$', auth_views.password_reset, name='password_reset'),
+    url(r'^password_reset/done/$', auth_views.password_reset_done, name='password_reset_done'),
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        auth_views.password_reset_confirm, name='password_reset_confirm'),
+    url(r'^reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
 
 ]
 
 urlpatterns += static(settings.MEDIA_ROOT, document_root=settings.MEDIA_ROOT)
 
 # report urls use DefaultRouter since they use the ViewSet
-router = routers.DefaultRouter()
-router.register(r'api/v1/tasks', TaskViewSet, base_name='tasks')
-urlpatterns += router.urls
+# router = routers.DefaultRouter()
+# router.register(r'api/v1/tasks', TaskViewSet, base_name='tasks')
+# urlpatterns += router.urls

@@ -1,7 +1,11 @@
 """
+PLEASE UPDATE CURL TESTS
+
 ########## NOTE ###########
 first access the token before accessing any endpoint
 http://localhost:8000/api-token-auth
+or
+http://localhost:8000/auth/login/
 ###########################
 
 
@@ -78,6 +82,13 @@ data = {
   "uid": "string"
 }
 
+###################
+
+###################
+ACCESSING IMAGES
+Use this base url
+http://127.0.0.1:8000/photos/
+plus products/123.png, vendors/234.png, users/456.png
 ###################
 
 # END

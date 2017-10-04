@@ -118,6 +118,11 @@ class UserLoginSerializer(serializers.ModelSerializer):
                 raise ValidationError("Login failure. Invalid username, email or phone number.")
 
             data['token'] = create_token(user_object)
+            print(user_object.image)
+            data['image'] = user_object.image
+            data['username'] = user_object.username
+            data['first_name'] = user_object.first_name
+            data['last_name'] = user_object.last_name
             return data
         else:
             raise ValidationError("A username, email or phone number is required to login")

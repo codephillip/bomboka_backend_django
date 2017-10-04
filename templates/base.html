@@ -1,0 +1,26 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Password reset</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+
+<div class="myclass">
+    <h2 class="title_class">RESET PASSWORD</h2>
+
+    {% block content %}
+
+    {% endblock %}
+
+    {% block footer %}
+        <h4>
+            &copy; codephillip
+        </h4>
+    {% endblock %}
+</div>
+</body>
+</html>

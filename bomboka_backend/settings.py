@@ -156,7 +156,7 @@ JWT_AUTH = {
 }
 
 DJOSER = {
-    'PASSWORD_RESET_CONFIRM_URL': '#/password/insert_new_password/{uid}/{token}',
+    'PASSWORD_RESET_CONFIRM_URL': 'password/insert_new_password/{uid}/{token}',
     'ACTIVATION_URL': '#/activate/{uid}/{token}',
 }
 

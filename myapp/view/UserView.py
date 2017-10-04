@@ -74,7 +74,6 @@ class UserDetailsView(RetrieveUpdateDestroyAPIView):
     """
     queryset = User.objects.all()
     serializer_class = UserGetSerializer
-    permission_classes = (IsAdminUser,)
 
 
 class ChangePasswordView(UpdateAPIView):
