@@ -10,6 +10,7 @@ from myapp.models import *
 
 
 class UserSerializer(serializers.ModelSerializer):
+    # todo needs serious refactoring since UserGetSerializer is more active than UserSerializer
     email = EmailField(label='Email Address')
     email2 = EmailField(label='Confirm Email')
 
@@ -131,16 +132,19 @@ class UserLoginSerializer(serializers.ModelSerializer):
 class UserGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        # todo refine user fields for signup
         fields = (
-            'id', 'user_permissions', 'first_name', 'last_name', 'username', 'email', 'phone', 'password', 'is_blocked',
-            'createdAt',
-            'image',
-            'last_login',
-            'date_joined',
-            'dob')
-        read_only = 'id'
-        extra_kwargs = {"password": {"write_only": True}}
+            'first_name', 'last_name', 'username', 'email', 'phone',
+            'image', 'password', 'gender', 'dob')
+
+    def create(self, validated_data):
+        """
+        Sets user password.
+        NOTE: Without this, User will never sign_in and password will not be encrypted
+        """
+        user = User.objects.create_user(**validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
 
 
 class ChangePasswordSerializer(serializers.Serializer):

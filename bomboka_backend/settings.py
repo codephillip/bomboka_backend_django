@@ -158,6 +158,9 @@ JWT_AUTH = {
 DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': 'password/insert_new_password/{uid}/{token}',
     'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    'SERIALIZERS': {
+        'user_registration': 'myapp.serializers.UserGetSerializer',
+    },
 }
 
 # todo update credentials, use bomboka smtp server

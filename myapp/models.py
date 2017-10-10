@@ -22,7 +22,8 @@ class User(AbstractUser):
         ),
     ])
     email2 = models.EmailField()
-    gender = models.IntegerField(choices=GENDER_CHOICES, default=GENDER_NOT_SPECIFIED)
+    gender = models.IntegerField(choices=GENDER_CHOICES, default=GENDER_NOT_SPECIFIED,
+                                 help_text='0 - Male, 1 - Female, 2 - Not Specified')
     createdAt = models.DateTimeField(auto_now_add=True)
     is_blocked = models.BooleanField(default=False)
     image = models.ImageField(upload_to='profile/', max_length=254)
