@@ -195,6 +195,7 @@ class Order(models.Model):
     address = models.ForeignKey(Address)
     product = models.ForeignKey(Product)
     courier = models.ForeignKey(Courier)
+    # todo add quantity
     createdAt = models.DateTimeField(auto_now_add=True)
     modifiedAt = models.DateTimeField(auto_now_add=True)
     is_received = models.BooleanField(default=False)

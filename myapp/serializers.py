@@ -133,6 +133,14 @@ class UserGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
+            'id', 'first_name', 'last_name', 'username', 'email', 'phone',
+            'image', 'password', 'gender', 'dob')
+
+
+class UserPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
             'first_name', 'last_name', 'username', 'email', 'phone',
             'image', 'password', 'gender', 'dob')
 

@@ -18,7 +18,7 @@ from myapp.models import User, Address, Follow, Order, Discount, FeedbackCategor
 from myapp.serializers import UserSerializer, AddressSerializer, AddressPostSerializer, FollowGetSerializer, \
     OrderGetSerializer, DiscountGetSerializer, FeedbackCategorySerializer, FeedbackPostSerializer, \
     FeedbackGetSerializer, \
-    UserLoginSerializer, UserGetSerializer, ChangePasswordSerializer, WishListGetSerializer, WishListPostSerializer, \
+    UserLoginSerializer, UserGetSerializer, UserPostSerializer, ChangePasswordSerializer, WishListGetSerializer, WishListPostSerializer, \
     TaskSerializer
 
 

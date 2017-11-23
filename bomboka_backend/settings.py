@@ -135,8 +135,9 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticated',
         # debugging only. to allow access to the api without tokens
+        'rest_framework.permissions.AllowAny',
         # 'rest_framework.permissions.IsAdminUser',
     ),
     'DEFAULT_PAGINATION_CLASS':
@@ -159,7 +160,7 @@ DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': 'password/insert_new_password/{uid}/{token}',
     'ACTIVATION_URL': '#/activate/{uid}/{token}',
     'SERIALIZERS': {
-        'user_registration': 'myapp.serializers.UserGetSerializer',
+        'user_registration': 'myapp.serializers.UserPostSerializer',
     },
 }
 

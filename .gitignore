@@ -1,0 +1,6 @@
+photos/
+myapp/migrations/
+ngrok
+.idea/
+*.sqlite3
+.idea/workspace.xml
