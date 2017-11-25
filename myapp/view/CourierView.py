@@ -64,7 +64,6 @@ class CourierCoveragesListView(ListCreateAPIView):
     Allows courier to create coverage
     """
     def get_queryset(self):
-        print("courier id " + self.kwargs['pk'])
         return Coverage.objects.filter(courier=self.kwargs['pk'])
 
     def get_serializer_class(self):
