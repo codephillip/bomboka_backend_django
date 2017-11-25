@@ -192,7 +192,7 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = 'staticfiles'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'bomboka/static'),
+    os.path.join(BASE_DIR, 'bomboka_backend/static'),
 )
 
 MEDIA_ROOT = "photos/"
