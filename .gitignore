@@ -5,5 +5,4 @@ ngrok
 *.sqlite3
 .idea/workspace.xml
 db.sqlite3
-bomboka_backend/settings.py
 myapp/__pycache__/
