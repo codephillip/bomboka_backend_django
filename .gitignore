@@ -1,5 +1,4 @@
 photos/
-myapp/migrations/
 ngrok
 .idea/
 *.sqlite3
