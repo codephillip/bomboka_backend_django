@@ -169,7 +169,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 # todo replace with info@bomboka.com
 EMAIL_HOST_USER = 'codephillip@gmail.com'
-EMAIL_HOST_PASSWORD = 'createNEWpassw07d'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 
 # Internationalization
