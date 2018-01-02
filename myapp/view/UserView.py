@@ -72,6 +72,7 @@ class UserDetailsView(RetrieveUpdateDestroyAPIView):
     """
     Allows RUD user
     """
+    permission_classes = (IsAdminUser,)
     queryset = User.objects.all()
     serializer_class = UserGetSerializer
 
