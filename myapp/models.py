@@ -75,6 +75,18 @@ class Subscription(models.Model):
         return self.name
 
 
+class Courier(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    is_verified = models.BooleanField(default=False)
+    is_blocked = models.BooleanField(default=False)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    modifiedAt = models.DateTimeField(auto_now_add=True)
+    user = models.OneToOneField(User)
+
+    def __str__(self):
+        return self.user.username
+
+
 class Shop(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
@@ -83,6 +95,26 @@ class Shop(models.Model):
     is_blocked = models.BooleanField(default=False)
     subscription = models.ForeignKey(Subscription)
     vendor = models.ForeignKey(Vendor)
+    address = models.CharField(max_length=250)
+    phone = models.CharField(max_length=12, validators=[
+        RegexValidator(
+            regex='^(256|254|255|0)[0-9]{9}$',
+            message='Wrong phone number format',
+        ),
+    ])
+    store_link = models.TextField()
+    category = models.ManyToManyField(Category)
+    delivery_partners = models.ManyToManyField(Courier)
+    bank_name = models.CharField(max_length=450)
+    bank_ac_name = models.CharField(max_length=450)
+    bank_ac_number = models.IntegerField()
+    mm_number = models.CharField(max_length=12, validators=[
+        RegexValidator(
+            regex='^(256|254|255|0)[0-9]{9}$',
+            message='Wrong phone number format',
+        ),
+    ])
+    image = models.ImageField(upload_to='store/', max_length=254)
 
     def __str__(self):
         return self.name
@@ -163,18 +195,6 @@ class Address(models.Model):
 
     def __str__(self):
         return str(self.name)
-
-
-class Courier(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    is_verified = models.BooleanField(default=False)
-    is_blocked = models.BooleanField(default=False)
-    createdAt = models.DateTimeField(auto_now_add=True)
-    modifiedAt = models.DateTimeField(auto_now_add=True)
-    user = models.OneToOneField(User)
-
-    def __str__(self):
-        return self.user.username
 
 
 class Coverage(models.Model):

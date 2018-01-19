@@ -188,13 +188,6 @@ class ShopGetSerializer(serializers.ModelSerializer):
             'id', 'name', 'is_blocked', 'vendor', 'subscription', 'createdAt', 'modifiedAt')
 
 
-class ShopPostSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Shop
-        fields = (
-            'id', 'name', 'is_blocked', 'vendor', 'subscription', 'createdAt', 'modifiedAt')
-
-
 class CategoryGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
@@ -576,3 +569,14 @@ class TaskSerializer(serializers.Serializer):
     owner = serializers.CharField(max_length=256)
     status = serializers.ChoiceField(choices=STATUSES, default='New')
     product = ProductGetSerializer(read_only=True)
+
+
+class ShopPostSerializer(serializers.ModelSerializer):
+    delivery_partners = CourierGetSerializer(read_only=True, many=True)
+    category = CategoryGetSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = Shop
+        fields = (
+            'id', 'name', 'is_blocked', 'vendor', 'subscription', 'createdAt', 'modifiedAt', 'address', 'phone',
+            'store_link', 'category', 'bank_name', 'bank_ac_name', 'bank_ac_number', 'mm_number', 'image', 'delivery_partners')
