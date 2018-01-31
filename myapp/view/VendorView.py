@@ -1,6 +1,6 @@
 from rest_framework.generics import RetrieveUpdateAPIView, ListAPIView, ListCreateAPIView
 from rest_framework.permissions import IsAdminUser
-from myapp.models import Vendor, Shop, Order
+from myapp.models import Vendor, Shop, Order, Book
 from myapp.serializers import VendorGetSerializer, VendorPostSerializer, ShopGetSerializer, OrderGetSerializer, \
     ShopPostSerializer
 
@@ -28,7 +28,7 @@ class VendorShopsView(ListCreateAPIView):
         return Shop.objects.filter(vendor=self.kwargs['pk'])
 
     def get_serializer_class(self):
-        if self.request.POST:
+        if self.request.method == 'POST':
             try:
                 self.request.POST._mutable = True
                 self.request.data['vendor'] = self.kwargs['pk']

@@ -179,20 +179,40 @@ class VendorPostSerializer(serializers.ModelSerializer):
             'id', 'is_verified', 'is_blocked', 'user', 'createdAt', 'modifiedAt')
 
 
+class CategoryGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('id', 'name', 'image')
+
+
+class CourierGetSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model = Courier
+        fields = ('id', 'is_verified', 'is_blocked', 'createdAt', 'modifiedAt', 'user')
+
+
 class ShopGetSerializer(serializers.ModelSerializer):
-    vendor = VendorGetSerializer()
+    vendor = VendorGetSerializer(read_only=True)
+    delivery_partners = CourierGetSerializer(read_only=True, many=True)
+    category = CategoryGetSerializer(read_only=True, many=True)
 
     class Meta:
         model = Shop
         fields = (
-            'id', 'name', 'is_blocked', 'vendor', 'subscription', 'createdAt', 'modifiedAt')
+            'id', 'name', 'is_blocked', 'vendor', 'subscription', 'createdAt', 'modifiedAt', 'address', 'phone',
+            'store_link', 'category', 'bank_name', 'bank_ac_name', 'bank_ac_number', 'mm_number', 'image',
+            'delivery_partners')
 
 
-class CategoryGetSerializer(serializers.ModelSerializer):
+class ShopPostSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Category
+        model = Shop
         fields = (
-            'id', 'name', 'image')
+            'id', 'name', 'is_blocked', 'vendor', 'subscription', 'createdAt', 'modifiedAt', 'address', 'phone',
+            'store_link', 'category', 'bank_name', 'bank_ac_name', 'bank_ac_number', 'mm_number', 'image',
+            'delivery_partners')
 
 
 class SubCategoryGetSerializer(serializers.ModelSerializer):
@@ -235,15 +255,6 @@ class AddressPostSerializer(serializers.ModelSerializer):
         model = Address
         fields = (
             'id', 'name', 'latitude', 'longitude', 'createdAt', 'modifiedAt', 'user')
-
-
-class CourierGetSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
-
-    class Meta:
-        model = Courier
-        fields = (
-            'id', 'is_verified', 'is_blocked', 'createdAt', 'modifiedAt', 'user')
 
 
 class CourierPostSerializer(serializers.ModelSerializer):
@@ -569,14 +580,3 @@ class TaskSerializer(serializers.Serializer):
     owner = serializers.CharField(max_length=256)
     status = serializers.ChoiceField(choices=STATUSES, default='New')
     product = ProductGetSerializer(read_only=True)
-
-
-class ShopPostSerializer(serializers.ModelSerializer):
-    delivery_partners = CourierGetSerializer(read_only=True, many=True)
-    category = CategoryGetSerializer(read_only=True, many=True)
-
-    class Meta:
-        model = Shop
-        fields = (
-            'id', 'name', 'is_blocked', 'vendor', 'subscription', 'createdAt', 'modifiedAt', 'address', 'phone',
-            'store_link', 'category', 'bank_name', 'bank_ac_name', 'bank_ac_number', 'mm_number', 'image', 'delivery_partners')

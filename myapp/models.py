@@ -64,6 +64,17 @@ class Vendor(models.Model):
         return str(self.user.username)
 
 
+class Shelf(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=250)
+
+
+class Book(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=250)
+    shelf = models.ForeignKey(Shelf)
+
+
 class Subscription(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
@@ -90,11 +101,11 @@ class Courier(models.Model):
 class Shop(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
+    vendor = models.ForeignKey(Vendor)
     createdAt = models.DateTimeField(auto_now_add=True)
     modifiedAt = models.DateTimeField(auto_now_add=True)
     is_blocked = models.BooleanField(default=False)
     subscription = models.ForeignKey(Subscription)
-    vendor = models.ForeignKey(Vendor)
     address = models.CharField(max_length=250)
     phone = models.CharField(max_length=12, validators=[
         RegexValidator(
@@ -114,7 +125,7 @@ class Shop(models.Model):
             message='Wrong phone number format',
         ),
     ])
-    image = models.ImageField(upload_to='store/', max_length=254)
+    image = models.ImageField(upload_to='store/', max_length=254, null=True, blank=True)
 
     def __str__(self):
         return self.name
