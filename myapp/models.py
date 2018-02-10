@@ -113,13 +113,13 @@ class Shop(models.Model):
             message='Wrong phone number format',
         ),
     ])
-    store_link = models.TextField()
+    store_link = models.TextField(null=True, blank=True)
     category = models.ManyToManyField(Category)
-    delivery_partners = models.ManyToManyField(Courier)
-    bank_name = models.CharField(max_length=450)
-    bank_ac_name = models.CharField(max_length=450)
-    bank_ac_number = models.IntegerField()
-    mm_number = models.CharField(max_length=12, validators=[
+    delivery_partners = models.ManyToManyField(Courier, null=True, blank=True)
+    bank_name = models.CharField(max_length=450, null=True, blank=True)
+    bank_ac_name = models.CharField(max_length=450, null=True, blank=True)
+    bank_ac_number = models.IntegerField(null=True, blank=True)
+    mm_number = models.CharField(max_length=12, null=True, blank=True, validators=[
         RegexValidator(
             regex='^(256|254|255|0)[0-9]{9}$',
             message='Wrong phone number format',

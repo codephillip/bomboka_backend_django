@@ -25,13 +25,43 @@ class TestShop(APITestCase):
         self.vendor = Vendor.objects.create(user=self.user)
         self.subscription = Subscription.objects.create(name="gold", price=1500000)
         self.category = Category.objects.create(name="category")
+        self.category2 = Category.objects.create(name="category2")
         self.subcategory = SubCategory.objects.create(name="subCategory", category=self.category)
         self.shop = Shop.objects.create(name="makarovShop", vendor=self.vendor, subscription=self.subscription)
         self.shop2 = Shop.objects.create(name="makarovShop2", vendor=self.vendor, subscription=self.subscription)
+        self.courier = Courier.objects.create(user=self.user)
 
         for x in range(4):
             self.product = Product.objects.create(name=get_random_string(length=10), price=40000, shop=self.shop, subCategory=self.subcategory)
             self.product2 = Product.objects.create(name=get_random_string(length=10), price=66000, shop=self.shop2, subCategory=self.subcategory)
+
+    def create_shop(self):
+        request_data = {
+            "name": "Super shop",
+            "is_blocked": False,
+            "vendor": self.vendor.id,
+            "subscription": self.subscription.id,
+            "address": "Ntinda",
+            "phone": "256756878443",
+            "store_link": "link",
+            "category": [
+                self.category.id,
+                self.category2.id,
+            ],
+            "bank_name": "Stanbic",
+            "bank_ac_name": "Shop bank ac name",
+            "bank_ac_number": "49384949853",
+            "mm_number": "256756878443",
+            "image": generate_photo_file(),
+            "delivery_partners": [
+                self.courier.id
+            ]
+        }
+        url = reverse("vendor-shops", kwargs={'pk': self.vendor.id})
+        print(url)
+        request = self.client.post(url, request_data)
+        self.assertEqual(request.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Shop.objects.filter(vendor=self.vendor).count(), 3)
 
     def test_get_shops(self):
         """
@@ -54,14 +84,30 @@ class TestShop(APITestCase):
         Vendor edits Shop
         """
         request_data = {
-            "name": "NewName",
-            "description": "Lorem Ipsum Lorem Default",
-            "subscription": self.subscription.id
+            "name": "Super shop2",
+            "is_blocked": False,
+            "vendor": self.vendor.id,
+            "subscription": self.subscription.id,
+            "address": "Ntinda",
+            "phone": "256756878443",
+            "store_link": "link",
+            "category": [
+                self.category.id,
+            ],
+            "bank_name": "Stanbic",
+            "bank_ac_name": "Shop bank ac name",
+            "bank_ac_number": "49384949853",
+            "mm_number": "256756878443",
+            "image": generate_photo_file(),
+            "delivery_partners": [
+                self.courier.id
+            ]
         }
         url = reverse("vendor-shop-details", kwargs={'pk': self.vendor.id, 'pk2': self.shop.id})
         print(url)
         request = self.client.put(url, request_data)
         self.assertEqual(request.status_code, status.HTTP_200_OK)
+        self.assertEqual(Shop.objects.filter(vendor=self.vendor)[0].category.count(), 1)
 
     def test_get_products(self):
         """
