@@ -62,6 +62,27 @@ http://127.0.0.1:8000/api/v1/products
 curl -H "Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNmZSIsInVzZXJfaWQiOjEsImVtYWlsIjoiIiwiZXhwIjoxNDYxOTY1ODI5fQ.OTX7CZFZqxhaUnU9Da13Ebh9FY_bHMeCF1ypr9hXjWw"
 http://127.0.0.1:8000/api/v1/users
 
+# POST create vendor shop
+curl -H "Content-Type: application/json" -X POST -d '{
+    "name": "Shop22",
+    "is_blocked": false,
+    "subscription": "87647542-2d30-43a8-a306-c41622a60969",
+    "address": "Kampala",
+    "phone": "256756878444",
+    "store_link": "link",
+    "category": [
+        "72963957-6ee9-4155-b7ec-d48e2a0dd825"
+    ],
+    "bank_name": "bank",
+    "bank_ac_name": "bank",
+    "bank_ac_number": 33333333,
+    "mm_number": "256756878444",
+    "delivery_partners": [
+        "5ead1343-6de5-4fc7-ad46-c80220e21bea"
+    ],
+    "image":"/home/codephillip/Images/EcommerceIcons/bag-for-shopping.png"
+}' https://api.bomboka.com/api/v1/vendors/46ffe38a-2095-4386-944e-774bad9b46ac/shops
+
 ####################
 CURL BUGS
 you may need to use quotes around urls

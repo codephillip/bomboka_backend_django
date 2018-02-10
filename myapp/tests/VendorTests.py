@@ -4,6 +4,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from myapp.models import *
+from myapp.tests import generate_photo_file
 
 """
 TESTS GUIDE
@@ -23,6 +24,7 @@ class TestVendor(APITestCase):
         self.courier = Courier.objects.create(user=self.user2)
         self.subscription = Subscription.objects.create(name="gold", price=1500000)
         self.category = Category.objects.create(name="category")
+        self.category2 = Category.objects.create(name="category2")
         self.subcategory = SubCategory.objects.create(name="subCategory", category=self.category)
         self.shop = Shop.objects.create(name="makarovShop", vendor=self.vendor, subscription=self.subscription)
         self.shop2 = Shop.objects.create(name="makarovShop2", vendor=self.vendor, subscription=self.subscription)
@@ -47,9 +49,25 @@ class TestVendor(APITestCase):
         Vendor adds shop
         """
         request_data = {
-            "name": "makarovShop3",
-            "description": "Lorem Ipsum",
-            "subscription": self.subscription.id
+            "name": "Super shop",
+            "is_blocked": False,
+            "vendor": self.vendor.id,
+            "subscription": self.subscription.id,
+            "address": "Ntinda",
+            "phone": "256756878443",
+            "store_link": "link",
+            "category": [
+                self.category.id,
+                self.category2.id,
+            ],
+            "bank_name": "Stanbic",
+            "bank_ac_name": "Shop bank ac name",
+            "bank_ac_number": "49384949853",
+            "mm_number": "256756878443",
+            "image": generate_photo_file(),
+            "delivery_partners": [
+                self.courier.id
+            ]
         }
         url = reverse("vendor-shops", kwargs={'pk': self.vendor.id})
         print(url)
